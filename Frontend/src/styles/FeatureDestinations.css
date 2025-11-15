@@ -1,0 +1,52 @@
+/* MAIN SCROLLER */
+.slider-container {
+  position: relative !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  gap: 20px !important;
+  padding: 10px !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+}
+
+/* HIDE SCROLLBAR */
+.slider-container::-webkit-scrollbar {
+  display: none !important;
+}
+.slider-container {
+  scrollbar-width: none !important;
+}
+
+/* CARD WIDTH FIX */
+.slider-item {
+  min-width: 280px !important;
+  max-width: 280px !important;
+  scroll-snap-align: start !important;
+}
+
+/* ARROWS */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 20;
+}
+
+.slider-arrow.left {
+  left: -10px;
+}
+
+.slider-arrow.right {
+  right: -10px;
+}

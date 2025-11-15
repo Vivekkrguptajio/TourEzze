@@ -1,0 +1,32 @@
+/* ---------- GOOGLE FONTS IMPORT ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ---------- GLOBAL FONT ---------- */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ---------- TOURISM FONT CLASSES ---------- */
+.tour-title {
+  font-family: 'Playfair Display', serif;
+}
+
+.tour-sub {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Chrome / Safari */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+
+
+@import "tailwindcss";
+
+
