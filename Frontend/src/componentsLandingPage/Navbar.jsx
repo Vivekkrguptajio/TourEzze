@@ -1,156 +1,92 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ setAuthType }) {
   const [roleOpen, setRoleOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState("Tourist");
 
   const handleRoleSelect = (role, path) => {
     setSelectedRole(role);
     setRoleOpen(false);
-    window.location.href = path;   // redirect to role-based page
+    window.location.href = path;
   };
 
   return (
-    <nav className="bg-green-900 backdrop-blur-md fixed w-full top-0 z-50 h-14">
+    <nav className="bg-green-900 fixed w-full top-0 z-50 h-14 shadow-md">
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
 
-        {/* LOGO + NAME */}
+        {/* LEFT: LOGO */}
         <div className="flex items-center gap-2 cursor-pointer">
-          <img
-            src="Photos/NavbarLogo/logo.png"
-            alt="logo"
-            className="w-10 h-10 object-contain"
-          />
-
-          <div className="flex flex-col leading-tight">
-            <h1 className="text-lg font-semibold text-green-100 tour-title tracking-wide">
-              Jharkhand
-            </h1>
-            <span className="text-[9px] text-green-200 -mt-1 uppercase tracking-widest">
+          <img src="/Photos/NavbarLogo/logo.png" className="w-10 h-10" alt="logo" />
+          <div className="leading-tight">
+            <h1 className="text-green-100 text-lg font-bold tracking-wide">Jharkhand</h1>
+            <p className="text-[9px] text-green-300 uppercase tracking-widest -mt-[2px]">
               Tourism
-            </span>
+            </p>
           </div>
         </div>
 
-        {/* MENU ITEMS */}
-        <ul className="hidden md:flex items-center gap-7 text-white font-medium tracking-wide">
+        {/* MIDDLE: MENU */}
+        <div className="hidden md:flex items-center gap-6 text-white font-medium text-sm">
 
-          <li className="hover:text-green-300 transition cursor-pointer">
-            <Link to="/">Home</Link>
-          </li>
+          <Link to="/" className="hover:text-green-300 transition">Home</Link>
+          <Link to="/explore" className="hover:text-green-300 transition">Explore</Link>
+          <Link to="/ai-itinerary" className="hover:text-green-300 transition">AI Itinerary</Link>
+          <Link to="/ar-vr" className="hover:text-green-300 transition">AR/VR</Link>
+          <Link to="/marketplace" className="hover:text-green-300 transition">Marketplace</Link>
 
-          <li className="hover:text-green-300 transition cursor-pointer">
-            <Link to="/explore">Explore</Link>
-          </li>
-
-          <li className="hover:text-green-300 transition cursor-pointer">
-            <Link to="/ai-itinerary">AI Itinerary</Link>
-          </li>
-
-          <li className="hover:text-green-300 transition cursor-pointer">
-            <Link to="/ar-vr">AR/VR</Link>
-          </li>
-
-          <li className="hover:text-green-300 transition cursor-pointer">
-            <Link to="/marketplace">Marketplace</Link>
-          </li>
-
-          {/* ROLE SELECT DROPDOWN */}
+          {/* ROLE DROPDOWN */}
           <div className="relative">
             <button
               onClick={() => setRoleOpen(!roleOpen)}
-              className="hover:text-green-300 cursor-pointer flex items-center gap-1"
+              className="hover:text-green-300 transition flex items-center gap-1"
             >
               {selectedRole} ▼
             </button>
 
             {roleOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white backdrop-blur-md shadow-lg rounded-lg border border-white/20 py-1 overflow-hidden text-green-900">
-
-                <p
-                  onClick={() => handleRoleSelect("Tourist", "/role/tourist")}
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Tourist
-                </p>
-
-                <p
-                  onClick={() =>
-                    handleRoleSelect("Vendor / Artisan", "/role/vendor")
-                  }
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Vendor / Artisan
-                </p>
-
-                <p
-                  onClick={() =>
-                    handleRoleSelect(
-                      "Guide / Transport Provider",
-                      "/role/guide"
-                    )
-                  }
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Guide / Transport Provider
-                </p>
-
-                <p
-                  onClick={() =>
-                    handleRoleSelect(
-                      "Hotel / Homestay Owner",
-                      "/role/hotel-owner"
-                    )
-                  }
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Hotel / Homestay Owner
-                </p>
-
-                <p
-                  onClick={() =>
-                    handleRoleSelect(
-                      "Government Department",
-                      "/role/government"
-                    )
-                  }
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Government Department
-                </p>
-
-                <p
-                  onClick={() => handleRoleSelect("Admin", "/role/admin")}
-                  className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
-                >
-                  Admin
-                </p>
-
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl py-2 text-gray-800 font-normal">
+                {[
+                  { label: "Tourist", path: "/role/tourist" },
+                  { label: "Vendor / Artisan", path: "/role/vendor" },
+                  { label: "Guide / Transport", path: "/role/guide" },
+                  { label: "Hotel / Homestay Owner", path: "/role/hotel-owner" },
+                  { label: "Government Department", path: "/role/government" },
+                  { label: "Admin", path: "/role/admin" },
+                ].map((item) => (
+                  <p
+                    key={item.path}
+                    onClick={() => handleRoleSelect(item.label, item.path)}
+                    className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                  >
+                    {item.label}
+                  </p>
+                ))}
               </div>
             )}
           </div>
-        </ul>
 
-        {/* LOGIN / SIGNUP */}
-        <div className="hidden md:flex items-center gap-2">
-          <Link
-            to="/login"
-            className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition"
+          {/* LOGIN / SIGNUP */}
+          <button
+            onClick={() => setAuthType("login")}
+            className="px-3 py-1 rounded-md border border-white text-white text-sm hover:bg-white hover:text-green-700 transition duration-200"
           >
             Login
-          </Link>
+          </button>
 
-          <Link
-            to="/signup"
-            className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition"
+          <button
+            onClick={() => setAuthType("signup")}
+            className="px-3 py-1 rounded-md border border-white text-white text-sm hover:bg-white hover:text-green-700 transition duration-200"
           >
             Sign Up
-          </Link>
+          </button>
         </div>
 
-        {/* MOBILE ICON */}
-        <div className="md:hidden cursor-pointer text-3xl text-white">☰</div>
+        {/* MOBILE MENU */}
+        <div className="md:hidden text-white text-3xl cursor-pointer">
+          ☰
+        </div>
+
       </div>
     </nav>
   );
