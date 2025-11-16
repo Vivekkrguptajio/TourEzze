@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [roleOpen, setRoleOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState("Tourist");
 
-  const handleRoleSelect = (role) => {
+  const handleRoleSelect = (role, path) => {
     setSelectedRole(role);
     setRoleOpen(false);
+    window.location.href = path;   // redirect to role-based page
   };
 
   return (
-    <nav className="bg-white/10 backdrop-blur-md fixed w-full top-0 z-50 h-14">
+    <nav className="bg-green-900 backdrop-blur-md fixed w-full top-0 z-50 h-14">
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
 
         {/* LOGO + NAME */}
@@ -34,11 +36,25 @@ export default function Navbar() {
         {/* MENU ITEMS */}
         <ul className="hidden md:flex items-center gap-7 text-white font-medium tracking-wide">
 
-          <li className="hover:text-green-300 transition cursor-pointer">Home</li>
-          <li className="hover:text-green-300 transition cursor-pointer">Explore</li>
-          <li className="hover:text-green-300 transition cursor-pointer">AI Itinerary</li>
-          <li className="hover:text-green-300 transition cursor-pointer">AR/VR</li>
-          <li className="hover:text-green-300 transition cursor-pointer">Marketplace</li>
+          <li className="hover:text-green-300 transition cursor-pointer">
+            <Link to="/">Home</Link>
+          </li>
+
+          <li className="hover:text-green-300 transition cursor-pointer">
+            <Link to="/explore">Explore</Link>
+          </li>
+
+          <li className="hover:text-green-300 transition cursor-pointer">
+            <Link to="/ai-itinerary">AI Itinerary</Link>
+          </li>
+
+          <li className="hover:text-green-300 transition cursor-pointer">
+            <Link to="/ar-vr">AR/VR</Link>
+          </li>
+
+          <li className="hover:text-green-300 transition cursor-pointer">
+            <Link to="/marketplace">Marketplace</Link>
+          </li>
 
           {/* ROLE SELECT DROPDOWN */}
           <div className="relative">
@@ -50,45 +66,62 @@ export default function Navbar() {
             </button>
 
             {roleOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white/20 backdrop-blur-md shadow-lg rounded-lg border border-white/20 py-1 overflow-hidden text-white">
+              <div className="absolute right-0 mt-2 w-48 bg-white backdrop-blur-md shadow-lg rounded-lg border border-white/20 py-1 overflow-hidden text-green-900">
 
                 <p
-                  onClick={() => handleRoleSelect("Tourist")}
+                  onClick={() => handleRoleSelect("Tourist", "/role/tourist")}
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Tourist
                 </p>
 
                 <p
-                  onClick={() => handleRoleSelect("Vendor / Artisan")}
+                  onClick={() =>
+                    handleRoleSelect("Vendor / Artisan", "/role/vendor")
+                  }
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Vendor / Artisan
                 </p>
 
                 <p
-                  onClick={() => handleRoleSelect("Guide / Transport Provider")}
+                  onClick={() =>
+                    handleRoleSelect(
+                      "Guide / Transport Provider",
+                      "/role/guide"
+                    )
+                  }
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Guide / Transport Provider
                 </p>
 
                 <p
-                  onClick={() => handleRoleSelect("Hotel / Homestay Owner")}
+                  onClick={() =>
+                    handleRoleSelect(
+                      "Hotel / Homestay Owner",
+                      "/role/hotel-owner"
+                    )
+                  }
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Hotel / Homestay Owner
                 </p>
 
                 <p
-                  onClick={() => handleRoleSelect("Government Department")}
+                  onClick={() =>
+                    handleRoleSelect(
+                      "Government Department",
+                      "/role/government"
+                    )
+                  }
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Government Department
                 </p>
 
                 <p
-                  onClick={() => handleRoleSelect("Admin")}
+                  onClick={() => handleRoleSelect("Admin", "/role/admin")}
                   className="px-3 py-2 text-sm hover:bg-white/30 hover:text-green-700 cursor-pointer transition"
                 >
                   Admin
@@ -101,13 +134,19 @@ export default function Navbar() {
 
         {/* LOGIN / SIGNUP */}
         <div className="hidden md:flex items-center gap-2">
-          <button className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition">
+          <Link
+            to="/login"
+            className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition"
+          >
             Login
-          </button>
+          </Link>
 
-          <button className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition">
+          <Link
+            to="/signup"
+            className="border border-white text-white px-3 py-1 rounded-md text-sm hover:bg-white hover:text-green-700 transition"
+          >
             Sign Up
-          </button>
+          </Link>
         </div>
 
         {/* MOBILE ICON */}

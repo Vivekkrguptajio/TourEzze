@@ -11,7 +11,7 @@ export default function FeatureDestinations() {
         text-center 
         mb-8
         tracking-wide
-        bg-gradient-to-r from-green-700 to-cyan-500 
+        bg-gradient-to-r from-green-700 to-green-900
         bg-clip-text text-transparent
         drop-shadow-sm
       ">

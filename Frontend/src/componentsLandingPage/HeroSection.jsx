@@ -89,7 +89,7 @@ export default function HeroSection() {
         <div className="text-right">
           <h2
             key={`title-${current}`}
-            className="text-white text-3xl md:text-4xl font-bold tour-title text-slide"
+            className="text-yellow-400 text-3xl md:text-4xl font-bold tour-title text-slide"
           >
             {slides[current].title}
           </h2>
