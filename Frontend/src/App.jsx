@@ -1,37 +1,33 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import LandingPage from "./pages/LandingPage";
-import ExplorePage from "./pages/ExplorePage";
+import ChatbotButton from "./componenets/ChatbotButton";
+import EmergencyWidget from "./componenets/EmergencyWidget";
+import MainLanding from "./MainLanding/MainLanding";
 
-import Navbar from "./componentsLandingPage/Navbar";
-import AuthModal from "./componentsLandingPage/modals/AuthModal";
-import Footer from "./componentsLandingPage/Footer";
-import ChatbotButton from "./componentsLandingPage/ChatbotButton";
+// Role Pages
+import TouristPortal from "./RolePages/Tourist/TouristPortal";
+import VendorPortal from "./RolePages/VendorPortal";
+import GuidePortal from "./RolePages/GuidePortal";
+import HotelPortal from "./RolePages/HotelPortal";
+import GovPortal from "./RolePages/GovPortal";
 
 export default function App() {
-  // Login/Signup modal control
-  const [authType, setAuthType] = useState(null); 
-  // null | "login" | "signup"
-
   return (
     <>
-      {/* Navbar me popup trigger bhejna zaruri */}
-      <Navbar setAuthType={setAuthType} />
+      {/* Floating Buttons (always visible) */}
+      <ChatbotButton />
+      <EmergencyWidget />
 
-      {/* GLOBAL POPUP MODAL */}
-      <AuthModal authType={authType} setAuthType={setAuthType} />
+      {/* Page Routes */}
+      <Routes>
+        <Route path="/" element={<MainLanding />} />
 
-      {/* Page Body */}
-      <div className="pt-14">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-        </Routes>
-      </div>
-
-      <Footer/>
-      <ChatbotButton/>
+        <Route path="/role/tourist" element={<TouristPortal />} />
+        <Route path="/role/vendor" element={<VendorPortal />} />
+        <Route path="/role/guide" element={<GuidePortal />} />
+        <Route path="/role/hotel-owner" element={<HotelPortal />} />
+        <Route path="/role/government" element={<GovPortal />} />
+      </Routes>
     </>
   );
 }
