@@ -1,41 +1,148 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Bell } from "lucide-react";
+import { Bell, Globe } from "lucide-react";
 
 export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplaceRef }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
+  const [showLang, setShowLang] = useState(false);
 
   const alertRef = useRef(null);
+  const langRef = useRef(null);
 
-  // Sample tourist alerts
-  const alerts = [
-    "🌧️ Weather Alert: Heavy rain expected in Netarhat.",
-    "⚠️ Hundru Falls water level very high. Avoid visiting.",
-    "🚧 Traffic Jam: Ranchi → Patratu route slow.",
-    "🔥 Forest Entry Restricted: Betla area closed today.",
-    "🎉 Festival Rush: High crowd near Pahari Mandir."
+  // ----------------- SELF LANGUAGE NAMES -----------------
+  const languages = [
+    { key: "Hindi", label: "हिन्दी" },
+    { key: "English", label: "English" },
+    { key: "Santhali", label: "ᱥᱟᱱᱛᱟᱞᱤ" },
+    { key: "Ho", label: "𑠀𑠤" },
+    { key: "Mundari", label: "ᱢᱩᱱᱰᱟᱨᱤ" },
+    { key: "Kurukh", label: "कुड़ुख" },
+    { key: "Kharia", label: "खड़िया" },
+    { key: "Nagpuri", label: "नगपुरी" },
+    { key: "Panchpargania", label: "पंचपरगनिया" },
+    { key: "Khortha", label: "खोरठा" },
+    { key: "Kurmali", label: "कुर्माली" },
   ];
 
-  // Handle scroll shrink
+  // CURRENT LANGUAGE
+  const [language, setLanguage] = useState(languages[0].key);
+
+  // 🔄 AUTO CHANGE LANGUAGE EVERY 1 SECOND
+  useEffect(() => {
+    let index = 0;
+
+    const interval = setInterval(() => {
+      index = (index + 1) % languages.length;
+      setLanguage(languages[index].key);
+    }, 3000); // change every 1 sec
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // ----------------- NAVIGATION TEXT TRANSLATIONS -----------------
+  const translations = {
+    English: {
+      explore: "Explore",
+      events: "Events",
+      marketplace: "Marketplace",
+      role: "Select Your Role",
+      alerts: "Travel Alerts",
+    },
+    Hindi: {
+      explore: "अन्वेषण",
+      events: "कार्यक्रम",
+      marketplace: "बाज़ार",
+      role: "अपनी भूमिका चुनें",
+      alerts: "यात्रा अलर्ट",
+    },
+    Santhali: {
+      explore: "ᱪᱟᱵᱟᱛ",
+      events: "ᱪᱟᱹᱱᱤᱭᱟᱜ",
+      marketplace: "ᱢᱤᱫᱟᱜ ᱛᱟᱭᱟᱜ",
+      role: "ᱨᱚᱞ ᱚᱱᱚᱞ",
+      alerts: "ᱟᱞᱮᱨᱴ",
+    },
+    Ho: {
+      explore: "ᱠᱚᱨᱚᱢ",
+      events: "ᱦᱚᱨᱚᱜ",
+      marketplace: "ᱠᱟᱹᱴᱩᱜ",
+      role: "ᱨᱚᱞ ᱪᱤᱱᱟ",
+      alerts: "ᱟᱞᱮᱨᱴ",
+    },
+    Mundari: {
+      explore: "Horoko",
+      events: "Hunrum",
+      marketplace: "Bazaar",
+      role: "Role Beye",
+      alerts: "Alert Beye",
+    },
+    Kurukh: {
+      explore: "Dhumma",
+      events: "Reena",
+      marketplace: "Hata",
+      role: "Role Meansa",
+      alerts: "Alert",
+    },
+    Kharia: {
+      explore: "Nongta",
+      events: "Karian",
+      marketplace: "Bazar",
+      role: "Role Cheya",
+      alerts: "Alert",
+    },
+    Nagpuri: {
+      explore: "घुमइया",
+      events: "समारोह",
+      marketplace: "बाजार",
+      role: "भूमिका चुनें",
+      alerts: "अलर्ट",
+    },
+    Panchpargania: {
+      explore: "घुमो",
+      events: "इवेंट",
+      marketplace: "हाट",
+      role: "भूमिका",
+      alerts: "सूचना",
+    },
+    Khortha: {
+      explore: "घुमाऽ",
+      events: "मेला",
+      marketplace: "बाजार",
+      role: "भूमिका चुनऽ",
+      alerts: "अलारट",
+    },
+    Kurmali: {
+      explore: "भ्रमण",
+      events: "उत्सव",
+      marketplace: "हाट",
+      role: "भूमिका चुनू",
+      alerts: "सूचना",
+    },
+  };
+
+  // HANDLE SCROLL
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close alert dropdown on outside click
+  // CLOSE DROPDOWNS ON OUTSIDE CLICK
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (alertRef.current && !alertRef.current.contains(e.target)) {
         setShowAlerts(false);
+      }
+      if (langRef.current && !langRef.current.contains(e.target)) {
+        setShowLang(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  // Smooth scroll to sections
+  // SMOOTH SCROLL
   const scrollToSection = (ref) => {
     if (!ref?.current) return;
     const yOffset = -85;
@@ -77,72 +184,99 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
         <div className="hidden md:flex items-center gap-8 text-white font-medium">
 
           <p className="hover:text-green-300 cursor-pointer" onClick={() => scrollToSection(exploreRef)}>
-            Explore
+            {translations[language].explore}
           </p>
 
           <p className="hover:text-green-300 cursor-pointer" onClick={() => scrollToSection(eventsRef)}>
-            Events
+            {translations[language].events}
           </p>
 
           <p className="hover:text-green-300 cursor-pointer" onClick={() => scrollToSection(marketplaceRef)}>
-            Marketplace
+            {translations[language].marketplace}
           </p>
 
           <Link to="/ar-vr" className="hover:text-green-300 transition">
             AR/VR
           </Link>
 
-          {/* 🌈 RAINBOW BORDER ROLE BUTTON */}
           <div
             onClick={() => scrollToSection(roleRef)}
-            className="
-              relative cursor-pointer px-4 py-1 rounded-lg 
-              text-white font-medium rainbow-border
-            "
+            className="relative cursor-pointer px-4 py-1 rounded-lg text-white font-medium rainbow-border"
           >
-            Select Your Role
+            {translations[language].role}
           </div>
         </div>
 
-        {/* 🔔 ALERT BELL */}
-        <div className="relative" ref={alertRef}>
-          <button
-            onClick={() => setShowAlerts(!showAlerts)}
-            className="text-white relative hover:text-green-300 transition"
-          >
-            <Bell className="h-6 w-6" />
+        {/* 🔔 ALERT + 🌐 LANGUAGE */}
+        <div className="flex items-center gap-6">
 
-            <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
-          </button>
-
-          {showAlerts && (
-            <div
-              className="
-                absolute right-0 mt-3 w-80 bg-white rounded-xl shadow-lg p-4 z-[10000]
-                animate-fade
-              "
+          {/* LANGUAGE DROPDOWN */}
+          <div className="relative" ref={langRef}>
+            <button
+              onClick={() => setShowLang(!showLang)}
+              className="text-white hover:text-green-300 transition flex items-center gap-2"
             >
-              <h3 className="text-green-900 font-semibold mb-3 text-lg">
-                Travel Alerts
-              </h3>
+              <Globe className="h-6 w-6" />
+              <span>
+                {languages.find(l => l.key === language)?.label}
+              </span>
+            </button>
 
-              <div className="space-y-3 max-h-64 overflow-y-auto">
-                {alerts.map((msg, i) => (
-                  <div
-                    key={i}
-                    className="
-                      p-3 rounded-lg bg-green-50 text-green-800 border border-green-200 
-                      text-sm shadow-sm
-                    "
+            {showLang && (
+              <div className="absolute right-0 mt-3 w-40 bg-white rounded-lg shadow-xl p-2">
+                {languages.map((lang) => (
+                  <p
+                    key={lang.key}
+                    className="p-2 text-sm cursor-pointer hover:bg-green-100 rounded"
+                    onClick={() => {
+                      setLanguage(lang.key);
+                      setShowLang(false);
+                    }}
                   >
-                    {msg}
-                  </div>
+                    {lang.label}
+                  </p>
                 ))}
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
 
+          {/* ALERT BELL */}
+          <div className="relative" ref={alertRef}>
+            <button
+              onClick={() => setShowAlerts(!showAlerts)}
+              className="text-white hover:text-green-300 transition relative"
+            >
+              <Bell className="h-6 w-6" />
+              <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
+            </button>
+
+            {showAlerts && (
+              <div className="absolute right-0 mt-3 w-80 bg-white rounded-xl shadow-lg p-4">
+                <h3 className="text-green-900 font-semibold mb-3 text-lg">
+                  {translations[language].alerts}
+                </h3>
+
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {[
+                    "🌧️ Weather Alert: Heavy rain expected in Netarhat.",
+                    "⚠️ Hundru Falls water level very high. Avoid visiting.",
+                    "🚧 Traffic Jam: Ranchi → Patratu route slow.",
+                    "🔥 Forest Entry Restricted: Betla area closed today.",
+                    "🎉 Festival Rush: High crowd near Pahari Mandir.",
+                  ].map((msg, i) => (
+                    <div
+                      key={i}
+                      className="p-3 rounded-lg bg-green-50 text-green-800 border border-green-200 text-sm shadow-sm"
+                    >
+                      {msg}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+        </div>
       </div>
     </nav>
   );

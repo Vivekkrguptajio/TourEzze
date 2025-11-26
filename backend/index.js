@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import touristRoutes from "./src/routes/tourist.routes.js";
+import hotelRoutes from "./src/routes/hotel.routes.js";
+
 
 dotenv.config();
 
@@ -32,6 +34,8 @@ app.get("/", (req, res) => {
 
 // Tourist routes
 app.use("/api/tourist", touristRoutes);
+app.use("/api/hotel", hotelRoutes);
+
 
 // Server Start
 const PORT = process.env.PORT || 5001;

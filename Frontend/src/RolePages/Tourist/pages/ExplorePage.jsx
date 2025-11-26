@@ -1,10 +1,7 @@
-import ExploreHeader from "../componentsExplorePage/ExploreHeader";
-import ExploreCategory from "../componentsExplorePage/ExploreCategory";
+import React from 'react'
 
 export default function ExplorePage() {
   return (
-    <>
-      <ExploreCategory />
-    </>
-  );
+    <div>ExplorePage</div>
+  )
 }

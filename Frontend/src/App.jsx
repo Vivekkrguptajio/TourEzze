@@ -6,10 +6,10 @@ import MainLanding from "./MainLanding/MainLanding";
 
 // Role Pages
 import TouristPortal from "./RolePages/Tourist/TouristPortal";
-import VendorPortal from "./RolePages/VendorPortal";
-import GuidePortal from "./RolePages/GuidePortal";
-import HotelPortal from "./RolePages/HotelPortal";
-import GovPortal from "./RolePages/GovPortal";
+import VendorPortal from "./RolePages/Vendor/VendorPortal";
+import GuidePortal from "./RolePages/Guide/GuidePortal";
+import HotelPortal from "./RolePages/Hotel/HotelPortal";
+import GovPortal from "./RolePages/Admin/GovPortal";
 
 export default function App() {
   return (
@@ -22,10 +22,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainLanding />} />
 
-        <Route path="/role/tourist" element={<TouristPortal />} />
+        <Route path="/role/tourist/*" element={<TouristPortal />} />
         <Route path="/role/vendor" element={<VendorPortal />} />
-        <Route path="/role/guide" element={<GuidePortal />} />
-        <Route path="/role/hotel-owner" element={<HotelPortal />} />
+        <Route path="/role/guide/*" element={<GuidePortal />} />
+        <Route path="/role/hotel-owner/*" element={<HotelPortal />} />
         <Route path="/role/government" element={<GovPortal />} />
       </Routes>
     </>
