@@ -27,7 +27,7 @@ export default function Navbar({ setAuthType }) {
 
         {/* LOGO */}
         <Link
-          to="/role/tourist"
+          to="/role/tourist/"
           className="flex items-center gap-2 cursor-pointer shrink-0"
         >
           <img src="/Photos/NavbarLogo/logo.png" className="w-10 h-10" alt="logo" />
@@ -45,9 +45,9 @@ export default function Navbar({ setAuthType }) {
         <div className="hidden md:flex items-center gap-5 lg:gap-7 text-white font-medium max-w-full">
 
          
-          <Link to="/role/tourist/explore" className="hover:text-green-300 transition">Explore</Link>
+          <Link to="/role/tourist" className="hover:text-green-300 transition">Explore</Link>
           <Link to="/role/tourist/ai-itinerary" className="hover:text-green-300 transition">Plan</Link>
-          <Link to="/role/tourist/book" className="hover:text-green-300 transition">Book</Link>
+          <Link to="/role/tourist/hotels" className="hover:text-green-300 transition">Hotels</Link>
           <Link to="/role/tourist/shop" className="hover:text-green-300 transition">Shop</Link>
           <Link to="/role/tourist/events" className="hover:text-green-300 transition">Events</Link>
 
