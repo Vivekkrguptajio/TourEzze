@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { MapPin, Calendar, Users } from "lucide-react";
 
 export default function HotelsSearchBar({
   location,
@@ -11,72 +11,78 @@ export default function HotelsSearchBar({
   setGuests,
 }) {
   return (
-    <div className="bg-[#e55526] text-white py-6 px-6 rounded-b-3xl shadow">
-      <h1 className="text-2xl font-bold mb-4">Discover Jharkhand</h1>
+    <div className="bg-[#e55526] text-white p-6 pb-10 shadow-md rounded-b-3xl">
+      <div className="max-w-6xl mx-auto">
 
-      <div className="bg-white rounded-xl shadow-md grid grid-cols-1 md:grid-cols-4 gap-3 p-4 items-center">
-        {/* Location */}
-        <div>
-          <label className="text-xs text-gray-600 font-semibold mb-1 block">
-            Location
-          </label>
-          <div className="flex items-center border rounded-lg px-3 py-2 text-sm">
-            <MapPin size={16} className="text-orange-500 mr-2" />
-            <input
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="flex-1 outline-none"
-              placeholder="Ranchi"
-            />
-          </div>
-        </div>
+        <div className="bg-white rounded-xl p-4 shadow grid grid-cols-1 md:grid-cols-5 gap-4">
 
-        {/* Check-in */}
-        <div>
-          <label className="text-xs text-gray-600 font-semibold mb-1 block">
-            Check-in
-          </label>
-          <input
-            type="date"
-            value={checkIn}
-            onChange={(e) => setCheckIn(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2 text-sm"
-          />
-        </div>
-
-        {/* Check-out */}
-        <div>
-          <label className="text-xs text-gray-600 font-semibold mb-1 block">
-            Check-out
-          </label>
-          <input
-            type="date"
-            value={checkOut}
-            onChange={(e) => setCheckOut(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2 text-sm"
-          />
-        </div>
-
-        {/* Guests + Button */}
-        <div className="flex flex-col gap-2">
+          {/* Location */}
           <div>
-            <label className="text-xs text-gray-600 font-semibold mb-1 block">
-              Guests
-            </label>
-            <select
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 text-sm"
-            >
-              <option>1 Guest</option>
-              <option>2 Guests</option>
-              <option>3 Guests</option>
-              <option>4+ Guests</option>
-            </select>
+            <label className="text-xs text-gray-600 font-semibold">Location</label>
+            <div className="border rounded-lg px-3 py-2 flex items-center gap-2">
+              <MapPin size={16} className="text-orange-500" />
+              <input
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full outline-none text-sm"
+                placeholder="Ranchi"
+              />
+            </div>
           </div>
-          <button className="w-full bg-[#e55526] text-white rounded-lg text-sm py-2 font-semibold">
-            Search Hotels
-          </button>
+
+          {/* Check-in */}
+          <div>
+            <label className="text-xs text-gray-600 font-semibold">Check-in</label>
+            <div className="border rounded-lg px-3 py-2 flex items-center gap-2">
+              <Calendar size={16} className="text-orange-500" />
+              <input
+                type="date"
+                value={checkIn}
+                onChange={(e) => setCheckIn(e.target.value)}
+                className="w-full outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Check-out */}
+          <div>
+            <label className="text-xs text-gray-600 font-semibold">Check-out</label>
+            <div className="border rounded-lg px-3 py-2 flex items-center gap-2">
+              <Calendar size={16} className="text-orange-500" />
+              <input
+                type="date"
+                value={checkOut}
+                onChange={(e) => setCheckOut(e.target.value)}
+                className="w-full outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Guests */}
+          <div>
+            <label className="text-xs text-gray-600 font-semibold">Guests</label>
+            <div className="border rounded-lg px-3 py-2 flex items-center gap-2">
+              <Users size={16} className="text-orange-500" />
+              <select
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+                className="w-full outline-none text-sm"
+              >
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4+ Guests</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Search Button */}
+          <div className="flex items-end">
+            <button className="bg-[#e55526] text-white w-full py-2 rounded-lg font-semibold">
+              Search Hotels
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Bell, HelpCircle, User, Settings, LogOut, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProviderNavbar() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -20,14 +22,24 @@ export default function ProviderNavbar() {
 
       {/* LEFT LOGO + TITLE */}
       <div className="flex items-center gap-3">
+
         <img
           src="/Photos/NavbarLogo/logo.png"
-          className="h-10 w-10 rounded-lg bg-green-700 p-1"
+          className="h-10 w-10 rounded-lg bg-green-700 p-1 cursor-pointer"
+          onClick={() => navigate("/")}
         />
 
-        <div className="leading-tight">
-          <h1 className="text-white font-bold text-base">Jharkhand Tourism</h1>
-          <p className="text-green-300 text-[11px]">Provider Portal</p>
+        {/* CLICKABLE TEXT BLOCK */}
+        <div
+          className="leading-tight cursor-pointer select-none"
+          onClick={() => navigate("/")}
+        >
+          <h1 className="text-white font-bold text-base hover:text-yellow-300 transition">
+            Jharkhand Tourism
+          </h1>
+          <p className="text-green-300 text-[11px]">
+            Provider Portal
+          </p>
         </div>
       </div>
 

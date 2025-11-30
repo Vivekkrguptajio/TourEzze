@@ -29,7 +29,8 @@ export default function HotelsPage() {
   } = useHotelFilters(hotels);
 
   return (
-    <div className="min-h-screen bg-[#faf5ef] pb-10">
+    <div className="bg-[#faf5ef] min-h-screen pb-16">
+
       <HotelsSearchBar
         location={location}
         setLocation={setLocation}
@@ -41,15 +42,16 @@ export default function HotelsPage() {
         setGuests={setGuests}
       />
 
-      <div className="max-w-6xl mx-auto px-4 mt-6">
-        <div className="flex justify-between items-center mb-4">
-          <p className="text-sm text-gray-700">
+      <div className="max-w-7xl mx-auto px-4 mt-6">
+
+        <div className="flex justify-between items-center">
+          <p className="text-sm font-medium">
             {filtered.length} properties found
           </p>
           <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[260px,1fr] gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-[260px,1fr] gap-6 mt-4">
           <HotelsFiltersSidebar
             price={price}
             setPrice={setPrice}
@@ -63,6 +65,7 @@ export default function HotelsPage() {
 
           <HotelGrid hotels={filtered} />
         </div>
+
       </div>
     </div>
   );

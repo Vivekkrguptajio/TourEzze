@@ -10,7 +10,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
   const alertRef = useRef(null);
   const langRef = useRef(null);
 
-  // ----------------- SELF LANGUAGE NAMES -----------------
+  // ----------------- LANGUAGES -----------------
   const languages = [
     { key: "Hindi", label: "हिन्दी" },
     { key: "English", label: "English" },
@@ -25,22 +25,24 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
     { key: "Kurmali", label: "कुर्माली" },
   ];
 
-  // CURRENT LANGUAGE
-  const [language, setLanguage] = useState(languages[0].key);
+  // Selected Language → Navbar text
+  const [language, setLanguage] = useState("English");
 
-  // 🔄 AUTO CHANGE LANGUAGE EVERY 1 SECOND
+  // Rotating Language UI Only
+  const [rotatingLang, setRotatingLang] = useState("English");
+
+  // 🔄 Auto rotate language label every 3 sec
   useEffect(() => {
     let index = 0;
-
     const interval = setInterval(() => {
       index = (index + 1) % languages.length;
-      setLanguage(languages[index].key);
-    }, 3000); // change every 1 sec
+      setRotatingLang(languages[index].key);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // ----------------- NAVIGATION TEXT TRANSLATIONS -----------------
+  // ----------------- TRANSLATIONS -----------------
   const translations = {
     English: {
       explore: "Explore",
@@ -121,39 +123,35 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
     },
   };
 
-  // HANDLE SCROLL
+  // ----------------- SCROLL HANDLER -----------------
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // CLOSE DROPDOWNS ON OUTSIDE CLICK
+  // OUTSIDE CLICK CLOSE
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (alertRef.current && !alertRef.current.contains(e.target)) {
-        setShowAlerts(false);
-      }
-      if (langRef.current && !langRef.current.contains(e.target)) {
-        setShowLang(false);
-      }
+    const click = (e) => {
+      if (alertRef.current && !alertRef.current.contains(e.target)) setShowAlerts(false);
+      if (langRef.current && !langRef.current.contains(e.target)) setShowLang(false);
     };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("click", click);
+    return () => document.removeEventListener("click", click);
   }, []);
 
-  // SMOOTH SCROLL
+  // SMOOTH SCROLL FUNCTION
   const scrollToSection = (ref) => {
     if (!ref?.current) return;
-    const yOffset = -85;
-    const yPosition =
-      ref.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: yPosition, behavior: "smooth" });
+    const offset = -85;
+    const pos =
+      ref.current.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top: pos, behavior: "smooth" });
   };
 
   return (
     <nav
-      className={`w-full fixed top-0 left-0 z-[999] transition-all duration-300
+      className={`w-full fixed top-0 left-0 z-[999] transition-all duration-300 
         ${isScrolled ? "py-2 bg-green-900 shadow-lg" : "py-4 bg-green-900 shadow-md"}
       `}
     >
@@ -164,23 +162,15 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-1 cursor-pointer"
         >
-          <h1
-            className={`font-bold text-white transition-all 
-              ${isScrolled ? "text-lg" : "text-2xl"}
-            `}
-          >
+          <h1 className={`font-bold text-white ${isScrolled ? "text-lg" : "text-2xl"}`}>
             TourEzze
           </h1>
-          <span
-            className={`text-white transition-all 
-              ${isScrolled ? "text-xl" : "text-3xl"}
-            `}
-          >
+          <span className={`text-white ${isScrolled ? "text-xl" : "text-3xl"}`}>
             .
           </span>
         </div>
 
-        {/* MENU ITEMS */}
+        {/* NAV LINKS */}
         <div className="hidden md:flex items-center gap-8 text-white font-medium">
 
           <p className="hover:text-green-300 cursor-pointer" onClick={() => scrollToSection(exploreRef)}>
@@ -201,27 +191,30 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
 
           <div
             onClick={() => scrollToSection(roleRef)}
-            className="relative cursor-pointer px-4 py-1 rounded-lg text-white font-medium rainbow-border"
+            className="cursor-pointer px-4 py-1 rounded-lg text-white rainbow-border"
           >
             {translations[language].role}
           </div>
         </div>
 
-        {/* 🔔 ALERT + 🌐 LANGUAGE */}
+        {/* RIGHT SIDE (LANG + ALERTS) */}
         <div className="flex items-center gap-6">
 
-          {/* LANGUAGE DROPDOWN */}
+          {/* 🌐 ROTATING LANGUAGE NAME — FIXED WIDTH SO NAVBAR DOESN'T MOVE */}
           <div className="relative" ref={langRef}>
             <button
               onClick={() => setShowLang(!showLang)}
               className="text-white hover:text-green-300 transition flex items-center gap-2"
             >
               <Globe className="h-6 w-6" />
-              <span>
-                {languages.find(l => l.key === language)?.label}
+
+              {/* 👇 FIXED WIDTH → NAVBAR NEVER SHIFTS */}
+              <span className="inline-block w-[90px] text-left truncate">
+                {languages.find(l => l.key === rotatingLang)?.label}
               </span>
             </button>
 
+            {/* LANG DROPDOWN */}
             {showLang && (
               <div className="absolute right-0 mt-3 w-40 bg-white rounded-lg shadow-xl p-2">
                 {languages.map((lang) => (
@@ -229,7 +222,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
                     key={lang.key}
                     className="p-2 text-sm cursor-pointer hover:bg-green-100 rounded"
                     onClick={() => {
-                      setLanguage(lang.key);
+                      setLanguage(lang.key); 
                       setShowLang(false);
                     }}
                   >
@@ -240,7 +233,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
             )}
           </div>
 
-          {/* ALERT BELL */}
+          {/* 🔔 ALERTS */}
           <div className="relative" ref={alertRef}>
             <button
               onClick={() => setShowAlerts(!showAlerts)}

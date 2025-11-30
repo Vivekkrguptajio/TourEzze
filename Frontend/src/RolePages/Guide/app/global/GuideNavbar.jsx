@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Bell, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function GuideNavbar() {
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="w-full bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between fixed top-0 left-0 z-50">
 
-      {/* LEFT TITLE */}
-      <h1 className="text-xl font-semibold text-green-800">
+      {/* LEFT TITLE (CLICKABLE) */}
+      <h1
+        className="text-xl font-semibold text-green-800 cursor-pointer select-none"
+        onClick={() => navigate("/")}   // 👈 redirect on click
+      >
         Tour Guide Dashboard
       </h1>
 
@@ -30,28 +35,19 @@ export default function GuideNavbar() {
             <User className="w-4 h-4" />
           </button>
 
-          {/* DROPDOWN MENU */}
+          {/* DROPDOWN */}
           {openMenu && (
             <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 shadow-lg rounded-lg py-2 animate-fadeIn">
 
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
+              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Profile
               </a>
 
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
+              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Settings
               </a>
 
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
+              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Support
               </a>
 

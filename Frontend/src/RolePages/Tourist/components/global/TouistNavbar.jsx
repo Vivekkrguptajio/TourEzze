@@ -27,7 +27,7 @@ export default function Navbar({ setAuthType }) {
 
         {/* LOGO */}
         <Link
-          to="/role/tourist/"
+          to="/"
           className="flex items-center gap-2 cursor-pointer shrink-0"
         >
           <img src="/Photos/NavbarLogo/logo.png" className="w-10 h-10" alt="logo" />

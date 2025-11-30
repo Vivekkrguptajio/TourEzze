@@ -26,7 +26,7 @@ export default function App() {
         <Route path="/role/vendor/*" element={<VendorPortal />} />
         <Route path="/role/guide/*" element={<GuidePortal />} />
         <Route path="/role/hotel-owner/*" element={<HotelPortal />} />
-        <Route path="/role/government" element={<GovPortal />} />
+        <Route path="/role/government/*" element={<GovPortal />} />
       </Routes>
     </>
   );

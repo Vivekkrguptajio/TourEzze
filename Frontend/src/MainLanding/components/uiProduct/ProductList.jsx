@@ -1,48 +1,63 @@
-import React, { useRef } from "react";
+// ProductList.jsx
+import React, { useRef, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { marketplaceProducts } from "./productData";
-import "../../styles/Explore.css"; // SAME CSS USE HOGA
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "../../styles/ProductScroll.css"; // New CSS file
 
 export default function ProductList() {
   const sliderRef = useRef(null);
 
-  // Wheel Scroll
-  const handleWheel = (e) => {
-    e.preventDefault();
-    sliderRef.current.scrollLeft += e.deltaY * 1.1;
-  };
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  // Arrow Left
+    const handleWheel = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      slider.scrollLeft += e.deltaY * 1.1;
+    };
+
+    slider.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      slider.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   const scrollLeft = () => {
-    sliderRef.current.scrollLeft -= 300;
+    sliderRef.current.scrollBy({ left: -400, behavior: 'smooth' });
   };
 
-  // Arrow Right
   const scrollRight = () => {
-    sliderRef.current.scrollLeft += 300;
+    sliderRef.current.scrollBy({ left: 400, behavior: 'smooth' });
   };
 
   return (
-    <div className="relative">
-      
+    <div className="product-slider-wrapper">
       {/* LEFT ARROW */}
-      <div className="slider-arrow left" onClick={scrollLeft}>
-        ❮
-      </div>
+      <button
+        onClick={scrollLeft}
+        className="product-arrow product-arrow-left"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
 
       {/* RIGHT ARROW */}
-      <div className="slider-arrow right" onClick={scrollRight}>
-        ❯
-      </div>
+      <button
+        onClick={scrollRight}
+        className="product-arrow product-arrow-right"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
 
       {/* HORIZONTAL SCROLL LIST */}
       <div
         ref={sliderRef}
-        onWheel={handleWheel}
-        className="slider-container"
+        className="product-slider-container"
       >
         {marketplaceProducts.map((item) => (
-          <div key={item.id} className="slider-item">
+          <div key={item.id} className="product-slider-item">
             <ProductCard item={item} />
           </div>
         ))}
