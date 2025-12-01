@@ -26,7 +26,7 @@ export default function MainLanding() {
 
       <HeroSection />
       <CultureSection />
-      <WhyChooseUs />
+     
 
       {/* EXPLORE SECTION */}
       <div ref={exploreRef}>
@@ -47,6 +47,7 @@ export default function MainLanding() {
       <div ref={roleRef}>
         <RoleSelector />
       </div>
+       <WhyChooseUs />
       <Footer/>
     </div>
   );

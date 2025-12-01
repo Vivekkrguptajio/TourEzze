@@ -13,8 +13,9 @@ import Review from "./app/review/Review";
 import Message from "./app/Message/Message";
 import Inventory from "./app/inventory/Inventory";
 import Verification from "./Verification/Verification";
-import Setting from "../Guide/app/others/Settings/Setting";
+
 import Settings from "./app/Settings/Settings";
+import Logout from "./Auth/VendorLogout";
 
 export default function VendorPortal() {
   return (
@@ -62,6 +63,7 @@ export default function VendorPortal() {
       <Route path="messages" element={<VendorLayout />}>
         <Route index element={<Message />} />
       </Route>
+
       <Route path="inventory" element={<VendorLayout />}>
         <Route index element={<Inventory />} />
       </Route>
@@ -70,8 +72,12 @@ export default function VendorPortal() {
         <Route index element={<Verification />} />
       </Route>
 
-       <Route path="Settings" element={<VendorLayout />}>
+      <Route path="Settings" element={<VendorLayout />}>
         <Route index element={<Settings />} />
+      </Route>
+
+      <Route path="/role/vendor/login" element={<VendorLayout />}>
+        <Route index element={<Logout />} />
       </Route>
     </Routes>
   );

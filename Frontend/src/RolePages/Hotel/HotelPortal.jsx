@@ -15,6 +15,7 @@ import Review from "./app/review/Review";
 import Message from "./app/messages/Message";
 import Support from "./app/support/Support";
 import Settings from "./app/settings/Settings";
+import HotelLogout from "./Auth/HotelLogout";
 
 export default function HotelPortal() {
   return (
@@ -144,6 +145,17 @@ export default function HotelPortal() {
           </ProviderLayout>
         }
       />
+
+        <Route
+        path="/role/hotel-owner/login"
+        element={
+          <ProviderLayout>
+            <HotelLogout/>
+          </ProviderLayout>
+        }
+      />
+
+      
     </Routes>
   );
 }

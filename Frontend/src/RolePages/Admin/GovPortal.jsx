@@ -18,6 +18,7 @@ import HotelVerification from "./app/Verification/pages/HotelVerification";
 import Complaints from "./app/Other/pages/complaints/Complaints";
 import Heatmaps from "./app/Other/pages/maps/Heatmaps";
 import Settings from "./app/Other/pages/settings/Settings";
+import GovLogout from "./Auth/GovLogout";
 
 export default function GovPortal() {
   return (
@@ -35,16 +36,16 @@ export default function GovPortal() {
         path="tourist-analytics"
         element={
           <Layout>
-            <TouristAnalytics/>
+            <TouristAnalytics />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="hotels"
         element={
           <Layout>
-            <Hotels/>
+            <Hotels />
           </Layout>
         }
       />
@@ -53,7 +54,7 @@ export default function GovPortal() {
         path="vendors"
         element={
           <Layout>
-            <Vendors/>
+            <Vendors />
           </Layout>
         }
       />
@@ -62,33 +63,33 @@ export default function GovPortal() {
         path="guides"
         element={
           <Layout>
-            <TourGuides/>
+            <TourGuides />
           </Layout>
         }
       />
-       <Route
+      <Route
         path="transport"
         element={
           <Layout>
-            <TransportProviders/>
+            <TransportProviders />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="events"
         element={
           <Layout>
-            <EventManagement/>
+            <EventManagement />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="approve-events"
         element={
           <Layout>
-            <ApproveEvents/>
+            <ApproveEvents />
           </Layout>
         }
       />
@@ -97,7 +98,7 @@ export default function GovPortal() {
         path="create-events"
         element={
           <Layout>
-            <CreateEvents/>
+            <CreateEvents />
           </Layout>
         }
       />
@@ -106,7 +107,7 @@ export default function GovPortal() {
         path="reports"
         element={
           <Layout>
-            <Reports/>
+            <Reports />
           </Layout>
         }
       />
@@ -115,76 +116,82 @@ export default function GovPortal() {
         path="daily-reports"
         element={
           <Layout>
-            <DailyReportTable/>
+            <DailyReportTable />
           </Layout>
         }
       />
-      
-        <Route
+
+      <Route
         path="monthly-reports"
         element={
           <Layout>
-            <MonthlyReports/>
+            <MonthlyReports />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="verification"
         element={
           <Layout>
-            <VendorVerification/>
+            <VendorVerification />
           </Layout>
         }
       />
 
-         <Route
+      <Route
         path="guide-verification"
         element={
           <Layout>
-            <GuideVerification/>
+            <GuideVerification />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="hotel-verification"
         element={
           <Layout>
-            <HotelVerification/>
+            <HotelVerification />
           </Layout>
         }
       />
 
- <Route
+      <Route
         path="complaints"
         element={
           <Layout>
-            <Complaints/>
+            <Complaints />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="maps"
         element={
           <Layout>
-            <Heatmaps/>
+            <Heatmaps />
           </Layout>
         }
       />
 
-       <Route
+      <Route
         path="settings"
         element={
           <Layout>
-            <Settings/>
+            <Settings />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="role/government/login"
+        element={
+          <Layout>
+            <GovLogout />
           </Layout>
         }
       />
     </Routes>
-
-    
-    
   );
 }

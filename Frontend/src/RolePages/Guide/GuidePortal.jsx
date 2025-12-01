@@ -16,6 +16,7 @@ import Message from "./app/others/Messages/Message";
 import Verifications from "./app/others/Verfications/Verifications";
 import Setting from "./app/others/Settings/Setting";
 import Support from "./app/others/Support/Support";
+import GuideLogout from "./Auth/GuideLogout";
 
 export default function GuidePortal() {
   return (
@@ -150,6 +151,15 @@ export default function GuidePortal() {
         element={
           <GuideLayout>
             <Setting />
+          </GuideLayout>
+        }
+      />
+
+       <Route
+        path="/role/guide/login"
+        element={
+          <GuideLayout>
+            <GuideLogout/>
           </GuideLayout>
         }
       />

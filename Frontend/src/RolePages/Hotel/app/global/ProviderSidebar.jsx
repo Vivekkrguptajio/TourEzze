@@ -16,7 +16,8 @@ import {
   XCircle,
   BedDouble,
   Car,
-  Plus
+  Plus,
+  LogOut
 } from "lucide-react";
 
 export default function ProviderSidebar() {
@@ -24,9 +25,10 @@ export default function ProviderSidebar() {
   const [openBookings, setOpenBookings] = useState(true);
 
   return (
-    <aside className="w-64 bg-black text-white h-screen pt-20 fixed left-0 top-0 border-r border-green-900">
+    <aside className="w-64 bg-black text-white h-screen pt-20 fixed left-0 top-0 border-r border-green-900 flex flex-col">
 
-      <ul className="px-4 space-y-1">
+      {/* MAIN MENU ITEMS */}
+      <ul className="px-4 space-y-1 flex-1 overflow-y-auto">
 
         {/* Dashboard */}
         <Link to="/role/hotel-owner/dashboard">
@@ -168,6 +170,18 @@ export default function ProviderSidebar() {
         </Link>
 
       </ul>
+
+      {/* ============================== LOGOUT STICKY BOTTOM ============================== */}
+      <div className="p-4 border-t border-green-800">
+        <Link
+          to="/role/hotel-owner/logout"
+          className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-700 bg-red-600 cursor-pointer transition"
+        >
+          <LogOut className="w-5 h-5 text-white" />
+          <span className="font-medium">Logout</span>
+        </Link>
+      </div>
+
     </aside>
   );
 }

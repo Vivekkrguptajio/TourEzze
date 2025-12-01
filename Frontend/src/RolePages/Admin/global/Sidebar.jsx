@@ -63,9 +63,16 @@ export default function Sidebar() {
       <SidebarItem to="settings" icon={<Settings size={18} />} label="Settings" />
 
       {/* LOGOUT */}
-      <div className="mt-5">
-        <SidebarItem to="/logout" icon={<LogOut size={18} />} label="Logout" red noPrefix />
-      </div>
+     {/* LOGOUT */}
+<div className="mt-5">
+  <SidebarItem 
+    to="logout" 
+    icon={<LogOut size={18} />} 
+    label="Logout" 
+    red 
+  />
+</div>
+
     </aside>
   );
 }
