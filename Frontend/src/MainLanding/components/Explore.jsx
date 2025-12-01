@@ -2,7 +2,7 @@ import PopularPlaceList from "../components/uiExplore/PopularPlaceList";
 
 export default function Explore() {
   return (
-    <section className="py-12 bg-gradient-to-b from-blue-50/30 to-white">
+    <section className="py-12 bg-gradient-to-b from-orange-50 via-amber-50 to-white">
       
       {/* TITLE */}
       <h2 className="

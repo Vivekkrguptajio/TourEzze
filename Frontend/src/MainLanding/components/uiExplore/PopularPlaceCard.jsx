@@ -1,82 +1,68 @@
+import { Link } from "react-router-dom";
+import { MapPin, Star } from "lucide-react";
 import "../../styles/Explore.css";
 
 export default function PopularPlaceCard({ place }) {
   return (
-    <div
-      className="
-      bg-white 
-      rounded-xl 
-      shadow-lg 
-      border border-gray-200 
-      overflow-hidden 
-      transition-all duration-300 
-      hover:-translate-y-2 
-      w-[280px]
-      h-[360px]
-      flex flex-col
-      hover:shadow-2xl
-    "
+    <Link
+      to={`/place/${place.id}`}
+      className="group block bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1 w-48"
     >
-      {/* IMAGE SECTION */}
-      <div className="relative w-full h-[180px] overflow-hidden">
+      {/* IMAGE */}
+      <div className="relative w-full h-32 overflow-hidden bg-gray-100 pointer-events-none">
         <img
           src={place.image}
           alt={place.name}
-          className="
-            w-full 
-            h-full 
-            object-cover 
-            transition-transform duration-500 
-            ease-out 
-            group-hover:scale-110
-          "
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
 
-        {/* CATEGORY BADGE */}
-        <span
-          className="
-          absolute top-3 right-3 
-          bg-green-400 
-          text-black text-[10px] 
-          font-semibold 
-          px-2 py-[2px] 
-          rounded-full shadow
-        "
-        >
-          {place.category}
-        </span>
+        {/* Left badge (category/type) */}
+        {place.category && (
+          <span className="absolute top-2 left-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-lg">
+            {place.category}
+          </span>
+        )}
+
+        {/* Right badge (featured/new) */}
+        {place.featured && (
+          <span className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-lg">
+            Featured
+          </span>
+        )}
       </div>
 
-      {/* CONTENT SECTION */}
-      <div className="flex-1 px-4 py-3 flex flex-col justify-between">
+      {/* CONTENT */}
+      <div className="p-3">
+        <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">
+          {place.subCategory ?? "Destination"}
+        </p>
 
-        {/* TITLE + RATING */}
-        <div>
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-[16px] font-semibold text-gray-900">
-              {place.name}
-            </h2>
+        <h3 className="font-bold text-sm text-gray-900 mb-1 line-clamp-1 group-hover:text-green-600 transition-colors duration-300">
+          {place.name}
+        </h3>
 
-            <div className="flex items-center gap-[2px] text-yellow-500 text-sm">
-              ⭐ <span className="font-medium">{place.rating}</span>
-            </div>
-          </div>
+        <div className="flex items-center gap-1 text-xs text-gray-600 mb-1">
+          <Star className="w-3 h-3 text-yellow-500" />
+          <span className="text-xs font-medium">{place.rating}</span>
+          <span className="text-gray-400">•</span>
+          <MapPin className="w-3 h-3 text-gray-400" />
+          <span className="truncate">{place.location}</span>
+        </div>
 
-          {/* DESCRIPTION */}
-          <p className="text-gray-600 text-[13px] leading-snug line-clamp-2">
-            {place.description}
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+          {place.description}
+        </p>
+
+        <div className="flex items-center justify-between pt-1 border-t border-gray-100">
+          <p className="text-sm font-bold bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent">
+            {place.price ?? "Free"}
           </p>
-        </div>
 
-        {/* BOTTOM INFO */}
-        <div className="flex items-center justify-between mt-3 text-[13px]">
-          <span className="text-gray-500">📍 {place.reviews} reviews</span>
-
-          <button className="text-green-600 hover:text-green-700 font-semibold">
+          <span className="px-2 py-1 rounded-md font-semibold text-xs transition-all duration-300 bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-sm hover:scale-105">
             Explore
-          </button>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

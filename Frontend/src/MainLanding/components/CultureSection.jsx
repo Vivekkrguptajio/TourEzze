@@ -3,7 +3,7 @@ import { Leaf, Users, Palette, Mountain, Sparkles } from "lucide-react";
 
 const CultureSection = () => {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden">
+    <section className="relative py-10 md:py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
@@ -14,23 +14,33 @@ const CultureSection = () => {
       {/* Decorative Pattern Overlay */}
       <div className="absolute inset-0 opacity-5" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, orange 1px, transparent 0)', backgroundSize: '40px 40px'}}></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 space-y-6">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 text-white px-8 py-3 rounded-full text-sm font-bold shadow-2xl hover:shadow-orange-300/50 hover:scale-105 transition-all duration-300 border-2 border-white/30">
-            <Sparkles className="w-5 h-5 animate-pulse" />
-            <span className="tracking-wide">DISCOVER THE HERITAGE</span>
-            <Sparkles className="w-5 h-5 animate-pulse" />
-          </div>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent leading-tight drop-shadow-lg">
-            Jharkhand
-          </h2>
-          <h3 className="text-2xl md:text-4xl font-bold text-gray-700">
-            A Land of Ancient History & Tribal Culture
-          </h3>
-          <p className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto font-semibold leading-relaxed">
-            ✨ Discover the rich heritage and natural beauty of this incredible land where traditions come alive ✨
-          </p>
-        </div>
+      <div className="pt-0 container mx-auto px-4 relative z-10">
+      
+
+
+
+       <div className="p text-center mb-10 space-y-3">
+
+  {/* Heading Jharkhand */}
+  <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold 
+                 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 
+                 bg-clip-text text-transparent leading-tight drop-shadow-lg">
+    Jharkhand
+  </h2>
+
+  {/* Subheading */}
+  <h3 className="text-lg md:text-2xl font-semibold text-gray-700">
+    A Land of Ancient History & Tribal Culture
+  </h3>
+
+  {/* Description */}
+  <p className="text-sm md:text-lg text-gray-600 max-w-xl mx-auto font-medium leading-relaxed">
+    ✨ Discover the rich heritage and natural beauty of this incredible land where traditions come alive ✨
+  </p>
+
+</div>
+
+
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center max-w-7xl mx-auto">
           
@@ -42,12 +52,6 @@ const CultureSection = () => {
               <span className="text-orange-600 font-bold text-sm tracking-wider uppercase">About Jharkhand</span>
             </div>
             
-            <p className="text-gray-800 leading-relaxed text-lg md:text-xl">
-              Jharkhand, meaning <span className="font-bold text-orange-600">"The Land of Forests,"</span> has ancient roots dating back to prehistoric
-              times with cave art that tells stories of early human civilization. This beautiful
-              state is home to <strong className="text-amber-600">32 tribal communities</strong>, each with unique traditions,
-              languages, and cultural practices preserved for generations.
-            </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="group relative overflow-hidden flex items-start gap-4 p-7 bg-gradient-to-br from-emerald-100 via-green-50 to-teal-50 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-2 border-emerald-300/60 cursor-pointer">
@@ -95,21 +99,11 @@ const CultureSection = () => {
               </div>
             </div>
             
-            <div className="relative bg-gradient-to-r from-amber-100 via-orange-100 to-yellow-100 p-8 rounded-3xl border-l-8 border-orange-500 shadow-2xl overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-300/30 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-yellow-300/30 rounded-full blur-2xl"></div>
-              <div className="relative z-10 flex items-start gap-4">
-                <span className="text-6xl">💫</span>
-                <p className="text-gray-800 text-lg md:text-xl italic font-bold leading-relaxed">
-                  From prehistoric cave paintings to colorful Sohrai murals adorning village walls,
-                  Jharkhand is a living museum of art, culture, and natural wonders.
-                </p>
-              </div>
-            </div>
+          
           </div>
           
           {/* LEFT SIDE IMAGE */}
-          <div className="order-1 md:order-2 relative group">
+          {/* <div className="order-1 md:order-2 relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
             <img
               src={tribalCulture}
@@ -120,7 +114,41 @@ const CultureSection = () => {
               <p className="text-white font-bold text-lg md:text-xl">Experience the Magic of Jharkhand</p>
               <p className="text-white/90 text-sm mt-1">Where culture meets nature</p>
             </div>
-          </div>
+          </div> */}
+          <div className="order-1 md:order-2 relative group">
+
+  <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 
+                  rounded-3xl blur-xl opacity-60 group-hover:opacity-80 transition duration-500">
+  </div>
+
+  <img
+    src={tribalCulture}
+    alt="Jharkhand Tribal Culture and Dance"
+    className="
+      relative 
+      w-full 
+      h-[350px] md:h-[450px] lg:h-[430px]   
+      rounded-3xl 
+      shadow-2xl 
+      object-cover 
+      ring-4 ring-white/50 
+      transform group-hover:scale-[1.03]    
+      transition-transform duration-500
+    "
+  />
+
+  <div className="absolute bottom-6 left-6 right-6 bg-gradient-to-r from-black/70 to-black/50 
+                  backdrop-blur-md p-5 rounded-2xl border border-white/20">
+    <p className="text-white font-bold text-lg md:text-xl">
+      Experience the Magic of Jharkhand
+    </p>
+    <p className="text-white/90 text-sm mt-1">
+      Where culture meets nature
+    </p>
+  </div>
+
+</div>
+
         </div>
       </div>
     </section>

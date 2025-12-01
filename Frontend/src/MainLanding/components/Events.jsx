@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Events() {
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white via-green-50/30 to-white overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-b from-orange-50 via-amber-50 to-white overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-green-200/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl"></div>
