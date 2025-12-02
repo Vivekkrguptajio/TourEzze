@@ -5,6 +5,7 @@ import cors from "cors";
 
 import touristRoutes from "./src/routes/tourist.routes.js";
 import vendorRoutes from "./src/routes/vendor.routes.js";
+import itineraryRoutes from "./src/routes/itinerary.routes.js";
 
 dotenv.config();
 
@@ -37,7 +38,7 @@ app.use("/api/tourist", touristRoutes);
 
 // Vendor routes
 app.use("/api/vendor", vendorRoutes);
-
+app.use("/api/ai", itineraryRoutes);
 // Server Start
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
