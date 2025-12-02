@@ -1,6 +1,3 @@
-import { generateItineraryService } from "../services/itinerary.service.js";
-import TravelPlan from "../models/travelPlan.model.js";
-
 export const generateItinerary = async (req, res) => {
   try {
     const {
@@ -9,12 +6,21 @@ export const generateItinerary = async (req, res) => {
       travellerType,
       startLocation,
       interests,
-      preferences,
+      preferences   // this now contains 7–8 extra fields
     } = req.body;
 
-    if (!duration || !budget || !travellerType) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
+    // Preference breakdown
+    const {
+      destination,
+      startDate,
+      endDate,
+      ageGroup,
+      transportMode,
+      foodPreference,
+      comfortLevel,
+      walkingPreference,
+      photography
+    } = preferences;
 
     const planText = await generateItineraryService({
       duration,
@@ -22,52 +28,32 @@ export const generateItinerary = async (req, res) => {
       travellerType,
       startLocation,
       interests,
-      preferences,
+      destination,
+      startDate,
+      endDate,
+      ageGroup,
+      transportMode,
+      foodPreference,
+      comfortLevel,
+      walkingPreference,
+      photography
     });
 
     let parsedPlan = planText;
     try {
       parsedPlan = JSON.parse(planText);
-    } catch (e) {
-      // agar JSON na ho to raw text hi bhej denge
-    }
-
-    const saved = await TravelPlan.create({
-      duration,
-      budget,
-      travellerType,
-      startLocation,
-      interests,
-      preferences,
-      aiPlan: typeof parsedPlan === "object" ? parsedPlan : { raw: planText },
-    });
+    } catch {}
 
     return res.status(200).json({
       success: true,
-      itinerary: parsedPlan,
-      id: saved._id,
+      itinerary: parsedPlan
     });
+
   } catch (err) {
-    console.error(err);
     return res.status(500).json({
       success: false,
       message: "AI itinerary generation failed",
-      error: err.message,
-    });
-  }
-};
-
-
-export const getTravelHistory = async (req, res) => {
-  try {
-    const plans = await TravelPlan.find().sort({ createdAt: -1 }).limit(10);
-
-    res.json({ success: true, plans });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch history",
-      error: err.message,
+      error: err.message
     });
   }
 };

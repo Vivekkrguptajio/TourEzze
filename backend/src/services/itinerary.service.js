@@ -1,31 +1,58 @@
-import { getGeminiModel } from "../utils/geminiClient.js";
-
 export const generateItineraryService = async ({
   duration,
   budget,
   travellerType,
   startLocation,
   interests,
-  preferences,
+  destination,
+  startDate,
+  endDate,
+  ageGroup,
+  transportMode,
+  foodPreference,
+  comfortLevel,
+  walkingPreference,
+  photography
 }) => {
+
   const model = getGeminiModel();
 
   const prompt = `
-  Create a detailed travel itinerary in JSON ONLY.
+  You are a professional travel planner AI.
 
-  Inputs:
-  - Duration: ${duration}
-  - Budget: ${budget}
-  - Traveller Type: ${travellerType}
-  - Starting Location: ${startLocation}
-  - Interests: ${interests.join(", ")}
-  - Preferences: ${JSON.stringify(preferences)}
+  Create a DAY-WISE trip itinerary in JSON ONLY.
 
-  Follow this JSON format exactly:
+  --- TRIP DETAILS ---
+  Destination: ${destination}
+  Starting Location: ${startLocation}
+  Duration: ${duration}
+  Budget: ₹${budget}
+  Dates: ${startDate || "Not given"} to ${endDate || "Not given"}
 
+  --- USER PROFILE ---
+  Traveller Type: ${travellerType}
+  Age Group: ${ageGroup}
+  Transport Mode: ${transportMode}
+  Food Preference: ${foodPreference}
+  Comfort Level: ${comfortLevel}
+  Walking Preference: ${walkingPreference}
+  Photography Priority: ${photography}
+
+  --- INTERESTS ---
+  ${interests.join(", ")}
+
+  --- OUTPUT JSON FORMAT ---
   {
     "summary": "",
+    "weather": "",
+    "bestSeason": "",
     "overallBudget": "",
+    "hotelSuggestions": [{ "name": "", "price": "" }],
+    "transportPlan": {
+        "mode": "",
+        "totalDistance": "",
+        "fuelCostApprox": ""
+    },
     "days": [
       {
         "day": 1,
@@ -34,15 +61,13 @@ export const generateItineraryService = async ({
         "travelTime": "",
         "fee": "",
         "weather": "",
-        "activities": ["", "", ""]
+        "activities": []
       }
     ]
   }
   `;
 
   const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
-
+  const text = result.response.text();
   return text;
 };
