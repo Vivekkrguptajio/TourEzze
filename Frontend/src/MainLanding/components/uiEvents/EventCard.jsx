@@ -1,83 +1,65 @@
-// EventCard.jsx
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Users } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 
 export default function EventCard({ event }) {
   return (
-    <Link
-      to={`/event/${event.id}`}
-      className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-2 block"
+    <div
+      className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1 w-48"
     >
       {/* IMAGE */}
-      <div className="relative w-full h-44 overflow-hidden bg-gray-100">
+      <div className="relative w-full h-32 overflow-hidden bg-gray-100 pointer-events-none">
         <img
           src={event.image}
           alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
-        {/* TYPE TAG */}
-        <span className="absolute top-2 left-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
+
+        <span className="absolute top-2 left-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-lg">
           {event.type || "Festival"}
         </span>
-        
-        {/* FEATURED BADGE */}
+
         {event.featured && (
-          <span className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
+          <span className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-lg">
             Featured
           </span>
         )}
-
-        {/* Quick View Button */}
-        <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110">
-          <Calendar className="w-4 h-4 text-green-600" />
-        </div>
       </div>
 
       {/* CONTENT */}
-      <div className="p-4">
-        {/* CATEGORY */}
+      <div className="p-3">
         <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">
           {event.category || "Cultural Event"}
         </p>
-        
-        {/* TITLE */}
-        <h3 className="font-bold text-base text-gray-900 mb-2 line-clamp-1 group-hover:text-green-600 transition-colors duration-300">
+
+        <h3 className="font-bold text-sm text-gray-900 mb-1 line-clamp-1 group-hover:text-green-600 transition-colors duration-300">
           {event.title}
         </h3>
-        
-        {/* DATE */}
-        <div className="flex items-center gap-1 text-xs text-gray-600 mb-2">
-          <Calendar className="w-3.5 h-3.5 text-gray-400" />
+
+        <div className="flex items-center gap-1 text-xs text-gray-600 mb-1">
+          <Calendar className="w-3 h-3 text-gray-400" />
           <span>{event.date}</span>
         </div>
-        
-        {/* LOCATION & ATTENDEES (like RATING in Product) */}
-        <div className="flex items-center gap-1.5 mb-3">
-          <div className="flex items-center gap-1 bg-orange-50 px-1.5 py-0.5 rounded">
-            <MapPin className="w-3.5 h-3.5 text-orange-600" />
+
+        <div className="flex items-center gap-1 mb-2">
+          <div className="flex items-center gap-1 bg-orange-50 px-1 py-0.5 rounded">
+            <MapPin className="w-3 h-3 text-orange-600" />
             <span className="text-xs font-semibold text-orange-700">{event.location}</span>
           </div>
-          {event.attendees && (
-            <span className="text-xs text-gray-500">({event.attendees}+)</span>
-          )}
         </div>
-        
-        {/* PRICE & BUTTON */}
-        <div className="flex items-center justify-between pt-2.5 border-t border-gray-100">
-          <p className="text-xl font-bold bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent">
+
+        <div className="flex items-center justify-between pt-1 border-t border-gray-100">
+          <p className="text-sm font-bold bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent">
             {event.price || "Free"}
           </p>
-          <button 
-            className="px-3 py-1.5 rounded-lg font-semibold text-xs transition-all duration-300 bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-lg hover:scale-105"
+
+          <Link
+            to={`/event/${event.id}`}
+            className="px-2 py-1 rounded-md font-semibold text-xs transition-all duration-300 bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-sm hover:scale-105"
           >
             View
-          </button>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

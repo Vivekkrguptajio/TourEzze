@@ -139,6 +139,62 @@ body {
   animation: fadeIn 0.25s ease-out;
 }
 
+.event-slider-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.event-slider-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.event-slider-container::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.event-slider-item {
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+.event-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 2px 8px #0002;
+  z-index: 50;
+}
+
+.event-arrow.left {
+  left: 0;
+}
+
+.event-arrow.right {
+  right: 0;
+}
+
+.event-arrow:hover {
+  background: #f0f0f0;
+}
+.active-drag {
+  cursor: grabbing;
+  scroll-behavior: auto; /* disable smooth during drag */
+}
+
+.event-slider-container {
+  cursor: grab;
+}
 @import "tailwindcss";
 
 

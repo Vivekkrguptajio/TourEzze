@@ -2,9 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import touristRoutes from "./src/routes/tourist.routes.js";
-import hotelRoutes from "./src/routes/hotel.routes.js";
 
+import touristRoutes from "./src/routes/tourist.routes.js";
+import vendorRoutes from "./src/routes/vendor.routes.js";
 
 dotenv.config();
 
@@ -34,8 +34,9 @@ app.get("/", (req, res) => {
 
 // Tourist routes
 app.use("/api/tourist", touristRoutes);
-app.use("/api/hotel", hotelRoutes);
 
+// Vendor routes
+app.use("/api/vendor", vendorRoutes);
 
 // Server Start
 const PORT = process.env.PORT || 5001;

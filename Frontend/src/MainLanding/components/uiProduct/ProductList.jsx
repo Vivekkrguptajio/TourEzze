@@ -1,67 +1,35 @@
 // ProductList.jsx
-import React, { useRef, useEffect } from "react";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import { marketplaceProducts } from "./productData";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import "../../styles/ProductScroll.css"; // New CSS file
 
 export default function ProductList() {
-  const sliderRef = useRef(null);
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    const handleWheel = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      slider.scrollLeft += e.deltaY * 1.1;
-    };
-
-    slider.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      slider.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
-
-  const scrollLeft = () => {
-    sliderRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-  };
-
-  const scrollRight = () => {
-    sliderRef.current.scrollBy({ left: 400, behavior: 'smooth' });
-  };
-
   return (
-    <div className="product-slider-wrapper">
-      {/* LEFT ARROW */}
-      <button
-        onClick={scrollLeft}
-        className="product-arrow product-arrow-left"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-
-      {/* RIGHT ARROW */}
-      <button
-        onClick={scrollRight}
-        className="product-arrow product-arrow-right"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      {/* HORIZONTAL SCROLL LIST */}
-      <div
-        ref={sliderRef}
-        className="product-slider-container"
+    <div className="relative">
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        mousewheel
+        spaceBetween={15}
+        slidesPerView={5}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          480: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 5 },
+        }}
       >
         {marketplaceProducts.map((item) => (
-          <div key={item.id} className="product-slider-item">
+          <SwiperSlide key={item.id}>
             <ProductCard item={item} />
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 }

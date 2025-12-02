@@ -1,12 +1,8 @@
 import mongoose from "mongoose";
 
-const hotelSchema = new mongoose.Schema(
+const vendorSchema = new mongoose.Schema(
   {
-    hotelName: {
-      type: String,
-      required: true,
-    },
-    ownerName: {
+    name: {
       type: String,
       required: true,
     },
@@ -16,25 +12,36 @@ const hotelSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    phone: {
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
-      minlength: 6,
+    },
+
+    // Vendor-specific fields
+    shopName: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String, // e.g. "Handicraft", "Food", "Metal Craft"
+      required: true,
     },
     address: {
       type: String,
       required: true,
     },
+
+    phone: {
+      type: String,
+      required: true,
+    },
+
     role: {
       type: String,
-      default: "hotel",
+      default: "vendor",
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Hotel", hotelSchema);
+export default mongoose.model("Vendor", vendorSchema);

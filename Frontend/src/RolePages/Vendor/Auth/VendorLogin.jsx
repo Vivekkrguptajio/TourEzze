@@ -1,120 +1,104 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function VendorAuth() {
+export default function VendorLogin() {
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true); // toggle login/signup
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    localStorage.setItem("vendorLogin", "true");
-    navigate("/role/vendor");
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Save Vendor Data (optional: database)
-    localStorage.setItem("vendorLogin", "true");
-    navigate("/role/vendor");
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:5001/api/vendor/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (!res.ok) {
+        alert(data.message || "Login Failed ❌");
+        return;
+      }
+
+      // Store login flag
+      localStorage.setItem("vendorLogin", "true");
+
+      alert("Login Successful! 🎉");
+      console.log("Vendor Login:", data);
+
+      // Redirect after login
+      navigate("/role/vendor");
+    } catch (err) {
+      setLoading(false);
+      alert("Server Error / CORS Issue ❌");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
+      <div className="bg-white p-8 rounded-2xl w-full max-w-md shadow-xl">
 
-        {/* Header */}
-        <h2 className="text-2xl font-bold text-green-700 text-center mb-6">
-          {isLogin ? "Vendor Login" : "Vendor Signup"}
-        </h2>
+        {/* TITLE */}
+        <h1 className="text-2xl text-center font-bold text-emerald-800">
+          Vendor Login
+        </h1>
 
         {/* FORM */}
-        <form onSubmit={isLogin ? handleLogin : handleSignup} className="space-y-4">
-
-          {/* Name – Only for Signup */}
-          {!isLogin && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
-              <input
-                required
-                type="text"
-                className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-              />
-            </div>
-          )}
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
 
           {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              required
-              type="email"
-              className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-            />
-          </div>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="vendor@example.com"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500"
+            required
+          />
 
           {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              required
-              type="password"
-              className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-            />
-          </div>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500"
+            required
+          />
 
-          {/* Confirm Password – Only for Signup */}
-          {!isLogin && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Confirm Password
-              </label>
-              <input
-                required
-                type="password"
-                className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-              />
-            </div>
-          )}
-
-          {/* BUTTON */}
+          {/* LOGIN BUTTON */}
           <button
             type="submit"
-            className="w-full bg-green-700 text-white py-2 rounded-lg font-semibold hover:bg-green-800 transition"
+            disabled={loading}
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold"
           >
-            {isLogin ? "Login" : "Create Account"}
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
 
-        {/* Toggle Text */}
-        <p className="text-center text-sm text-gray-600 mt-4">
-          {isLogin ? (
-            <>
-              Don’t have an account?{" "}
-              <span
-                onClick={() => setIsLogin(false)}
-                className="text-green-700 font-medium cursor-pointer"
-              >
-                Sign up
-              </span>
-            </>
-          ) : (
-            <>
-              Already have an account?{" "}
-              <span
-                onClick={() => setIsLogin(true)}
-                className="text-green-700 font-medium cursor-pointer"
-              >
-                Login
-              </span>
-            </>
-          )}
+        {/* SIGNUP LINK */}
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Don't have an account?{" "}
+          <Link
+            to="/role/vendor/signup"
+            className="text-emerald-700 font-semibold hover:underline"
+          >
+            Sign Up
+          </Link>
         </p>
+
       </div>
     </div>
   );
