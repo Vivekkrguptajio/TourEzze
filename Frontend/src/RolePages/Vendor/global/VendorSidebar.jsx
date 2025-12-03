@@ -17,30 +17,39 @@ import {
   LogOut,
   ChevronDown,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function VendorSidebar() {
   const [openProducts, setOpenProducts] = useState(true);
   const [openOrders, setOpenOrders] = useState(true);
+  const navigate = useNavigate();
 
   const linkBase =
-    "flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition";
-  const activeClass = "bg-green-100 text-green-900 font-medium";
+    "flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-all duration-150";
+  const activeClass = "bg-green-100 text-green-900 font-semibold";
   const normalClass = "text-green-800 hover:bg-green-50";
 
-  return (
-    <aside className="w-64 h-screen bg-white border-r text-green-800 flex flex-col justify-between">
+  const handleLogout = () => {
+    localStorage.removeItem("vendorToken");
+    navigate("/role/vendor/login");
+  };
 
-      {/* ------------------- TOP + MIDDLE SECTION ------------------- */}
-      <div className="py-4 flex flex-col gap-3 overflow-y-auto">
+  return (
+    <aside className="w-64 h-screen bg-white border-r border-gray-200 text-green-800 flex flex-col justify-between shadow-sm">
+
+      {/* ------- TOP SECTION ------- */}
+      <div className="py-5 flex flex-col gap-3 overflow-y-auto">
 
         {/* Dashboard */}
         <div className="px-3 mb-2">
           <NavLink
-            to="/role/vendor"
+            to="/role/vendor/"
+            end
             className={({ isActive }) =>
               `${linkBase} ${
-                isActive ? "bg-green-700 text-white" : "hover:bg-green-50"
+                isActive
+                  ? "bg-green-700 text-white font-semibold"
+                  : "hover:bg-green-50"
               }`
             }
           >
@@ -49,17 +58,18 @@ export default function VendorSidebar() {
           </NavLink>
         </div>
 
+        {/* ------------ MENU ------------ */}
         <nav className="px-3 space-y-1 text-sm">
 
-          {/* My Products */}
+          {/* PRODUCTS SECTION */}
           <div>
             <button
               onClick={() => setOpenProducts(!openProducts)}
               className="w-full flex items-center justify-between px-2 py-2 hover:bg-green-50 rounded-lg"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 font-medium">
                 <Box size={18} />
-                <span>My Products</span>
+                My Products
               </span>
               <ChevronDown
                 size={16}
@@ -70,7 +80,7 @@ export default function VendorSidebar() {
             </button>
 
             {openProducts && (
-              <div className="ml-7 mt-1 space-y-1">
+              <div className="ml-6 mt-1 space-y-1 border-l border-green-100 pl-3">
                 <NavLink
                   to="/role/vendor/products"
                   className={({ isActive }) =>
@@ -78,7 +88,7 @@ export default function VendorSidebar() {
                   }
                 >
                   <List size={16} />
-                  <span>All Listings</span>
+                  All Listings
                 </NavLink>
 
                 <NavLink
@@ -88,21 +98,21 @@ export default function VendorSidebar() {
                   }
                 >
                   <Plus size={16} />
-                  <span>Add Product</span>
+                  Add Product
                 </NavLink>
               </div>
             )}
           </div>
 
-          {/* Orders */}
+          {/* ORDERS SECTION */}
           <div>
             <button
               onClick={() => setOpenOrders(!openOrders)}
-              className="w-full flex items-center justify-between px-2 py-2 hover:bg-green-50 rounded-lg mt-1"
+              className="w-full flex items-center justify-between px-2 py-2 mt-1 hover:bg-green-50 rounded-lg"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 font-medium">
                 <ShoppingCart size={18} />
-                <span>Orders</span>
+                Orders
               </span>
               <ChevronDown
                 size={16}
@@ -113,7 +123,8 @@ export default function VendorSidebar() {
             </button>
 
             {openOrders && (
-              <div className="ml-7 mt-1 space-y-1">
+              <div className="ml-6 mt-1 space-y-1 border-l border-green-100 pl-3">
+
                 <NavLink
                   to="/role/vendor/orders/new"
                   className={({ isActive }) =>
@@ -121,7 +132,7 @@ export default function VendorSidebar() {
                   }
                 >
                   <ClipboardList size={16} />
-                  <span>New Orders</span>
+                  New Orders
                 </NavLink>
 
                 <NavLink
@@ -130,8 +141,8 @@ export default function VendorSidebar() {
                     `${linkBase} ${isActive ? activeClass : normalClass}`
                   }
                 >
-                  <Box size={16} />
-                  <span>Accepted</span>
+                  <CheckCircle2 size={16} />
+                  Accepted
                 </NavLink>
 
                 <NavLink
@@ -141,7 +152,7 @@ export default function VendorSidebar() {
                   }
                 >
                   <CheckCircle2 size={16} />
-                  <span>Completed</span>
+                  Completed
                 </NavLink>
 
                 <NavLink
@@ -151,13 +162,14 @@ export default function VendorSidebar() {
                   }
                 >
                   <XCircle size={16} />
-                  <span>Cancelled</span>
+                  Cancelled
                 </NavLink>
+
               </div>
             )}
           </div>
 
-          {/* Single Items */}
+          {/* OTHER LINKS */}
           <NavLink
             to="/role/vendor/earnings"
             className={({ isActive }) =>
@@ -165,7 +177,7 @@ export default function VendorSidebar() {
             }
           >
             <DollarSign size={16} />
-            <span>Earnings</span>
+            Earnings
           </NavLink>
 
           <NavLink
@@ -175,7 +187,7 @@ export default function VendorSidebar() {
             }
           >
             <Star size={16} />
-            <span>Reviews</span>
+            Reviews
           </NavLink>
 
           <NavLink
@@ -185,7 +197,7 @@ export default function VendorSidebar() {
             }
           >
             <MessageSquare size={16} />
-            <span>Messages</span>
+            Messages
           </NavLink>
 
           <NavLink
@@ -195,7 +207,7 @@ export default function VendorSidebar() {
             }
           >
             <Boxes size={16} />
-            <span>Inventory</span>
+            Inventory
           </NavLink>
 
           <NavLink
@@ -205,7 +217,7 @@ export default function VendorSidebar() {
             }
           >
             <ShieldCheck size={16} />
-            <span>Verification</span>
+            Verification
           </NavLink>
 
           <NavLink
@@ -215,23 +227,22 @@ export default function VendorSidebar() {
             }
           >
             <Settings size={16} />
-            <span>Settings</span>
+            Settings
           </NavLink>
+
         </nav>
       </div>
 
-      {/* ------------------- LOGOUT AT BOTTOM ------------------- */}
-      <div className="px-3 pb-4">
-        <NavLink
-  to="/role/vendor/logout"
-  className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg w-full"
->
-  <LogOut size={18} />
-  <span>Logout</span>
-</NavLink>
-
+      {/* LOGOUT */}
+      <div className="px-3 pb-4 border-t border-gray-100">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 px-4 py-2 w-full text-sm text-red-600 hover:bg-red-50 rounded-lg transition"
+        >
+          <LogOut size={18} />
+          Logout
+        </button>
       </div>
-
     </aside>
   );
 }

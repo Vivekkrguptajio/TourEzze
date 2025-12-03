@@ -27,6 +27,7 @@ import HotelProtectedRoute from "./RolePages/Hotel/Auth/HotelProtectedRoute";
 import GovLogin from "./RolePages/Admin/Auth/GovLogin";
 import GovLogout from "./RolePages/Admin/Auth/GovLogout";
 import GovProtectedRoute from "./RolePages/Admin/Auth/GovProtectedRoute";
+import VendorSignup from "./RolePages/Vendor/Auth/VendorSignup";
 
 export default function App() {
   return (
@@ -36,14 +37,16 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<MainLanding />} />
-
         {/* ====================== TOURIST ====================== */}
         <Route path="/role/tourist/*" element={<TouristPortal />} />
 
+
+        
         {/* ====================== VENDOR ====================== */}
         <Route path="/role/vendor/login" element={<VendorLogin />} />
+        <Route path="/role/vendor/signup" element={<VendorSignup />} />
+        {/* FIX */}
         <Route path="/role/vendor/logout" element={<VendorLogout />} />
-
         <Route
           path="/role/vendor/*"
           element={
@@ -52,11 +55,9 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         {/* ====================== GUIDE ======================= */}
         <Route path="/role/guide/login" element={<GuideLogin />} />
         <Route path="/role/guide/logout" element={<GuideLogout />} />
-
         <Route
           path="/role/guide/*"
           element={
@@ -65,15 +66,11 @@ export default function App() {
             </GuideProtectedRoute>
           }
         />
-
         {/* ====================== HOTEL (FIXED FULL AUTH) ======================= */}
-
         {/* LOGIN + SIGNUP PAGE */}
         <Route path="/role/hotel-owner/login" element={<HotelAuth />} />
-
         {/* LOGOUT */}
         <Route path="/role/hotel-owner/logout" element={<HotelLogout />} />
-
         {/* PROTECTED PORTAL */}
         <Route
           path="/role/hotel-owner/*"
@@ -83,12 +80,9 @@ export default function App() {
             </HotelProtectedRoute>
           }
         />
-
         {/* ====================== GOVERNMENT AUTH ====================== */}
-
         <Route path="/role/government/login" element={<GovLogin />} />
         <Route path="/role/government/logout" element={<GovLogout />} />
-
         <Route
           path="/role/government/*"
           element={

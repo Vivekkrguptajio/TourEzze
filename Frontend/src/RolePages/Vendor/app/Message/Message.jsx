@@ -70,7 +70,7 @@ export default function Message() {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-80px)] p-6">
+    <div className="w-full h-[calc(100vh-80px)] p-6 ">
       <div className="bg-white border rounded-2xl shadow-sm h-full flex overflow-hidden">
         {/* Left: Conversation List */}
         <div className="w-full md:w-1/3 border-r flex flex-col">

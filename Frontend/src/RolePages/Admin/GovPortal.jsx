@@ -19,6 +19,10 @@ import Complaints from "./app/Other/pages/complaints/Complaints";
 import Heatmaps from "./app/Other/pages/maps/Heatmaps";
 import Settings from "./app/Other/pages/settings/Settings";
 import GovLogout from "./Auth/GovLogout";
+import AllDestinations from "./app/destinations/AllDestinations";
+import AddDestination from "./app/destinations/AddDestination";
+import RemoveDestination from "./app/destinations/RemoveDestination";
+import UpdateDestination from "./app/destinations/UpdateDestination";
 
 export default function GovPortal() {
   return (
@@ -28,6 +32,42 @@ export default function GovPortal() {
         element={
           <Layout>
             <Dashboard />
+          </Layout>
+        }
+      />
+
+       <Route
+        path="destinations"
+        element={
+          <Layout>
+            <AllDestinations />
+          </Layout>
+        }
+      />
+
+       <Route
+        path="add-destination"
+        element={
+          <Layout>
+            <AddDestination />
+          </Layout>
+        }
+      />
+
+       <Route
+        path="remove-destination"
+        element={
+          <Layout>
+            <RemoveDestination/>
+          </Layout>
+        }
+      />
+
+      <Route
+        path="update-destination"
+        element={
+          <Layout>
+            <UpdateDestination/>
           </Layout>
         }
       />

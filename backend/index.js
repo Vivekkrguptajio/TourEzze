@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import touristRoutes from "./src/routes/tourist.routes.js";
-import hotelRoutes from "./src/routes/hotel.routes.js";
 
+import touristRoutes from "./src/routes/tourist.routes.js";
+import vendorRoutes from "./src/routes/vendor.routes.js";
+import itineraryRoutes from "./src/routes/itinerary.routes.js";
+
+import { connectDB } from "./src/utils/db.js";
 
 dotenv.config();
 
@@ -15,15 +18,15 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Connected ✔️");
-  } catch (error) {
-    console.error("MongoDB Connection Error ❌", error);
-    process.exit(1);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO_URI);
+//     console.log("MongoDB Connected ✔️");
+//   } catch (error) {
+//     console.error("MongoDB Connection Error ❌", error);
+//     process.exit(1);
+//   }
+// };
 
 connectDB();
 
@@ -34,9 +37,10 @@ app.get("/", (req, res) => {
 
 // Tourist routes
 app.use("/api/tourist", touristRoutes);
-app.use("/api/hotel", hotelRoutes);
 
-
+// Vendor routes
+app.use("/api/vendor", vendorRoutes);
+app.use("/api/ai", itineraryRoutes);
 // Server Start
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

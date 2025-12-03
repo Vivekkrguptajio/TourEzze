@@ -1,31 +1,28 @@
 import React from "react";
-import VendorSidebar from "./VendorSidebar";
 import VendorTopbar from "./VendorTopbar";
-import { Outlet } from "react-router-dom";
+import VendorSidebar from "./VendorSidebar";
 
-export default function VendorLayout() {
+
+export default function VendorLayout({ children }) {
   return (
-    <div className="h-screen w-full flex bg-gray-50">
+    <div className="min-h-screen bg-[#f9fafb] text-gray-800">
 
-      {/* LEFT SIDEBAR FIXED */}
-      <div className="w-64 fixed left-0 top-0 h-full bg-white border-r z-30 overflow-y-auto">
-        <VendorSidebar />
-      </div>
+      {/* TOP NAVBAR */}
+      <VendorTopbar />
 
-      {/* RIGHT SIDE: TOPBAR + CONTENT */}
-      <div className="flex-1 ml-64 flex flex-col">
+      {/* PAGE STRUCTURE */}
+      <div className="flex pt-0">
 
-        {/* TOPBAR FIXED */}
-        <div className="fixed top-0 left-64 right-0 z-20 bg-white border-b">
-          <VendorTopbar />
+        {/* SIDEBAR — FIXED + SCROLLABLE */}
+        <div className="fixed left-0 top-16 w-64 h-[calc(100vh-64px)] overflow-y-auto bg-white border-r shadow-sm">
+          <VendorSidebar/>
         </div>
 
         {/* MAIN CONTENT */}
-        <main className="mt-[72px] p-6 overflow-y-auto h-full">
-          <Outlet />
+        <main className="ml-64 p-6 w-full min-h-screen">
+          {children}
         </main>
       </div>
-
     </div>
   );
 }

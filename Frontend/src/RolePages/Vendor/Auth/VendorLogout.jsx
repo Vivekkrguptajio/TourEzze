@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Logout() {
+export default function VendorLogout() {
   const navigate = useNavigate();
 
   useEffect(() => {
