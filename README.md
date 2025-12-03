@@ -151,7 +151,7 @@ JWT_SECRET=your_jwt_secret_key
 
 3. **Start all services with Docker Compose**
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 This will start:
@@ -161,17 +161,17 @@ This will start:
 
 4. **View logs**
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 5. **Stop services**
 ```bash
-docker-compose down
+docker compose down
 ```
 
 6. **Stop and remove volumes (clean slate)**
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 **Note**: The `docker-compose.yml` automatically reads environment variables from `backend/.env`. The `MONGO_URI` will be automatically set to use the Docker MongoDB service (`mongodb://mongodb:27017/tour-ezze`) for container-to-container communication.
@@ -339,16 +339,16 @@ The project is fully dockerized and ready for containerized deployment:
 
 1. **Build and push Docker images** (if using a registry):
 ```bash
-docker-compose build
-docker tag tour-ezze-backend:latest your-registry/backend:latest
-docker tag tour-ezze-frontend:latest your-registry/frontend:latest
+docker compose build
+docker tag vivek-backend:latest your-registry/backend:latest
+docker tag vivek-frontend:latest your-registry/frontend:latest
 docker push your-registry/backend:latest
 docker push your-registry/frontend:latest
 ```
 
 2. **Deploy with Docker Compose**:
    - Ensure `backend/.env` is properly configured
-   - Run `docker-compose up -d` on your server
+   - Run `docker compose up -d` on your server
    - Services will automatically restart on failure
 
 3. **Production considerations**:
