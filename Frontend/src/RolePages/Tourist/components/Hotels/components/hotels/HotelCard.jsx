@@ -1,78 +1,80 @@
-import { MapPin } from "lucide-react";
+// src/components/hotels/CompactHotelCard.jsx
+import React from "react";
+import { MapPin, Heart } from "lucide-react";
 
-export default function HotelCard({ hotel }) {
+/**
+ * CompactHotelCard (gap-friendly)
+ * - Use inside a grid where grid controls spacing (w-full)
+ * - Props:
+ *    hotel: { id, name, image, location, priceLine, rating }
+ *    onView (optional): (hotel) => {}
+ */
+export default function CompactHotelCard({ hotel = {}, onView }) {
+  const handleView = () => {
+    if (onView) return onView(hotel);
+    // fallback navigation
+    window.location.href = `/hotel/${hotel.id}`;
+  };
+
   return (
-    <div className="bg-white rounded-xl overflow-hidden border shadow-sm">
+    <div
+      className="w-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer"
+      onClick={handleView}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && handleView()}
+      aria-label={`View ${hotel.name}`}
+    >
+      {/* Image */}
+      <div className="relative">
+        <img
+          src={
+            hotel.image ??
+            `https://picsum.photos/seed/compact-${hotel.id ?? "na"}/800/600`
+          }
+          alt={hotel.name}
+          className="w-full h-44 sm:h-48 object-cover rounded-t-2xl"
+          loading="lazy"
+        />
 
-      {/* Image Placeholder */}
-      <div className="h-36 bg-gray-100 flex items-center justify-center">
-        <div className="w-10 h-10 border-2 border-gray-300 rounded-full"></div>
+        {/* Pill badge top-left */}
+        <div className="absolute left-3 top-3 bg-white/95 px-3 py-1 rounded-full text-xs font-medium text-gray-800 shadow-sm">
+          Guest favourite
+        </div>
+
+        {/* Heart top-right */}
+        <button
+          className="absolute right-3 top-3 bg-white/90 p-1.5 rounded-full shadow-sm hover:scale-105 transition"
+          onClick={(e) => {
+            e.stopPropagation();
+            // placeholder: toggle save (implement callback if needed)
+            console.log("toggle save", hotel.id);
+          }}
+          aria-label="Save listing"
+          title="Save"
+        >
+          <Heart className="w-4 h-4 text-gray-600" />
+        </button>
       </div>
 
-      <div className="p-4">
+      {/* Content */}
+      <div className="p-3">
+        <h4 className="text-sm sm:text-base font-medium text-gray-900 leading-tight truncate">
+          {hotel.name ?? "Untitled place"}
+        </h4>
 
-        {/* Badges */}
-        <div className="flex justify-between">
-          <div className="flex gap-2">
-            {hotel.tags.includes("Best Seller") && (
-              <span className="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-1 rounded">
-                Best Seller
-              </span>
-            )}
+        <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
+          <MapPin className="w-3 h-3" />
+          <span className="truncate">{hotel.location ?? "Unknown"}</span>
+        </div>
+
+        <div className="mt-3 flex items-center justify-between text-xs text-gray-600">
+          <div className="truncate">{hotel.priceLine ?? "₹2,000 for 2 nights"}</div>
+          <div className="flex items-center gap-2 text-gray-500">
+            <span className="font-medium text-gray-800">{hotel.rating ?? "4.93"}</span>
+            <span className="text-gray-400">★</span>
           </div>
-
-          {hotel.tags.includes("Verified") && (
-            <span className="text-[11px] bg-blue-100 text-blue-700 px-2 py-1 rounded">
-              Verified
-            </span>
-          )}
         </div>
-
-        {/* Title */}
-        <h3 className="font-semibold mt-2">{hotel.name}</h3>
-
-        {/* Location */}
-        <p className="flex items-center text-[13px] text-gray-600">
-          <MapPin size={13} className="mr-1" />
-          {hotel.location}
-        </p>
-        <p className="text-[11px] text-gray-500">{hotel.distance}</p>
-
-        {/* Rating */}
-        <div className="flex items-center gap-2 mt-2">
-          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-            ★ {hotel.rating}
-          </span>
-          <span className="text-xs text-gray-500">({hotel.reviews} reviews)</span>
-        </div>
-
-        {/* Amenities */}
-        <div className="flex flex-wrap gap-1 mt-2">
-          {hotel.amenities.map((a) => (
-            <span
-              key={a}
-              className="text-[11px] bg-gray-100 text-gray-700 px-2 py-1 rounded"
-            >
-              {a}
-            </span>
-          ))}
-        </div>
-
-        {/* Price + Button */}
-        <div className="flex justify-between items-center mt-4">
-          <div>
-            <p className="text-sm text-gray-500">From</p>
-            <p className="text-xl font-bold text-[#e55526]">
-              ₹{hotel.pricePerNight}
-            </p>
-            <p className="text-[11px] text-gray-500">per night</p>
-          </div>
-
-          <button className="bg-[#e55526] text-white px-4 py-2 rounded-lg text-sm">
-            View Details
-          </button>
-        </div>
-
       </div>
     </div>
   );
