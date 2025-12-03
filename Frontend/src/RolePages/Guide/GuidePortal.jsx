@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import AddTour from "./app/Tours/AddTour";
 import MyTour from "./app/Tours/MyTour";
-import Request from "./app/books/request/request";
+import Request from "./app/books/request/Request";
 import Upcoming from "./app/books/upcoming/Upcoming";
 import Completed from "./app/books/completed/Completed";
 import Cancelled from "./app/books/cancelled/Cancelled";

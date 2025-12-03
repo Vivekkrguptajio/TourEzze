@@ -10,7 +10,7 @@ import Cancelled from "./app/booking/cancelled/Cancelled";
 import Completed from "./app/booking/completed/Completed";
 import Requests from "./app/booking/requests/Requests";
 import Upcoming from "./app/booking/upcoming/Upcoming";
-import Earn from "./app/earnings/earn";
+import Earn from "./app/earnings/Earn";
 import Review from "./app/review/Review";
 import Message from "./app/messages/Message";
 import Support from "./app/support/Support";
