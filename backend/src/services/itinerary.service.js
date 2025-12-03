@@ -1,73 +1,93 @@
-export const generateItineraryService = async ({
-  duration,
-  budget,
-  travellerType,
-  startLocation,
-  interests,
-  destination,
-  startDate,
-  endDate,
-  ageGroup,
-  transportMode,
-  foodPreference,
-  comfortLevel,
-  walkingPreference,
-  photography
-}) => {
+import { getGeminiModel } from "../utils/geminiClient.js";
+
+export const generateItineraryService = async (payload) => {
+  const {
+    duration,
+    budget,
+    travellerType,
+    startLocation,
+    interests,
+    destination,
+    startDate,
+    endDate,
+    ageGroup,
+    transportMode,
+    foodPreference,
+    comfortLevel,
+    walkingPreference,
+    photography,
+  } = payload;
 
   const model = getGeminiModel();
 
   const prompt = `
-  You are a professional travel planner AI.
+You are a professional travel planner AI.
 
-  Create a DAY-WISE trip itinerary in JSON ONLY.
+Generate a COMPLETE travel itinerary in PURE JSON.
 
-  --- TRIP DETAILS ---
-  Destination: ${destination}
-  Starting Location: ${startLocation}
-  Duration: ${duration}
-  Budget: ₹${budget}
-  Dates: ${startDate || "Not given"} to ${endDate || "Not given"}
+--- INPUT DATA ---
+Destination/Region: ${destination}
+Starting Location: ${startLocation}
+Duration: ${duration}
+Budget: ₹${budget}
+Dates: ${startDate || "Not given"} → ${endDate || "Not given"}
 
-  --- USER PROFILE ---
-  Traveller Type: ${travellerType}
-  Age Group: ${ageGroup}
-  Transport Mode: ${transportMode}
-  Food Preference: ${foodPreference}
-  Comfort Level: ${comfortLevel}
-  Walking Preference: ${walkingPreference}
-  Photography Priority: ${photography}
+Traveller Type: ${travellerType}
+Age Group: ${ageGroup}
+Transport Mode: ${transportMode}
+Food Preference: ${foodPreference}
+Comfort Level: ${comfortLevel}
+Walking Preference: ${walkingPreference}
+Photography Priority: ${photography}
 
-  --- INTERESTS ---
-  ${interests.join(", ")}
+Interests: ${interests.join(", ")}
 
-  --- OUTPUT JSON FORMAT ---
-  {
-    "summary": "",
-    "weather": "",
-    "bestSeason": "",
-    "overallBudget": "",
-    "hotelSuggestions": [{ "name": "", "price": "" }],
-    "transportPlan": {
-        "mode": "",
-        "totalDistance": "",
-        "fuelCostApprox": ""
-    },
-    "days": [
-      {
-        "day": 1,
-        "title": "",
-        "bestTime": "",
-        "travelTime": "",
-        "fee": "",
-        "weather": "",
-        "activities": []
-      }
-    ]
-  }
-  `;
+--- OUTPUT FORMAT (MUST FOLLOW EXACTLY) ---
+Return ONLY valid JSON matching this structure:
+
+{
+  "summary": "",
+  "weather": "",
+  "overallBudget": "",
+  "days": [
+    {
+      "day": 1,
+      "title": "",
+      "startTime": "",
+      "bestTime": "",
+      "travelTime": "",
+      "fee": "",
+      "weather": "",
+      "food": "",
+      "activities": []
+    }
+  ],
+  "routePlan": {
+    "locations": [],
+    "totalDistance": "",
+    "totalTime": ""
+  },
+  "recommended": [
+    {
+      "type": "",
+      "name": "",
+      "description": "",
+      "price": "",
+      "rating": ""
+    }
+  ]
+}
+
+Rules:
+- Do NOT add markdown or explanation.
+- Do NOT wrap JSON in backticks.
+- Make sure JSON is valid and parsable.
+- At least 3 days if duration >= 3.
+- routePlan.locations should follow realistic route order.
+`;
 
   const result = await model.generateContent(prompt);
-  const text = result.response.text();
+  const response = await result.response;
+  const text = response.text();
   return text;
 };

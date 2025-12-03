@@ -7,6 +7,8 @@ import touristRoutes from "./src/routes/tourist.routes.js";
 import vendorRoutes from "./src/routes/vendor.routes.js";
 import itineraryRoutes from "./src/routes/itinerary.routes.js";
 
+import { connectDB } from "./src/utils/db.js";
+
 dotenv.config();
 
 const app = express();

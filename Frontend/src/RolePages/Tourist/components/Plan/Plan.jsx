@@ -1,8 +1,8 @@
 import React from 'react'
-import ItineraryPlannerPage from './pages/ItineraryPlannerPage'
+import AiItineraryPro from './components/AiItineraryPro'
 
 export default function Plan() {
   return (
-    <div><ItineraryPlannerPage/></div>
+    <div><AiItineraryPro/></div>
   )
 }

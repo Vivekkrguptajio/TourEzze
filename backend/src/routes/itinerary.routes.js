@@ -1,12 +1,14 @@
 import express from "express";
 import {
   generateItinerary,
-  getTravelHistory,
+  savePlan,
+  getHistory,
 } from "../controllers/itinerary.controller.js";
 
 const router = express.Router();
 
 router.post("/generate-itinerary", generateItinerary);
-router.get("/history", getTravelHistory);
+router.post("/save-plan/:id", savePlan);
+router.get("/history", getHistory);
 
 export default router;
