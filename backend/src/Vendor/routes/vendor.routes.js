@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { vendorSignup, vendorLogin } from "../controllers/vendor.controller.js";
-import { authenticate } from "../middlewares/auth.middleware.js";
+import { authenticate } from "../../common/middleware/auth.middleware.js";
 
 const router = Router();
 

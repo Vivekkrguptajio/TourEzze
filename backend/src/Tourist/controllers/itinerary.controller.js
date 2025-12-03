@@ -1,4 +1,4 @@
-import { generateItineraryService } from "../services/itinerary.service.js";
+import { generateItineraryService } from "../../common/services/itinerary.service.js";
 import TravelPlan from "../models/travelPlan.model.js";
 
 export const generateItinerary = async (req, res) => {

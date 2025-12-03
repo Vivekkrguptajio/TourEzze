@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import touristRoutes from "./src/routes/tourist.routes.js";
-import vendorRoutes from "./src/routes/vendor.routes.js";
-import itineraryRoutes from "./src/routes/itinerary.routes.js";
+import touristRoutes from "./src/Tourist/routes/tourist.routes.js";
+import vendorRoutes from "./src/Vendor/routes/vendor.routes.js";
+import itineraryRoutes from "./src/Tourist/routes/itinerary.routes.js";
 
-import { connectDB } from "./src/utils/db.js";
+import { connectDB } from "./src/common/utils/db.js";
 
 dotenv.config();
 
@@ -16,17 +16,6 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-
-// MongoDB Connection
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(process.env.MONGO_URI);
-//     console.log("MongoDB Connected ✔️");
-//   } catch (error) {
-//     console.error("MongoDB Connection Error ❌", error);
-//     process.exit(1);
-//   }
-// };
 
 connectDB();
 

@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
 import Tourist from "../models/tourist.model.js";
-import { generateToken } from "../utils/jwt.js";
+import { generateToken } from "../../common/utils/jwt.js";
 import {
   touristSignupSchema,
   touristLoginSchema,
-} from "../validations/tourist.validation.js";
+} from "../../common/validations/tourist.validation.js";
 
 // POST /api/tourist/signup
 export const touristSignup = async (req, res) => {

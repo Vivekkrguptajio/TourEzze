@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
 import Vendor from "../models/vendor.model.js";
-import { generateToken } from "../utils/jwt.js";
+import { generateToken } from "../../common/utils/jwt.js";
 import {
   vendorSignupSchema,
   vendorLoginSchema,
-} from "../validations/vendor.validation.js";
+} from "../../common/validations/vendor.validation.js";
 
 // SIGNUP
 export const vendorSignup = async (req, res) => {

@@ -4,8 +4,9 @@ import {
   touristLogin,
   getTouristProfile,
 } from "../controllers/tourist.controller.js";
-import { authenticate } from "../middlewares/auth.middleware.js";
 
+
+import { authenticate } from "../../common/middleware/auth.middleware.js"
 
 const router = Router();
 
