@@ -7,7 +7,7 @@ import PlannerHeader from "./PlannerHeader";
 import PlannerLeftPanel from "./PlannerLeftPanel";
 import PlannerRightPanel from "./PlannerRightPanel";
 
-const API_BASE = "http://localhost:5001";
+const API_BASE = "http://localhost:5000";
 
 export default function AiItineraryPro() {
   // BASIC TRIP INFO (shared states)

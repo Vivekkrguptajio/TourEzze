@@ -20,7 +20,7 @@ export default function SignupModal({ close }) {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5001/api/tourist/signup",
+        "http://localhost:5000/api/tourist/signup",
         form
       );
 

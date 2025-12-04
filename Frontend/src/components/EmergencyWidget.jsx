@@ -24,7 +24,7 @@ export default function EmergencyWidget() {
       <button
         onClick={() => setOpen(true)}
         className="
-          fixed bottom-24 right-6 z-[9998]
+          fixed bottom-34 right-6 z-[9998]
           h-16 w-16 rounded-full
           bg-gradient-to-br from-red-600 to-red-700
           text-white text-xl shadow-xl shadow-red-400/40

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import ChatbotButton from "./componenets/ChatbotButton";
-import EmergencyWidget from "./componenets/EmergencyWidget";
+import Chatbot from "./components/Chatbot";  // FIXED
+import EmergencyWidget from "./components/EmergencyWidget";
 import MainLanding from "./MainLanding/MainLanding";
 
 // Role Pages
@@ -11,7 +11,7 @@ import GuidePortal from "./RolePages/Guide/GuidePortal";
 import HotelPortal from "./RolePages/Hotel/HotelPortal";
 import GovPortal from "./RolePages/Admin/GovPortal";
 
-// AUTH (Vendor + Guide + Hotel)
+// AUTH
 import VendorLogin from "./RolePages/Vendor/Auth/VendorLogin";
 import GuideLogin from "./RolePages/Guide/Auth/GuideLogin";
 import HotelAuth from "./RolePages/Hotel/Auth/HotelAuth";
@@ -32,20 +32,15 @@ import VendorSignup from "./RolePages/Vendor/Auth/VendorSignup";
 export default function App() {
   return (
     <>
-      <ChatbotButton />
+      <Chatbot />   {/* FIXED GPT CHATBOT HERE */}
       <EmergencyWidget />
 
       <Routes>
         <Route path="/" element={<MainLanding />} />
-        {/* ====================== TOURIST ====================== */}
         <Route path="/role/tourist/*" element={<TouristPortal />} />
 
-
-        
-        {/* ====================== VENDOR ====================== */}
         <Route path="/role/vendor/login" element={<VendorLogin />} />
         <Route path="/role/vendor/signup" element={<VendorSignup />} />
-        {/* FIX */}
         <Route path="/role/vendor/logout" element={<VendorLogout />} />
         <Route
           path="/role/vendor/*"
@@ -55,7 +50,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        {/* ====================== GUIDE ======================= */}
+
         <Route path="/role/guide/login" element={<GuideLogin />} />
         <Route path="/role/guide/logout" element={<GuideLogout />} />
         <Route
@@ -66,12 +61,9 @@ export default function App() {
             </GuideProtectedRoute>
           }
         />
-        {/* ====================== HOTEL (FIXED FULL AUTH) ======================= */}
-        {/* LOGIN + SIGNUP PAGE */}
+
         <Route path="/role/hotel-owner/login" element={<HotelAuth />} />
-        {/* LOGOUT */}
         <Route path="/role/hotel-owner/logout" element={<HotelLogout />} />
-        {/* PROTECTED PORTAL */}
         <Route
           path="/role/hotel-owner/*"
           element={
@@ -80,7 +72,7 @@ export default function App() {
             </HotelProtectedRoute>
           }
         />
-        {/* ====================== GOVERNMENT AUTH ====================== */}
+
         <Route path="/role/government/login" element={<GovLogin />} />
         <Route path="/role/government/logout" element={<GovLogout />} />
         <Route

@@ -18,7 +18,7 @@ export default function LoginModal({ close }) {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5001/api/tourist/login",
+        "http://localhost:5000/api/tourist/login",
         form
       );
 
