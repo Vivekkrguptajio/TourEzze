@@ -33,7 +33,7 @@ const slides = [
     desc: "Netarhat, Patratu Valley, and peaceful natural retreats.",
   },
   {
-    image: "/Photos/HeroImage/Urban.jpg",
+    image: "/Photos/HeroImage/Urban.png",
     title: "Urban Tourism",
     desc: "City attractions, parks, museums, and modern recreation.",
   },

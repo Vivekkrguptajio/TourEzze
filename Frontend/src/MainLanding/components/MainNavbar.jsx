@@ -25,13 +25,9 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
     { key: "Kurmali", label: "कुर्माली" },
   ];
 
-  // Selected Language → Navbar text
   const [language, setLanguage] = useState("English");
-
-  // Rotating Language UI Only
   const [rotatingLang, setRotatingLang] = useState("English");
 
-  // 🔄 Auto rotate language label every 3 sec
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
@@ -152,7 +148,11 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
   return (
     <nav
       className={`w-full fixed top-0 left-0 z-[999] transition-all duration-300 
-        ${isScrolled ? "py-2 bg-green-900 shadow-lg" : "py-4 bg-green-900 shadow-md"}
+        ${
+          isScrolled
+            ? "py-2 bg-green-900/60 backdrop-blur-lg shadow-lg"
+            : "py-4 bg-green-900/40 backdrop-blur-xl shadow-md"
+        }
       `}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -200,21 +200,18 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
         {/* RIGHT SIDE (LANG + ALERTS) */}
         <div className="flex items-center gap-6">
 
-          {/* 🌐 ROTATING LANGUAGE NAME — FIXED WIDTH SO NAVBAR DOESN'T MOVE */}
+          {/* 🌐 ROTATING LANGUAGE NAME */}
           <div className="relative" ref={langRef}>
             <button
               onClick={() => setShowLang(!showLang)}
               className="text-white hover:text-green-300 transition flex items-center gap-2"
             >
               <Globe className="h-6 w-6" />
-
-              {/* 👇 FIXED WIDTH → NAVBAR NEVER SHIFTS */}
               <span className="inline-block w-[90px] text-left truncate">
                 {languages.find(l => l.key === rotatingLang)?.label}
               </span>
             </button>
 
-            {/* LANG DROPDOWN */}
             {showLang && (
               <div className="absolute right-0 mt-3 w-40 bg-white rounded-lg shadow-xl p-2">
                 {languages.map((lang) => (
@@ -222,7 +219,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
                     key={lang.key}
                     className="p-2 text-sm cursor-pointer hover:bg-green-100 rounded"
                     onClick={() => {
-                      setLanguage(lang.key); 
+                      setLanguage(lang.key);
                       setShowLang(false);
                     }}
                   >

@@ -29,8 +29,10 @@ import eventRoutes from "./src/Admin/routes/event.routes.js";
 
 // Hotel
 import hotelAuthRoutes from "./src/Hotel/routes/hotel.auth.routes.js";
-import hotelRoutes from "./src/Hotel/routes/hotel.routes.js";   // ⭐ NEW: My hotel + Add hotel
-// import roomRoutes from "./src/Hotel/routes/room.routes.js";     // ⭐ NEW: Add rooms etc.
+import hotelRoutes from "./src/Hotel/routes/hotel.routes.js";
+
+// ⭐ NEW: Guide Module
+import guideAuthRoutes from "./src/Guide/routes/guide.auth.routes.js";
 
 // -----------------------------------------
 // 📌 PATH FIX FOR ES MODULES (__dirname)
@@ -56,7 +58,7 @@ app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // -----------------------------------------
-// ⭐ UNIVERSAL IMAGE PROXY (Improved)
+// ⭐ UNIVERSAL IMAGE PROXY
 // -----------------------------------------
 app.get("/image-proxy", async (req, res) => {
   try {
@@ -77,7 +79,7 @@ app.get("/image-proxy", async (req, res) => {
 });
 
 // -----------------------------------------
-// 📌 LOGGER MIDDLEWARE
+// 📌 LOGGER
 // -----------------------------------------
 app.use((req, res, next) => {
   console.log(`📩 ${req.method} → ${req.originalUrl}`);
@@ -95,24 +97,27 @@ app.get("/", (req, res) => {
 // ⭐ ATTACH ALL ROUTES
 // -----------------------------------------
 
+// Chatbot + Tourist
 app.use("/api", chatRoutes);
-
 app.use("/api/tourist", touristRoutes);
 app.use("/api/ai", itineraryRoutes);
 
+// Vendor
 app.use("/api/vendor", vendorRoutes);
 
-// ADMIN MODULES
+// Admin
 app.use("/api/admin/destinations", destinationRoutes);
 app.use("/api/admin/events", eventRoutes);
 
-// HOTEL MODULES
+// Hotel Module
 app.use("/api/hotel/auth", hotelAuthRoutes);
-app.use("/api/hotel", hotelRoutes);   // ⭐ /add + /my-hotel
-// app.use("/api/hotel/rooms", roomRoutes);
+app.use("/api/hotel", hotelRoutes);
+
+// ⭐ Guide Module
+app.use("/api/guide/auth", guideAuthRoutes);
 
 // -----------------------------------------
-// ❌ 404 HANDLER (Always last)
+// ❌ 404 HANDLER
 // -----------------------------------------
 app.use((req, res) => {
   return res.status(404).json({

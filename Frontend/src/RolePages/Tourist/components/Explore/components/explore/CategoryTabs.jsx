@@ -1,28 +1,34 @@
 import React from "react";
-import { TreePine, Landmark, Droplet, PawPrint, Mountain, Sun, Ticket } from "lucide-react";
 
-const categories = [
-  { name: "Nature", icon: TreePine },
-  { name: "Culture & Heritage", icon: Landmark },
-  { name: "Waterfalls", icon: Droplet },
-  { name: "Wildlife & Parks", icon: PawPrint },
-  { name: "Adventure", icon: Mountain },
-  { name: "Religious Places", icon: Sun },
-  { name: "Events & Festivals", icon: Ticket },
-];
+export default function CategoryTabs({ active, setActive, search, setSearch }) {
+  const categories = ["All", "Nature", "Temple", "Adventure", "Heritage"];
 
-export default function CategoryTabs() {
   return (
-    <div className="flex gap-3 overflow-x-auto py-4 px-2">
-      {categories.map((cat, i) => (
-        <button
-          key={i}
-          className="flex items-center gap-2 px-4 py-2 border rounded-xl bg-white hover:bg-gray-50 shadow-sm"
-        >
-          <cat.icon size={18} className="text-green-700" />
-          <span className="text-sm font-medium">{cat.name}</span>
-        </button>
-      ))}
+    <div className="px-6 mt-6 space-y-4">
+      <input
+        type="text"
+        placeholder="Search destinations..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="w-full p-3 border rounded-lg"
+      />
+
+      <div className="flex gap-3 flex-wrap">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActive(cat)}
+            className={`px-4 py-2 rounded-full border 
+              ${
+                active === cat
+                  ? "bg-green-600 text-white"
+                  : "bg-white text-gray-700"
+              }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
