@@ -10,92 +10,103 @@ const LANGUAGE_GUIDE = {
   Magahi: "Reply in Magahi friendly tone."
 };
 
-// 🔥 ALLOWED KEYWORDS (Only tourism allowed)
-const ALLOWED_KEYWORDS = [
-  "jharkhand", "ranchi", "hazaribagh", "netarhat", "deoghar", "dhanbad",
-  "tour", "tourism", "travel", "trip", "visit", "places",
-  "waterfall", "falls", "hill", "temple", "jungle", "forest",
-  "park", "wildlife", "hotel", "stay", "food", "route", "itinerary",
-  "sunrise", "sunset", "dam", "lake", "heritage"
-];
-
 export const chatWithGemini = async (req, res) => {
   try {
     const { message, lang } = req.body;
 
-    if (!message || typeof message !== "string") {
+    if (!message?.trim()) {
       return res.status(400).json({
         success: false,
         message: "Message is required",
       });
     }
 
-    const languageRule = LANGUAGE_GUIDE[lang] || LANGUAGE_GUIDE["English"];
-    const userMessage = message.toLowerCase();
+    const languageRule = LANGUAGE_GUIDE[lang] || LANGUAGE_GUIDE.English;
 
-    // ❌ STEP 1: Block all non-tourism questions
-    const isAllowed = ALLOWED_KEYWORDS.some((k) => userMessage.includes(k));
-
-    if (!isAllowed) {
-      return res.json({
-        success: true,
-        reply: "I can only help with Jharkhand tourism related information."
-      });
-    }
-
-    // STEP 2: Gemini model
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
     });
 
-    // 🔥 SUPER STRICT TOURISM-ONLY PROMPT
+    // ================= PROMPT ==================
     const prompt = `
 You are CHAMPA – Jharkhand Tourism AI Assistant.
 
-ALLOWED TOPICS ONLY:
+CRITICAL RULE:
+If the user asks anything outside Jharkhand tourism, reply EXACTLY:
+"I can only help with Jharkhand tourism related information."
+
+ALLOWED CONTENT:
 - Jharkhand tourist places
 - Waterfalls, hills, forests
-- Temples, culture, food
-- Travel routes, timing, safety
-- Hotels, stay, itinerary
-- Wildlife, national parks
-
-NOT ALLOWED:
-Anything outside Jharkhand tourism.
-
-IF QUESTION OUTSIDE DOMAIN:
-Reply EXACTLY: "I can only help with Jharkhand tourism related information."
+- Temples, culture, festivals, food
+- Travel routes, distance, timing
+- Hotels, stay options
+- Wildlife, national parks, adventure
 
 OUTPUT FORMAT (STRICT):
---------------------------------
-Title:
-- point_1
-- point_2
-- point_3
---------------------------------
+The answer MUST contain ONLY:
+- Exactly 10 bullet points
+- Each bullet must start with "- "
+- Each point must be MAXIMUM 30 words
+- NO paragraphs
+- NO emojis
+- NO other formatting
+- NO heading unless it's part of a bullet
+- NO extra lines before or after
 
-RULES:
-1) Always reply in ${languageRule}
-2) Total answer under **80 words**
-3) Use ONLY 2–4 bullet points
-4) Each bullet max **10–12 words**
-5) NO paragraphs, NO emojis
-6) Keep answer clean & tourism-focused
+STYLE:
+- Reply in ${languageRule}
+- Tourism guide tone
+- Clear, short, helpful sentences
 
-USER ASKED:
+USER QUESTION:
 "${message}"
+
+Now generate EXACTLY 10 bullet points. Nothing more.
 `;
+    // ===========================================
 
     const result = await model.generateContent(prompt);
-    const reply = result.response.text();
+    let reply = result.response.text().trim();
 
-    return res.json({
-      success: true,
-      reply: reply || "No clean response generated.",
+    // Clean extra blank lines
+    reply = reply.replace(/\n{3,}/g, "\n");
+
+    // Count bullets
+    const bullets = reply.match(/^- /gm) || [];
+
+    // Validate bullet count
+    const isValidCount = bullets.length === 10;
+
+    // Validate word count (<= 30 words each)
+    let isValidWordLimit = true;
+    reply.split("\n").forEach((line) => {
+      if (line.startsWith("- ")) {
+        const words = line.split(/\s+/).length;
+        if (words > 30) isValidWordLimit = false;
+      }
     });
 
+    // If invalid → fallback safe response
+    if (!isValidCount || !isValidWordLimit) {
+      reply = `
+- Only Jharkhand tourism answers allowed
+- Your question triggered formatting restrictions
+- Please ask again in allowed tourism topics
+- Response must follow bullet rules
+- Try rephrasing your question
+- Strict output safety applied
+- The model failed formatting enforcement
+- Ask again for a clean tourism response
+- Only 30 words per bullet allowed
+- Only 10 bullets allowed
+`.trim();
+    }
+
+    return res.json({ success: true, reply });
+
   } catch (error) {
-    console.error("Gemini Error =>", error);
+    console.error("Gemini Error:", error);
     return res.status(500).json({
       success: false,
       message: "AI server error",

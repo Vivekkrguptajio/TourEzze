@@ -4,11 +4,14 @@ export default function FloatingButton({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-6 right-6 bg-teal-500 hover:bg-teal-600
-      p-5 rounded-full shadow-xl text-white transition-all duration-200
-      hover:scale-110 z-[999999]"
+      className="
+        fixed bottom-16 right-6 p-4 rounded-full shadow-xl 
+        bg-gradient-to-br from-teal-500 to-teal-600 
+        text-white hover:scale-110 transition-all 
+        animate-pulse hover:animate-none z-[99999]
+      "
     >
-      <LuMessagesSquare size={30} />
+      <LuMessagesSquare size={28} />
     </button>
   );
 }
