@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MapPin,
   Mountain,
   Calendar,
   Tag,
   Compass,
-  Plus,
   Video,
   Image,
 } from "lucide-react";
 
-export default function AddDestination() {
+export default function EditModal({ isOpen, onClose, data, onSave }) {
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -22,41 +21,48 @@ export default function AddDestination() {
     description: "",
     nearby: "",
     tags: "",
-    imageLinks: "", // ⭐ Google Drive image URLs
+    imageLinks: "", // ⭐ Image URL links
   });
+
+  useEffect(() => {
+    if (data) {
+      setForm({
+        name: data.name || "",
+        category: data.category || "",
+        location: data.location || "",
+        mapUrl: data.mapUrl || "",
+        bestSeason: data.bestSeason || "",
+        arvr: data.arvr || "",
+        arvrLink: data.arvrLink || "",
+        description: data.description || "",
+        nearby: data.nearby || "",
+        tags: Array.isArray(data.tags) ? data.tags.join(", ") : "",
+        imageLinks: Array.isArray(data.imageLinks)
+          ? data.imageLinks.join(", ")
+          : "",
+      });
+    }
+  }, [data]);
 
   // Handle Inputs
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Submit Handler
-  const handleSubmit = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/admin/destinations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-      alert("Destination Added Successfully ✔");
-      console.log(data);
-
-    } catch (err) {
-      console.error(err);
-      alert("Error adding destination ❌");
-    }
+  // Submit handler
+  const handleSubmit = () => {
+    onSave(form);
   };
 
-  return (
-    <div className="p-6 pl-32 space-y-6">
-      <h1 className="text-3xl font-bold text-green-800">Add New Destination</h1>
+  if (!isOpen) return null;
 
-      <div className="bg-white border rounded-2xl shadow-sm p-6 space-y-8">
-        
+  return (
+    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[2000]">
+      <div className="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-xl overflow-y-auto max-h-[95vh] space-y-6">
+
+        <h2 className="text-2xl font-bold text-green-800">Edit Destination</h2>
+
+        {/* FORM */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Name */}
@@ -67,7 +73,6 @@ export default function AddDestination() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Enter destination name"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
@@ -104,20 +109,18 @@ export default function AddDestination() {
               name="location"
               value={form.location}
               onChange={handleChange}
-              placeholder="Eg: Netarhat, Latehar"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
 
           {/* Map URL */}
           <div>
-            <label className="font-medium text-sm">Google Maps URL</label>
+            <label className="font-medium text-sm">Google Map URL</label>
             <input
               type="text"
               name="mapUrl"
               value={form.mapUrl}
               onChange={handleChange}
-              placeholder="https://maps.google.com/location"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
@@ -132,15 +135,14 @@ export default function AddDestination() {
               name="bestSeason"
               value={form.bestSeason}
               onChange={handleChange}
-              placeholder="Eg: October – March"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
 
-          {/* AR/VR Select */}
+          {/* AR/VR */}
           <div>
             <label className="font-medium text-sm flex items-center gap-1">
-              <Video size={16} /> AR/VR Preview Available?
+              <Video size={16} /> AR/VR Available?
             </label>
             <select
               name="arvr"
@@ -148,8 +150,8 @@ export default function AddDestination() {
               onChange={handleChange}
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             >
-              <option>Select Option</option>
-              <option value="yes">Yes (360° View Available)</option>
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
@@ -163,7 +165,6 @@ export default function AddDestination() {
                 name="arvrLink"
                 value={form.arvrLink}
                 onChange={handleChange}
-                placeholder="https://your-360-view-link.com"
                 className="w-full border mt-1 px-3 py-2 rounded-lg"
               />
             </div>
@@ -177,10 +178,9 @@ export default function AddDestination() {
             name="description"
             value={form.description}
             onChange={handleChange}
-            rows="4"
-            placeholder="Write description..."
+            rows={4}
             className="w-full border mt-1 px-3 py-2 rounded-lg"
-          ></textarea>
+          />
         </div>
 
         {/* Nearby */}
@@ -193,7 +193,6 @@ export default function AddDestination() {
             name="nearby"
             value={form.nearby}
             onChange={handleChange}
-            placeholder="Eg: Magnolia Point, Pine Forest"
             className="w-full border mt-1 px-3 py-2 rounded-lg"
           />
         </div>
@@ -208,48 +207,44 @@ export default function AddDestination() {
             name="tags"
             value={form.tags}
             onChange={handleChange}
-            placeholder="Eg: Eco-Friendly, Trekking"
             className="w-full border mt-1 px-3 py-2 rounded-lg"
           />
         </div>
 
-        {/* ⭐ IMAGE LINKS (Direct Image URLs) */}
-<div>
-  <label className="font-medium text-sm flex items-center gap-1">
-    <Image size={18} /> Image Links
-  </label>
+        {/* ⭐ IMAGE LINKS */}
+        <div>
+          <label className="font-medium text-sm flex items-center gap-1">
+            <Image size={18} /> Image URLs
+          </label>
 
-  <input
-    type="text"
-    name="imageLinks"
-    value={form.imageLinks}
-    onChange={handleChange}
-    placeholder="Paste direct image URLs separated by comma"
-    className="w-full border mt-1 px-3 py-2 rounded-lg"
-  />
+          <input
+            type="text"
+            name="imageLinks"
+            value={form.imageLinks}
+            onChange={handleChange}
+            placeholder="Put image URLs separated by comma"
+            className="w-full border mt-1 px-3 py-2 rounded-lg"
+          />
 
-  <p className="text-xs mt-1 text-gray-500">
-    Example: https://example.com/img1.jpg, https://example.com/img2.png
-  </p>
-</div>
+          <p className="text-xs text-gray-500 mt-1">
+            Example: https://img1.jpg, https://img2.png
+          </p>
+        </div>
 
-
-        {/* Submit */}
-        <div className="flex justify-end">
-
-           {/* ⭐ All Destinations Button */}
-          <a
-            href="http://localhost:5173/role/government/destinations"
-            className="px-6 py-3 rounded-lg border border-green-700 text-green-700 font-medium hover:bg-green-50 transition"
+        {/* Buttons */}
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
           >
-            ← All Destinations
-          </a>
+            Cancel
+          </button>
 
           <button
-            className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg flex items-center gap-1"
             onClick={handleSubmit}
+            className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
           >
-            <Plus size={20} /> Add Destination
+            Save Changes
           </button>
         </div>
 

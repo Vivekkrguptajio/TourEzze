@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Chatbot from "./components/Chatbot";  // FIXED
+import Chatbot from "./components/chatbot/Chatbot";  // FIXED
 import EmergencyWidget from "./components/EmergencyWidget";
 import MainLanding from "./MainLanding/MainLanding";
 

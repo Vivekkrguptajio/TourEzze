@@ -3,31 +3,57 @@ import "../styles/HeroSection.css";
 
 const slides = [
   {
-    image: "/Photos/HeroImage/Photo1.jpg",
-    title: "Mesmerizing Waterfalls",
-    desc: "Experience the beauty and power of Jharkhand’s iconic falls.",
+    image: "/Photos/HeroImage/Waterfall.jpg",
+    title: "Eco Tourism",
+    desc: "Dense forests, national parks, and scenic green landscapes.",
   },
   {
-    image: "/Photos/HeroImage/Photo2.avif",
-    title: "Rich Tribal Culture",
-    desc: "Discover vibrant art, traditions, and festivals.",
+    image: "/Photos/HeroImage/Adventure.jpg",
+    title: "Adventure Tourism",
+    desc: "Trekking, parasailing, boating, and rock climbing thrills.",
   },
   {
-    image: "/Photos/HeroImage/Photo3.avif",
-    title: "Untouched Forests",
-    desc: "Walk through dense greenery full of wildlife.",
+    image: "/Photos/HeroImage/Culture.jpg",
+    title: "Cultural Tourism",
+    desc: "Tribal dance, art, festivals, and deep-rooted traditions.",
   },
   {
-    image: "/Photos/HeroImage/Photo4.avif",
-    title: "Cultural Vibrance",
-    desc: "Feel the warmth of Jharkhand's heritage.",
+    image: "/Photos/HeroImage/Religious.jpg",
+    title: "Religious Tourism",
+    desc: "Baba Baidyanath Dham, Parasnath, Rajrappa, and more holy sites.",
   },
   {
-    image: "/Photos/HeroImage/Photo5.avif",
-    title: "Nature’s Peace",
-    desc: "Experience serenity and natural wonders.",
+    image: "/Photos/HeroImage/Heritage.jpg",
+    title: "Heritage Tourism",
+    desc: "Ancient temples, forts, and historic architectural marvels.",
+  },
+  {
+    image: "/Photos/HeroImage/Nature.jpg",
+    title: "Wellness & Nature Tourism",
+    desc: "Netarhat, Patratu Valley, and peaceful natural retreats.",
+  },
+  {
+    image: "/Photos/HeroImage/Urban.jpg",
+    title: "Urban Tourism",
+    desc: "City attractions, parks, museums, and modern recreation.",
+  },
+  {
+    image: "/Photos/HeroImage/Waterfalls.jpg",
+    title: "Waterfall Tourism",
+    desc: "Hundru, Dassam, Jonha, Hirni, and other majestic falls.",
+  },
+  {
+    image: "/Photos/HeroImage/Tribal.jpg",
+    title: "Rural & Tribal Tourism",
+    desc: "Explore tribal villages, lifestyle, culture, and traditions.",
+  },
+  {
+    image: "/Photos/HeroImage/Industrial.jpg",
+    title: "Industrial & Mining Tourism",
+    desc: "Coalfields, steel plants, and mineral-rich industrial sites.",
   },
 ];
+
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
@@ -75,13 +101,21 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-7 flex flex-wrap gap-4">
-            <button className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg">
-              Plan My Trip →
-            </button>
-            <button className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm">
-              Explore Destinations
-            </button>
-          </div>
+  <a
+    href="http://localhost:5173/role/tourist/ai-itinerary"
+    className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
+  >
+    Plan My Trip →
+  </a>
+
+  <a
+    href="http://localhost:5173/role/tourist"
+    className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
+  >
+    Explore Destinations
+  </a>
+</div>
+
         </div>
 
         {/* RIGHT-SIDE SLIDING TEXT */}

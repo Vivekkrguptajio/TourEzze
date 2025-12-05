@@ -21,8 +21,8 @@ import Settings from "./app/Other/pages/settings/Settings";
 import GovLogout from "./Auth/GovLogout";
 import AllDestinations from "./app/destinations/AllDestinations";
 import AddDestination from "./app/destinations/AddDestination";
-import RemoveDestination from "./app/destinations/RemoveDestination";
-import UpdateDestination from "./app/destinations/UpdateDestination";
+// import RemoveDestination from "./app/destinations/RemoveDestination";
+// import UpdateDestination from "./app/destinations/UpdateDestination";
 
 export default function GovPortal() {
   return (
@@ -54,7 +54,7 @@ export default function GovPortal() {
         }
       />
 
-       <Route
+       {/* <Route
         path="remove-destination"
         element={
           <Layout>
@@ -70,7 +70,7 @@ export default function GovPortal() {
             <UpdateDestination/>
           </Layout>
         }
-      />
+      /> */}
 
       <Route
         path="tourist-analytics"

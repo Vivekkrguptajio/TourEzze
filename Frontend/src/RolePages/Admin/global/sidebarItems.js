@@ -34,8 +34,8 @@ export const sidebarSections = [
     items: [
       { to: "destinations", label: "All Destinations", icon: MapPin },
       { to: "add-destination", label: "Add Destination", icon: MapPinPlus },
-      { to: "update-destination", label: "Update Destination", icon: Edit },
-      { to: "remove-destination", label: "Remove Destination", icon: MapPinMinus }
+      // { to: "update-destination", label: "Update Destination", icon: Edit },
+      // { to: "remove-destination", label: "Remove Destination", icon: MapPinMinus }
     ]
   },
 

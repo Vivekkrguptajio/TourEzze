@@ -1,136 +1,162 @@
-import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Sparkles, Send } from "lucide-react";
-import "./chatbot.css";
+import { useState } from "react";
+import { FiSend } from "react-icons/fi";
+import { IoMdMic } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { LuMessagesSquare } from "react-icons/lu";
 
 export default function Chatbot() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("");
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const chatEndRef = useRef(null);
+  const [input, setInput] = useState("");
+  const [lang, setLang] = useState("English");
+  const [loading, setLoading] = useState(false);
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  const languages = [
+    "English",
+    "Hindi",
+    "Nagpuri",
+    "Santhali",
+    "Khortha",
+    "Bhojpuri",
+    "Magahi",
+  ];
 
-  // Send message to backend
-  const handleSend = async () => {
+  const quickButtons = [
+    "Best places in Jharkhand",
+    "Ranchi me kya famous hai?",
+    "Waterfalls near Ranchi",
+    "Hill station Netarhat info",
+  ];
+
+  const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMsg = { from: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
-
-    const userInput = input;
     setInput("");
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userInput }),
+        body: JSON.stringify({ message: input, lang }),
       });
 
       const data = await res.json();
-      const botText = data?.reply || "Sorry, response nahi aaya 😅";
+      const botMsg = { from: "bot", text: data.reply || "No response." };
 
-      setMessages((prev) => [...prev, { from: "bot", text: botText }]);
+      setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
+      console.error(err);
       setMessages((prev) => [
         ...prev,
-        { from: "bot", text: "Server error, please try later 🚨" },
+        { from: "bot", text: "⚠️ Server not responding" },
       ]);
     }
+
+    setLoading(false);
+  };
+
+  const handleQuick = async (text) => {
+    const userMsg = { from: "user", text };
+    setMessages((prev) => [...prev, userMsg]);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, lang }),
+      });
+
+      const data = await res.json();
+      const botMsg = { from: "bot", text: data.reply || "No response." };
+
+      setMessages((prev) => [...prev, botMsg]);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        { from: "bot", text: "⚠️ Server not responding" },
+      ]);
+    }
+
+    setLoading(false);
   };
 
   return (
     <>
-      {/* Floating Chatbot Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="
-          fixed bottom-16 right-6 z-[9999]
-          h-16 w-16 rounded-full
-          bg-gradient-to-br from-green-600 to-green-700
-          text-white shadow-xl shadow-green-400/40
-          flex items-center justify-center
-          hover:scale-110 hover:shadow-green-500/50
-          transition-all duration-300
-        "
-      >
-        {isOpen ? (
-          <X className="h-7 w-7" />
-        ) : (
-          <MessageCircle className="h-8 w-8" />
-        )}
-      </button>
-
-      {/* POPUP WINDOW */}
-      {isOpen && (
-        <div
-          className="
-            fixed bottom-44 right-6 z-[9999]
-            w-[350px] max-h-[75vh]
-            bg-white/95 backdrop-blur-xl
-            rounded-3xl shadow-2xl border border-green-200
-            flex flex-col animate-chatbot-popup
-          "
+      {/* Floating Icon */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed bottom-6 right-6 bg-teal-400 p-4 rounded-full shadow-lg text-white hover:scale-110 transition z-[999999]"
         >
-          {/* HEADER */}
-          <div className="bg-gradient-to-r from-green-600 to-green-700 text-white px-5 py-4 flex items-center justify-between shadow-md">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-yellow-300" />
-              <h2 className="font-bold text-lg tracking-wide">Champa (AI)</h2>
+          <LuMessagesSquare size={28} />
+        </button>
+      )}
+
+      {/* Chat Window */}
+      {open && (
+        <div className="fixed bottom-6 right-6 w-[380px] h-[550px] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 animate-fadeIn z-[999999]">
+          {/* Header */}
+          <div className="bg-teal-50 px-4 py-3 border-b border-teal-100 flex items-center justify-between">
+            <div>
+              <h3 className="font-semibold text-gray-800">Champa – Travel Assistant</h3>
+              <p className="text-xs text-gray-500 -mt-1">
+                Ask me anything about Jharkhand trips!
+              </p>
             </div>
-            <p className="text-xs opacity-90">Your Travel Guide</p>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                className="bg-transparent text-sm outline-none"
+              >
+                {languages.map((l) => (
+                  <option key={l}>{l}</option>
+                ))}
+              </select>
+
+              <IoClose
+                size={24}
+                className="cursor-pointer text-gray-600 hover:text-gray-800"
+                onClick={() => setOpen(false)}
+              />
+            </div>
           </div>
 
-          {/* BODY */}
-          <div className="flex-1 p-4 overflow-y-auto bg-gradient-to-b from-white to-green-50 space-y-4">
-            {/* Intro Message */}
-            <div className="bg-green-100 text-green-900 p-4 rounded-xl border border-green-200 shadow-sm leading-relaxed">
-              <p className="font-semibold text-lg">Namaste! 🙏</p>
-              <p className="mt-1">I'm Champa, your AI travel assistant.</p>
-
-              <ul className="mt-3 space-y-1 text-sm">
-                <li>🌄 Best itinerary planning</li>
-                <li>🏨 Hotels & travel help</li>
-                <li>🗺️ Explore Jharkhand</li>
-                <li>🛍️ Local shops & artisans</li>
-              </ul>
-            </div>
-
+          {/* Chat Body */}
+          <div className="flex-1 overflow-y-auto p-4 bg-teal-50/50">
             {/* Quick Buttons */}
-            <div className="grid grid-cols-2 gap-3">
-              <button className="chatbot-chip bg-yellow-100 border-yellow-300 text-yellow-700">
-                3-Day Trip Plan
-              </button>
-
-              <button className="chatbot-chip bg-blue-100 border-blue-300 text-blue-700">
-                Wildlife Tours
-              </button>
-
-              <button className="chatbot-chip bg-green-100 border-green-300 text-green-700">
-                Local Cuisine
-              </button>
-
-              <button className="chatbot-chip bg-orange-100 border-orange-300 text-orange-700">
-                Culture Spots
-              </button>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {quickButtons.map((btn) => (
+                <button
+                  key={btn}
+                  onClick={() => handleQuick(btn)}
+                  className="bg-teal-100 border border-teal-200 text-teal-700 px-3 py-1 text-xs rounded-full"
+                >
+                  {btn}
+                </button>
+              ))}
             </div>
 
-            {/* Chat Messages */}
+            {/* Messages */}
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`flex ${
+                className={`flex mb-3 ${
                   msg.from === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
-                  className={`px-4 py-2 rounded-2xl max-w-[75%] text-sm shadow ${
+                  className={`px-4 py-2 max-w-[75%] rounded-2xl text-sm whitespace-pre-line ${
                     msg.from === "user"
-                      ? "bg-green-600 text-white rounded-br-none"
-                      : "bg-green-100 text-green-900 border border-green-200 rounded-bl-none"
+                      ? "bg-teal-600 text-white rounded-br-none"
+                      : "bg-white border border-teal-200 text-gray-800 rounded-bl-none"
                   }`}
                 >
                   {msg.text}
@@ -138,30 +164,28 @@ export default function Chatbot() {
               </div>
             ))}
 
-            <div ref={chatEndRef}></div>
-
-            {/* Language Note */}
-            <div className="pt-2 text-center text-xs text-gray-500">
-              Chat in: English • Hindi • Nagpuri • Santhali
-            </div>
+            {loading && (
+              <p className="text-xs text-gray-500 mt-1">Champa is thinking...</p>
+            )}
           </div>
 
-          {/* INPUT BOX */}
+          {/* Input Section */}
           <div className="p-3 border-t bg-white flex items-center gap-2">
+            <IoMdMic size={22} className="text-teal-600" />
+
             <input
-              type="text"
-              placeholder="Type message..."
+              className="flex-1 px-4 py-2 border rounded-full text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+              placeholder="Type your travel question..."
               value={input}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              className="flex-1 px-4 py-2 rounded-xl border border-green-300 focus:ring-2 focus:ring-green-500/40 focus:outline-none text-sm"
             />
 
             <button
-              onClick={handleSend}
-              className="h-11 w-11 rounded-xl bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-all shadow-md hover:scale-105"
+              onClick={sendMessage}
+              className="bg-teal-600 p-2 rounded-full text-white hover:bg-teal-700"
             >
-              <Send className="h-5 w-5" />
+              <FiSend size={20} />
             </button>
           </div>
         </div>
