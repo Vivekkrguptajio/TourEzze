@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Calendar,
   MapPin,
@@ -7,11 +7,10 @@ import {
   FileText,
   FileUp,
   Image,
-  Plus,
   Video,
 } from "lucide-react";
 
-export default function CreateEventForm() {
+export default function EditEventModal({ isOpen, data, onClose, onSave }) {
   const [form, setForm] = useState({
     eventName: "",
     organizer: "",
@@ -26,63 +25,49 @@ export default function CreateEventForm() {
     arvrLink: "",
   });
 
+  // Load data when modal opens
+  useEffect(() => {
+    if (data) {
+      setForm({
+        eventName: data.eventName || "",
+        organizer: data.organizer || "",
+        location: data.location || "",
+        eventDate: data.eventDate || "",
+        description: data.description || "",
+        category: data.category || "",
+        tags: data.tags?.join(", ") || "",
+        bannerImage: data.bannerImage || "",
+        documentLink: data.documentLink || "",
+        arvr: data.arvr || "no",
+        arvrLink: data.arvrLink || "",
+      });
+    }
+  }, [data]);
+
+  // Input Handler
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // ⭐ POST request to backend
-  const handleSubmit = async () => {
-    try {
-      const payload = {
-        ...form,
-        tags:
-          form.tags.trim() !== ""
-            ? form.tags.split(",").map((t) => t.trim())
-            : [],
-      };
+  // Submit Handler
+  const handleSubmit = () => {
+    const payload = {
+      ...form,
+      tags: form.tags.split(",").map((t) => t.trim()),
+    };
 
-      const res = await fetch("http://localhost:5000/api/admin/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        alert("Event Created Successfully ✔");
-        console.log("EVENT SAVED:", data);
-
-        // Reset Form
-        setForm({
-          eventName: "",
-          organizer: "",
-          location: "",
-          eventDate: "",
-          description: "",
-          category: "",
-          tags: "",
-          bannerImage: "",
-          documentLink: "",
-          arvr: "",
-          arvrLink: "",
-        });
-      } else {
-        alert("Event creation failed ❌");
-      }
-    } catch (err) {
-      console.error("Event Create Error:", err);
-      alert("Server Error ❌");
-    }
+    onSave(payload); // send to parent
   };
 
+  if (!isOpen) return null;
+
   return (
-    <div className="p-6 pl-0 space-y-6">
-      <h1 className="text-3xl font-bold text-green-800">Create New Event</h1>
+    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[2000]">
+      <div className="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-xl overflow-y-auto max-h-[95vh] space-y-6">
 
-      <div className="bg-white border rounded-2xl shadow-sm p-6 space-y-8">
+        <h2 className="text-2xl font-bold text-green-800">Edit Event</h2>
 
-        {/* GRID */}
+        {/* FORM GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Event Name */}
@@ -95,7 +80,6 @@ export default function CreateEventForm() {
               name="eventName"
               value={form.eventName}
               onChange={handleChange}
-              placeholder="Enter event title"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
@@ -110,7 +94,6 @@ export default function CreateEventForm() {
               name="organizer"
               value={form.organizer}
               onChange={handleChange}
-              placeholder="Organizer name"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
@@ -125,7 +108,6 @@ export default function CreateEventForm() {
               name="location"
               value={form.location}
               onChange={handleChange}
-              placeholder="Venue / place name"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
@@ -147,7 +129,7 @@ export default function CreateEventForm() {
           {/* Category */}
           <div>
             <label className="font-medium text-sm flex items-center gap-1">
-              <Tag size={16} /> Event Category
+              <Tag size={16} /> Category
             </label>
             <select
               name="category"
@@ -175,10 +157,41 @@ export default function CreateEventForm() {
               name="tags"
               value={form.tags}
               onChange={handleChange}
-              placeholder="Eg: Music, Outdoor, Free Entry"
+              placeholder="Music, Free Entry"
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
+
+          {/* ARVR SELECT */}
+          <div>
+            <label className="font-medium text-sm flex items-center gap-1">
+              <Video size={16} /> AR/VR Available?
+            </label>
+            <select
+              name="arvr"
+              value={form.arvr}
+              onChange={handleChange}
+              className="w-full border mt-1 px-3 py-2 rounded-lg"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes (360° View)</option>
+            </select>
+          </div>
+
+          {/* ARVR LINK */}
+          {form.arvr === "yes" && (
+            <div className="col-span-2">
+              <label className="font-medium text-sm">360° AR/VR Link</label>
+              <input
+                type="text"
+                name="arvrLink"
+                value={form.arvrLink}
+                onChange={handleChange}
+                placeholder="https://your-360-view.com"
+                className="w-full border mt-1 px-3 py-2 rounded-lg"
+              />
+            </div>
+          )}
 
         </div>
 
@@ -190,7 +203,6 @@ export default function CreateEventForm() {
             value={form.description}
             onChange={handleChange}
             rows="4"
-            placeholder="Write event details..."
             className="w-full border mt-1 px-3 py-2 rounded-lg"
           ></textarea>
         </div>
@@ -205,42 +217,10 @@ export default function CreateEventForm() {
             name="bannerImage"
             value={form.bannerImage}
             onChange={handleChange}
-            placeholder="https://image-link.jpg"
+            placeholder="https://image.jpg"
             className="w-full border mt-1 px-3 py-2 rounded-lg"
           />
         </div>
-
-        {/* AR/VR AVAILABLE? */}
-        <div>
-          <label className="font-medium text-sm flex items-center gap-1">
-            <Video size={16} /> AR/VR Preview Available?
-          </label>
-          <select
-            name="arvr"
-            value={form.arvr}
-            onChange={handleChange}
-            className="w-full border mt-1 px-3 py-2 rounded-lg"
-          >
-            <option value="">Select</option>
-            <option value="yes">Yes (360° View Available)</option>
-            <option value="no">No</option>
-          </select>
-        </div>
-
-        {/* ARVR LINK */}
-        {form.arvr === "yes" && (
-          <div>
-            <label className="font-medium text-sm">360° AR/VR Link</label>
-            <input
-              type="text"
-              name="arvrLink"
-              value={form.arvrLink}
-              onChange={handleChange}
-              placeholder="https://your-360-view-link.com"
-              className="w-full border mt-1 px-3 py-2 rounded-lg"
-            />
-          </div>
-        )}
 
         {/* Document Link */}
         <div>
@@ -252,18 +232,25 @@ export default function CreateEventForm() {
             name="documentLink"
             value={form.documentLink}
             onChange={handleChange}
-            placeholder="https://docs-link.pdf"
+            placeholder="https://docs.pdf"
             className="w-full border mt-1 px-3 py-2 rounded-lg"
           />
         </div>
 
-        {/* Submit */}
-        <div className="flex justify-end">
+        {/* BUTTONS */}
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+
           <button
             onClick={handleSubmit}
-            className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg flex items-center gap-1 hover:bg-green-800"
+            className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
           >
-            <Plus size={20} /> Create Event
+            Save Changes
           </button>
         </div>
 

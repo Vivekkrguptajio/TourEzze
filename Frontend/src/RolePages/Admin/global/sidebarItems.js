@@ -52,9 +52,9 @@ export const sidebarSections = [
   {
     title: "Events",
     items: [
-      { to: "events", label: "Event Management", icon: ClipboardList },
-      { to: "approve-events", label: "Approve Events", icon: CalendarCheck },
-      { to: "create-events", label: "Create Events", icon: FileText }
+      { to: "events", label: "All Events", icon: ClipboardList },
+      // { to: "approve-events", label: "Approve Events", icon: CalendarCheck },
+      { to: "create-events", label: "Add Events", icon: FileText }
     ]
   },
 
