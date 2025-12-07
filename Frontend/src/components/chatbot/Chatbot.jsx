@@ -20,18 +20,41 @@ export default function Chatbot() {
     }, 150);
   };
 
-  // Main Send Function
+  // ----------------------------
+  // MAIN SEND FUNCTION
+  // ----------------------------
   const handleSend = async (customText) => {
     const text = customText || input;
-
     if (!text.trim()) return;
 
+    // User message add
     const userMsg = { from: "user", text };
     setMessages((prev) => [...prev, userMsg]);
-
     setInput("");
-    setLoading(true);
     scrollToBottom();
+
+    // ----------------------------
+    // GREETING KEYWORDS DETECTION
+    // ----------------------------
+    const lower = text.toLowerCase();
+    const greetings = ["hi", "hii", "hello", "hey", "hlo", "namaste", "hola", "champa"];
+
+    if (greetings.some((g) => lower.includes(g))) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          from: "bot",
+          text: "Hi! 👋 I'm Champa, your Jharkhand travel assistant. How can I help you today?",
+        },
+      ]);
+      scrollToBottom();
+      return; // IMPORTANT → API CALL STOP
+    }
+
+    // ----------------------------
+    // NORMAL API CALL
+    // ----------------------------
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/api/chat", {
@@ -42,12 +65,9 @@ export default function Chatbot() {
 
       const data = await res.json();
 
-      const botMsg = {
-        from: "bot",
-        text: data.reply || "No response from server",
-      };
-
+      const botMsg = { from: "bot", text: data.reply || "No response from server" };
       setMessages((prev) => [...prev, botMsg]);
+
       scrollToBottom();
     } catch (err) {
       setMessages((prev) => [
@@ -61,10 +81,8 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Button */}
       {!open && <FloatingButton onClick={() => setOpen(true)} />}
 
-      {/* Chat Window */}
       {open && (
         <div ref={chatRef}>
           <ChatWindow

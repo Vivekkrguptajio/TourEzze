@@ -1,4 +1,13 @@
+import { useEffect, useRef } from "react";
+
 export default function MessageList({ messages }) {
+  const bottomRef = useRef(null);
+
+  // AUTO SCROLL TO BOTTOM
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
       {messages.map((msg, i) => (
@@ -24,12 +33,10 @@ export default function MessageList({ messages }) {
               {msg.text.split("\n").map((line, index) => {
                 line = line.trim();
 
-                // Skip divider lines like "-----"
                 if (/^-{2,}/.test(line)) {
                   return null;
                 }
 
-                // Title line
                 if (line.startsWith("Title:")) {
                   return (
                     <div key={index} className="font-semibold text-lg text-teal-700">
@@ -38,7 +45,6 @@ export default function MessageList({ messages }) {
                   );
                 }
 
-                // Bullet points
                 if (line.startsWith("-")) {
                   return (
                     <div key={index} className="pl-3 relative">
@@ -48,13 +54,15 @@ export default function MessageList({ messages }) {
                   );
                 }
 
-                // Normal text
                 return <div key={index}>{line}</div>;
               })}
             </div>
           </div>
         </div>
       ))}
+
+      {/* AUTO SCROLL TARGET */}
+      <div ref={bottomRef}></div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import EventsHero from "../components/events/EventsHero";
 import EventsCategoryTabs from "../components/events/EventsCategoryTabs";
 import EventLargeCard from "../components/events/EventLargeCard";
-import EventsGrid from "../components/events/EventsGrid";
+import EventsGrid from "../components/TouristEvents.jsx";
 import EventsCalendar from "../components/events/EventsCalendar";
 import useEventFilters from "../hooks/useEventFilters";
 import events from "../data/events.js";
@@ -30,7 +30,6 @@ export default function EventsPage() {
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-[3fr,1fr] gap-6 mt-8">
           <div>
-            <h3 className="text-xl font-semibold mb-2">All Events</h3>
             <p className="text-sm text-gray-600 mb-4">
               {filtered.length} events found
             </p>
