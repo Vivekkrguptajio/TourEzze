@@ -45,7 +45,7 @@ ALLOWED CONTENT:
 
 OUTPUT FORMAT (STRICT):
 The answer MUST contain ONLY:
-- Exactly 10 bullet points
+- Exactly 3 bullet points
 - Each bullet must start with "- "
 - Each point must be MAXIMUM 30 words
 - NO paragraphs
@@ -62,7 +62,7 @@ STYLE:
 USER QUESTION:
 "${message}"
 
-Now generate EXACTLY 10 bullet points. Nothing more.
+Now generate EXACTLY 3 bullet points. Nothing more.
 `;
     // ===========================================
 
@@ -75,8 +75,8 @@ Now generate EXACTLY 10 bullet points. Nothing more.
     // Count bullets
     const bullets = reply.match(/^- /gm) || [];
 
-    // Validate bullet count
-    const isValidCount = bullets.length === 10;
+    // Validate bullet count (must be EXACTLY 3)
+    const isValidCount = bullets.length === 3;
 
     // Validate word count (<= 30 words each)
     let isValidWordLimit = true;
@@ -87,19 +87,12 @@ Now generate EXACTLY 10 bullet points. Nothing more.
       }
     });
 
-    // If invalid → fallback safe response
+    // If invalid → fallback safe response (EXACTLY 3 bullets)
     if (!isValidCount || !isValidWordLimit) {
       reply = `
-- Only Jharkhand tourism answers allowed
-- Your question triggered formatting restrictions
-- Please ask again in allowed tourism topics
-- Response must follow bullet rules
-- Try rephrasing your question
-- Strict output safety applied
-- The model failed formatting enforcement
-- Ask again for a clean tourism response
-- Only 30 words per bullet allowed
-- Only 10 bullets allowed
+- Only Jharkhand tourism questions are allowed; your request did not follow the required answer format.
+- Each response must contain exactly 3 bullet points, with each point limited to 30 words.
+- Please ask again with a valid Jharkhand tourism query for a proper response.
 `.trim();
     }
 
