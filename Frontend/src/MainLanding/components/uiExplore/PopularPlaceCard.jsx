@@ -1,4 +1,3 @@
-// PopularPlaceCard.jsx
 import React, { useEffect, useState } from "react";
 import {
   MapPin,
@@ -40,7 +39,6 @@ export default function PopularPlaceCard({ place }) {
   const sliderAvailable = !place;
   const data = place || placesData[currentIndex];
 
-  // Derive sanitized image paths — DO NOT mutate `data`
   const img = data.image ? normalizePublicPath(data.image) : "";
   const img360Raw = data.image360 ? data.image360.trim() : "";
   // If it's a Google embed URL, keep as is; otherwise normalize

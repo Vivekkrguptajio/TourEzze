@@ -41,7 +41,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
   // ----------------- TRANSLATIONS -----------------
   const translations = {
     English: {
-      explore: "Explore",
+      explore: "Explore Location",
       events: "Events",
       marketplace: "Marketplace",
       role: "Select Your Role",

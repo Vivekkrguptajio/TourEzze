@@ -2,7 +2,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import modules from the correct path
 import { Navigation, Mousewheel } from "swiper/modules";
 
 import "swiper/css";
