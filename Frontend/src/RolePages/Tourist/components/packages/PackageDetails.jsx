@@ -1,5 +1,37 @@
+import { useNavigate } from "react-router-dom";
+
 export default function PackageDetails({ pkg, onClose }) {
+  const navigate = useNavigate();
+
   if (!pkg) return null;
+
+  // ⭐ Add to Cart Function
+  const handleAddToCart = () => {
+    let cart = JSON.parse(localStorage.getItem("tour_cart")) || [];
+
+    const item = {
+      id: pkg.id,
+      title: pkg.title,
+      price: pkg.price,
+      duration: pkg.duration,
+      image: pkg.image,
+      highlights: pkg.highlights,
+      quantity: 1,
+    };
+
+    const exists = cart.some((d) => d.id === pkg.id);
+
+    if (!exists) {
+      cart.push(item);
+      localStorage.setItem("tour_cart", JSON.stringify(cart));
+    }
+
+    // Close modal first
+    onClose();
+
+    // Redirect to Cart
+    navigate("/role/tourist/cart");
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4">
@@ -22,12 +54,22 @@ export default function PackageDetails({ pkg, onClose }) {
             Price: ₹ {pkg.price.toLocaleString()}
           </p>
 
+          {/* ⭐ Add to Cart Button */}
           <button
-            className="w-full mt-4 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800"
+            onClick={handleAddToCart}
+            className="w-full py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold"
+          >
+            Add to Cart
+          </button>
+
+          {/* Close Button */}
+          <button
+            className="w-full mt-3 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
             onClick={onClose}
           >
             Close
           </button>
+
         </div>
       </div>
     </div>

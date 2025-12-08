@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import UserDropdown from "./UserDropdown";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function DesktopMenu({
   navLinks,
@@ -7,11 +8,13 @@ export default function DesktopMenu({
   user,
   setAuthType,
   userMenuOpen,
-  setUserMenuOpen
+  setUserMenuOpen,
+  cartCount = 0,      // ⭐ NEW PROP (optional)
 }) {
   return (
     <div className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
 
+      {/* NAV LINKS */}
       {navLinks.map((link) => (
         <Link
           key={link.to}
@@ -22,6 +25,24 @@ export default function DesktopMenu({
         </Link>
       ))}
 
+      {/* ⭐ CART ICON (SHOW ONLY WHEN LOGGED IN) */}
+      {isLoggedIn && (
+        <Link 
+          to="/cart"
+          className="relative flex items-center text-white hover:text-green-300 transition-colors"
+        >
+          <FaShoppingCart size={20} />
+
+          {/* COUNT BADGE */}
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-semibold w-5 h-5 flex items-center justify-center rounded-full">
+              {cartCount}
+            </span>
+          )}
+        </Link>
+      )}
+
+      {/* NOT LOGGED IN → LOGIN / SIGNUP */}
       {!isLoggedIn && (
         <div className="flex items-center gap-2 lg:gap-3 shrink-0 ml-2">
           <button
@@ -40,6 +61,7 @@ export default function DesktopMenu({
         </div>
       )}
 
+      {/* USER DROPDOWN */}
       {isLoggedIn && user && (
         <UserDropdown
           user={user}
