@@ -5,7 +5,7 @@ export default function FloatingButton({ onClick }) {
     <button
       onClick={onClick}
       className="
-        fixed bottom-16 right-6 p-4 rounded-full shadow-xl 
+        fixed bottom-46 right-7 p-4 rounded-full shadow-xl 
         bg-gradient-to-br from-teal-500 to-teal-600 
         text-white hover:scale-110 transition-all 
         animate-pulse hover:animate-none z-[99999]
