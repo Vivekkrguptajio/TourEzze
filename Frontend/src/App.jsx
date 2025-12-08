@@ -1,6 +1,8 @@
+// App.jsx
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Chatbot from "./components/chatbot/Chatbot";  // FIXED
+import Chatbot from "./components/chatbot/Chatbot";
 import EmergencyWidget from "./components/EmergencyWidget";
 import MainLanding from "./MainLanding/MainLanding";
 
@@ -29,14 +31,35 @@ import GovLogout from "./RolePages/Admin/Auth/GovLogout";
 import GovProtectedRoute from "./RolePages/Admin/Auth/GovProtectedRoute";
 import VendorSignup from "./RolePages/Vendor/Auth/VendorSignup";
 
+// Events UI
+import EventList from "../src/MainLanding/components/uiEvents/EventList";      // optional: list component
+import EventDetails from "../src/MainLanding/components/uiEvents/EventDetails";
+
+function NotFound() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">404 — Page not found</h1>
+        <a href="/" className="text-green-600 underline">Go back home</a>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <>
-      <Chatbot />   {/* FIXED GPT CHATBOT HERE */}
+      <Chatbot />
       <EmergencyWidget />
 
       <Routes>
         <Route path="/" element={<MainLanding />} />
+
+        {/* Public events listing + detail routes */}
+        {/* If you don't have EventList just remove the EventList route */}
+        <Route path="/events" element={<EventList />} />
+        <Route path="/events/:id" element={<EventDetails />} />
+
         <Route path="/role/tourist/*" element={<TouristPortal />} />
 
         <Route path="/role/vendor/login" element={<VendorLogin />} />
@@ -83,6 +106,9 @@ export default function App() {
             </GovProtectedRoute>
           }
         />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

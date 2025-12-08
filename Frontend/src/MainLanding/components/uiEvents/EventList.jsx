@@ -12,14 +12,14 @@ export default function EventList() {
       <Swiper
         modules={[Navigation, Mousewheel]}
         spaceBetween={15}       // gap between cards
-        slidesPerView={5}       // show minimum 5 cards
+        slidesPerView={1}       // show minimum 5 cards
         navigation={true}       // arrows
         mousewheel={true}       // scroll with wheel / touchpad
         breakpoints={{          // responsive
           320: { slidesPerView: 1 },
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 5 },
+          // 640: { slidesPerView: 2 },
+          // 768: { slidesPerView: 3 },
+          // 1024: { slidesPerView: 5 },
         }}
         className="mySwiper"
       >

@@ -1,5 +1,6 @@
 import ProductList from "./uiProduct/ProductList";
 import { Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Product() {
   return (
@@ -35,26 +36,27 @@ export default function Product() {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-            <span>View All Products</span>
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+          <Link to="/role/tourist/shop">
+            <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <span>View All Products</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
 
       </div>
     </section>
   );
 }
-

@@ -1,7 +1,7 @@
 // ProductList.jsx
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Mousewheel } from "swiper/modules";  
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -12,7 +12,7 @@ export default function ProductList() {
   return (
     <div className="relative">
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Mousewheel]}  
         navigation
         mousewheel
         spaceBetween={15}

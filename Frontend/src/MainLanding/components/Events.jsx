@@ -2,6 +2,8 @@
 import EventList from "./uiEvents/EventList";
 import { Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import EventDetails from "./uiEvents/EventList";
+
 
 export default function Events() {
   return (
@@ -43,8 +45,13 @@ export default function Events() {
             </svg>
           </Link>
         </div>
+        {/* <Route path="/event/:id" element={<EventDetails />} /> kisme likhe ye */}
+
+
 
       </div>
     </section>
+
+
   );
 }
