@@ -16,7 +16,7 @@ export default function ProductList() {
         navigation
         mousewheel
         spaceBetween={15}
-        slidesPerView={5}
+        slidesPerView={3}
         breakpoints={{
           320: { slidesPerView: 1 },
           480: { slidesPerView: 2 },

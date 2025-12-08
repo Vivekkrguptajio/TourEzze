@@ -88,11 +88,11 @@ export default function HeroSection() {
         {/* LEFT TEXT */}
         <div>
           <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-tight tour-title">
-            Discover Jharkhand
+            जोहार झारखंड
           </h1>
 
           <h2 className="text-yellow-400 text-3xl md:text-5xl font-bold mt-2 tracking-tight">
-            Smart, Safe, Sustainable
+            Pristine, Indigenous, TimeLess
           </h2>
 
           <p className="text-gray-200 mt-5 text-lg md:text-xl max-w-lg leading-relaxed">
