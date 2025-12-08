@@ -178,7 +178,7 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
             {translations[language].marketplace}
           </p>
 
-          <Link to="/ar-vr" className="hover:text-green-300 transition">AR/VR</Link>
+          <Link to="/ar-vr" className="hover:text-green-300 transition">Packages</Link>
 
           {/* ROLE DROPDOWN */}
           <div className="relative group">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Navbar from "../Tourist/components/global/TouistNavbar.jsx";
+import Navbar from "../Tourist/components/global/Navbar/Navbar.jsx";
 import LoginModal from "../Tourist/components/global/auth/LoginModal.jsx";
 import SignupModal from "../Tourist/components/global/auth/SignupModal.jsx";
 import Footer from "../Tourist/components/global/Footer.jsx";
@@ -11,6 +11,9 @@ import Plan from "./components/Plan/Plan.jsx";
 import EventsPage from "./components/events/pages/EventsPage.jsx";
 import MarketplacePage from "./components/Shop/pages/MarketplacePage.jsx";
 import HotelsPage from "./components/Hotels/pages/HotelsPage.jsx";
+
+// ⭐ NEW IMPORT ADDED
+import Packages from "./components/packages/Packages.jsx";
 
 export default function Tourist() {
   const [authType, setAuthType] = useState(null);
@@ -33,6 +36,9 @@ export default function Tourist() {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/shop" element={<MarketplacePage />} />
           <Route path="/hotels" element={<HotelsPage />} />
+
+          {/* ⭐ NEW ROUTE ADDED */}
+          <Route path="/packages" element={<Packages />} />
         </Routes>
       </div>
 
