@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "../styles/HeroSection.css";
 
 const slides = [
   {
@@ -54,21 +53,62 @@ const slides = [
   },
 ];
 
+const languages = [
+  { discover: "Johar Jharkhand", tagline: "Pristine, Indigenous, TimeLess" },
+  { discover: "जोहड़ झारखण्ड", tagline: "निर्मल, स्वदेशी, शाश्वत" },
+  { discover: "जोहाड़ झारखण्ड", tagline: "निरमल • देसी • अमर" },
+  { discover: "जोहार झारुखाड़", tagline: "पोरुस • आदिवासी • दखापर" },
+  { discover: "जोहार झारखंड", tagline: "सिरी • होरोको • इतोको" },
+  { discover: "जोहार झारखंड", tagline: "सिरि • आदिवासी • लेंदे" },
+  { discover: "ᱡᱚᱦᱟᱨ ᱡᱷᱟᱨᱠᱟᱱᱰ", tagline: "ᱥᱟᱡᱟᱞ • ᱰᱤᱥᱚᱢ • ᱪᱮᱸᱰᱚ" }
+];
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
+  const [langIndex, setLangIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 4500);
-
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const langTimer = setInterval(() => {
+      setLangIndex((prev) => (prev + 1) % languages.length);
+    }, 3000);
+    return () => clearInterval(langTimer);
   }, []);
 
   return (
     <section className="w-full min-h-screen pt-24 relative overflow-hidden flex flex-col justify-center">
-      {/* ↑↑ FIXED: h-screen → min-h-screen + pt-24 */}
+      <style>{`
+        .fade-image {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+        }
+        .fade-image.active {
+          opacity: 1;
+        }
+        .text-slide {
+          animation: slideIn 0.6s ease-out;
+        }
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
 
       {/* Background Image Crossfade */}
       {slides.map((slide, index) => (
@@ -87,12 +127,18 @@ export default function HeroSection() {
 
         {/* LEFT TEXT */}
         <div>
-          <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-tight tour-title">
-            Discover Jharkhand
+          <h1
+            key={`discover-${langIndex}`}
+            className="text-white text-4xl md:text-6xl font-extrabold leading-tight text-slide"
+          >
+            {languages[langIndex].discover}
           </h1>
 
-          <h2 className="text-yellow-400 text-3xl md:text-5xl font-bold mt-2 tracking-tight">
-            Smart, Safe, Sustainable
+          <h2
+            key={`tagline-${langIndex}`}
+            className="text-yellow-400 text-3xl md:text-5xl font-bold mt-2 tracking-tight text-slide"
+          >
+            {languages[langIndex].tagline}
           </h2>
 
           <p className="text-gray-200 mt-5 text-lg md:text-xl max-w-lg leading-relaxed">
@@ -101,40 +147,38 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-7 flex flex-wrap gap-4">
-  <a
-    href="http://localhost:5173/role/tourist/ai-itinerary"
-    className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
-  >
-    Plan My Trip →
-  </a>
+            <a
+              href="http://localhost:5173/role/tourist/ai-itinerary"
+              className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
+            >
+              Plan My Trip →
+            </a>
 
-  <a
-    href="http://localhost:5173/role/tourist"
-    className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
-  >
-    Explore Destinations
-  </a>
-</div>
-
+            <a
+              href="http://localhost:5173/role/tourist"
+              className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
+            >
+              Explore Destinations
+            </a>
+          </div>
         </div>
 
         {/* RIGHT-SIDE SLIDING TEXT */}
         <div className="text-right">
           <h2
             key={`title-${current}`}
-            className="text-yellow-400 text-3xl md:text-4xl font-bold tour-title text-slide"
+            className="text-yellow-400 text-3xl md:text-4xl font-bold text-slide"
           >
             {slides[current].title}
           </h2>
 
           <p
             key={`desc-${current}`}
-            className="text-gray-300 mt-3 text-base md:text-lg tour-sub text-slide"
+            className="text-gray-300 mt-3 text-base md:text-lg text-slide"
           >
             {slides[current].desc}
           </p>
         </div>
-
       </div>
 
       {/* Bottom Stats */}
