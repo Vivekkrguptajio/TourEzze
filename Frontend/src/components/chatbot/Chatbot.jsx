@@ -11,7 +11,7 @@ export default function Chatbot() {
 
   const chatRef = useRef(null);
 
-  // Auto scroll to bottom
+  // Auto scroll
   const scrollToBottom = () => {
     setTimeout(() => {
       if (chatRef.current) {
@@ -27,18 +27,19 @@ export default function Chatbot() {
     const text = customText || input;
     if (!text.trim()) return;
 
-    // User message add
+    // Add user message
     const userMsg = { from: "user", text };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     scrollToBottom();
 
-    // ----------------------------
-    // GREETING KEYWORDS DETECTION
-    // ----------------------------
     const lower = text.toLowerCase();
     const greetings = ["hi", "hii", "hello", "hey", "hlo", "namaste", "hola", "champa"];
 
+    // ----------------------------
+    // GREETING MESSAGE (Restriction Removed)
+    // → Greeting dikhega + API bhi chalega
+    // ----------------------------
     if (greetings.some((g) => lower.includes(g))) {
       setMessages((prev) => [
         ...prev,
@@ -48,7 +49,7 @@ export default function Chatbot() {
         },
       ]);
       scrollToBottom();
-      return; // IMPORTANT → API CALL STOP
+      // **NO RETURN HERE → API WILL ALSO RUN**
     }
 
     // ----------------------------
@@ -84,7 +85,7 @@ export default function Chatbot() {
       {!open && <FloatingButton onClick={() => setOpen(true)} />}
 
       {open && (
-        <div ref={chatRef}>
+        <div ref={chatRef} style={{ height: "100%", overflowY: "auto" }}>
           <ChatWindow
             lang={lang}
             setLang={setLang}
