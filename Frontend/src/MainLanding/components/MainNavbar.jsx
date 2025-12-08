@@ -10,7 +10,6 @@ export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplace
   const alertRef = useRef(null);
   const langRef = useRef(null);
 
-  // ----------------- LANGUAGES -----------------
   const languages = [
     { key: "Hindi", label: "हिन्दी" },
     { key: "English", label: "English" },
