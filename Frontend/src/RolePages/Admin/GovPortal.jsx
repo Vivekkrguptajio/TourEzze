@@ -54,23 +54,7 @@ export default function GovPortal() {
         }
       />
 
-       {/* <Route
-        path="remove-destination"
-        element={
-          <Layout>
-            <RemoveDestination/>
-          </Layout>
-        }
-      />
 
-      <Route
-        path="update-destination"
-        element={
-          <Layout>
-            <UpdateDestination/>
-          </Layout>
-        }
-      /> */}
 
       <Route
         path="tourist-analytics"

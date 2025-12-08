@@ -38,7 +38,7 @@ export default function AllEvents() {
     }
   };
 
-  // ⭐⭐⭐ UPDATE EVENT (PUT)
+  //  UPDATE EVENT (PUT)
   const updateEvent = async (updated) => {
     try {
       const res = await fetch(
