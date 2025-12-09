@@ -17,7 +17,9 @@ import {
   MapPinPlus,
   MapPinMinus,
   MapPin,
-  Edit
+  Edit,
+  PackageSearch,
+  PackagePlus // NEW ICON
 } from "lucide-react";
 
 export const sidebarSections = [
@@ -34,8 +36,6 @@ export const sidebarSections = [
     items: [
       { to: "destinations", label: "All Destinations", icon: MapPin },
       { to: "add-destination", label: "Add Destination", icon: MapPinPlus },
-      // { to: "update-destination", label: "Update Destination", icon: Edit },
-      // { to: "remove-destination", label: "Remove Destination", icon: MapPinMinus }
     ]
   },
 
@@ -45,7 +45,11 @@ export const sidebarSections = [
       { to: "hotels", label: "Hotels & Homestays", icon: Hotel },
       { to: "vendors", label: "Vendors & Marketplace", icon: Store },
       { to: "guides", label: "Tour Guides", icon: Users },
-      { to: "transport", label: "Transport Providers", icon: Globe }
+      { to: "transport", label: "Transport Providers", icon: Globe },
+
+      // ✅ Added Tour Package Menu
+      { to: "tour-packages", label: "All Packages", icon: PackageSearch },
+      { to: "create-package", label: "Add Package", icon: PackagePlus }
     ]
   },
 
@@ -53,7 +57,6 @@ export const sidebarSections = [
     title: "Events",
     items: [
       { to: "events", label: "All Events", icon: ClipboardList },
-      // { to: "approve-events", label: "Approve Events", icon: CalendarCheck },
       { to: "create-events", label: "Add Events", icon: FileText }
     ]
   },

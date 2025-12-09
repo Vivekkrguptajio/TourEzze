@@ -1,32 +1,52 @@
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./global/Layout";
+
+// Tourist Analytics
 import TouristAnalytics from "./pages/TouristAnalytics";
+
+// Management
 import Hotels from "./app/Management/Hotels/Hotels";
 import Vendors from "./app/Management/vendor/Vendor";
 import TourGuides from "./app/Management/Guide/TourGuides";
 import TransportProviders from "./app/Management/transport/TransportProviders";
+
+// ⭐ NEW (Tour Packages)
+
+
+// Events
 import EventManagement from "./app/Events/pages/AllEventsPage";
 import ApproveEvents from "./app/Events/pages/ApproveEvents";
 import CreateEvents from "./app/Events/pages/AddEvents";
+
+// Reports
 import Reports from "./app/Reports/pages/Reports";
 import DailyReportTable from "./app/Reports/components/DailyReportTable";
 import MonthlyReports from "./app/Reports/pages/MonthlyReports";
+
+// Verification
 import VendorVerification from "./app/Verification/pages/VendorVerification";
 import GuideVerification from "./app/Verification/pages/GuideVerification";
 import HotelVerification from "./app/Verification/pages/HotelVerification";
+
+// Others
 import Complaints from "./app/Other/pages/complaints/Complaints";
 import Heatmaps from "./app/Other/pages/maps/Heatmaps";
 import Settings from "./app/Other/pages/settings/Settings";
+
+// Auth
 import GovLogout from "./Auth/GovLogout";
+
+// Destinations
 import AllDestinations from "./app/destinations/AllDestinations";
 import AddDestination from "./app/destinations/AddDestination";
-// import RemoveDestination from "./app/destinations/RemoveDestination";
-// import UpdateDestination from "./app/destinations/UpdateDestination";
+import AllPackage from "./app/packages/AllPackage";
+import CreatePackage from "./app/packages/CreatePackage";
 
 export default function GovPortal() {
   return (
     <Routes>
+      {/* Dashboard */}
       <Route
         path="/"
         element={
@@ -36,7 +56,8 @@ export default function GovPortal() {
         }
       />
 
-       <Route
+      {/* Destination routes */}
+      <Route
         path="destinations"
         element={
           <Layout>
@@ -44,8 +65,7 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
-       <Route
+      <Route
         path="add-destination"
         element={
           <Layout>
@@ -54,8 +74,7 @@ export default function GovPortal() {
         }
       />
 
-
-
+      {/* Tourist Analytics */}
       <Route
         path="tourist-analytics"
         element={
@@ -65,6 +84,7 @@ export default function GovPortal() {
         }
       />
 
+      {/* Management */}
       <Route
         path="hotels"
         element={
@@ -73,7 +93,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="vendors"
         element={
@@ -82,7 +101,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="guides"
         element={
@@ -100,6 +118,25 @@ export default function GovPortal() {
         }
       />
 
+      {/* ⭐ TOUR PACKAGES ROUTES ADDED HERE */}
+      <Route
+        path="tour-packages"
+        element={
+          <Layout>
+            <AllPackage />
+          </Layout>
+        }
+      />
+      <Route
+        path="create-package"
+        element={
+          <Layout>
+            <CreatePackage />
+          </Layout>
+        }
+      />
+
+      {/* Events */}
       <Route
         path="events"
         element={
@@ -108,7 +145,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="approve-events"
         element={
@@ -117,7 +153,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="create-events"
         element={
@@ -127,6 +162,7 @@ export default function GovPortal() {
         }
       />
 
+      {/* Reports */}
       <Route
         path="reports"
         element={
@@ -135,7 +171,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="daily-reports"
         element={
@@ -144,7 +179,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="monthly-reports"
         element={
@@ -154,6 +188,7 @@ export default function GovPortal() {
         }
       />
 
+      {/* Verification */}
       <Route
         path="verification"
         element={
@@ -162,7 +197,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="guide-verification"
         element={
@@ -171,7 +205,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="hotel-verification"
         element={
@@ -181,6 +214,7 @@ export default function GovPortal() {
         }
       />
 
+      {/* Others */}
       <Route
         path="complaints"
         element={
@@ -189,7 +223,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="maps"
         element={
@@ -198,7 +231,6 @@ export default function GovPortal() {
           </Layout>
         }
       />
-
       <Route
         path="settings"
         element={
@@ -208,6 +240,7 @@ export default function GovPortal() {
         }
       />
 
+      {/* Logout */}
       <Route
         path="role/government/login"
         element={

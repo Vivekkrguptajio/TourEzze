@@ -15,7 +15,7 @@ connectDB();
 // 📌 IMPORT ROUTES (All Modules)
 // -----------------------------------------
 
-// Chatbot & Tourist
+// Chatbot + Tourist
 import chatRoutes from "./src/Chatbot/routes/chat.routes.js";
 import touristRoutes from "./src/Tourist/routes/tourist.routes.js";
 import itineraryRoutes from "./src/Tourist/routes/itinerary.routes.js";
@@ -27,11 +27,14 @@ import vendorRoutes from "./src/Vendor/routes/vendor.routes.js";
 import destinationRoutes from "./src/Admin/routes/destination.routes.js";
 import eventRoutes from "./src/Admin/routes/event.routes.js";
 
+// ⭐ NEW: Tour Package Module  
+import tourPackageRoutes from "./src/Admin/routes/tourPackage.routes.js";
+
 // Hotel
 import hotelAuthRoutes from "./src/Hotel/routes/hotel.auth.routes.js";
 import hotelRoutes from "./src/Hotel/routes/hotel.routes.js";
 
-// ⭐ NEW: Guide Module
+// Guide
 import guideAuthRoutes from "./src/Guide/routes/guide.auth.routes.js";
 
 // -----------------------------------------
@@ -71,7 +74,6 @@ app.get("/image-proxy", async (req, res) => {
     res.set("Content-Type", response.headers.get("content-type"));
     const buffer = Buffer.from(await response.arrayBuffer());
     res.send(buffer);
-
   } catch (err) {
     console.error("IMAGE PROXY ERROR:", err);
     res.status(500).send("Failed to load image");
@@ -109,11 +111,14 @@ app.use("/api/vendor", vendorRoutes);
 app.use("/api/admin/destinations", destinationRoutes);
 app.use("/api/admin/events", eventRoutes);
 
+// ⭐ Tour Package Module
+app.use("/api/admin/tour-packages", tourPackageRoutes);
+
 // Hotel Module
 app.use("/api/hotel/auth", hotelAuthRoutes);
 app.use("/api/hotel", hotelRoutes);
 
-// ⭐ Guide Module
+// Guide Module
 app.use("/api/guide/auth", guideAuthRoutes);
 
 // -----------------------------------------
