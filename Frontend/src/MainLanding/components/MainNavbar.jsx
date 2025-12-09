@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Bell, Globe, User, Store, Navigation, Building, Shield } from "lucide-react";
 
-export default function MainNavbar({ exploreRef, roleRef, eventsRef, marketplaceRef }) {
+export default function MainNavbar({ exploreRef, eventsRef, marketplaceRef }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
 
