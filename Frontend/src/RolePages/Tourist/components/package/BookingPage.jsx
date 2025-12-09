@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function BookingPage() {
   const { id } = useParams();
+  const navigate = useNavigate();   // ✅ React Router navigation
   const [pkg, setPkg] = useState(null);
 
   const fetchPackage = async () => {
@@ -13,7 +14,7 @@ export default function BookingPage() {
       );
       setPkg(res.data.data);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to fetch package:", err);
     }
   };
 
@@ -23,32 +24,44 @@ export default function BookingPage() {
 
   if (!pkg) return <h2>Loading...</h2>;
 
+  // ✅ FINAL CORRECT Stripe Payment Navigation
   const goToPayment = () => {
-    // Pass package ID + price
-    window.location.href = `/role/tourist/payment/${pkg._id}?amount=${pkg.price}`;
+    navigate("/role/tourist/packages/payment", {
+      state: {
+        selectedPackage: pkg,   // ✅ full package data sent safely
+      },
+    });
   };
 
   return (
     <div style={{ padding: "30px", maxWidth: "600px", margin: "auto" }}>
       <h1>Book: {pkg.packageName}</h1>
       <p>📍 {pkg.location}</p>
-      <p><strong>Duration:</strong> {pkg.duration}</p>
-      <p><strong>Price:</strong> ₹{pkg.price}</p>
+
+      <p>
+        <strong>Duration:</strong> {pkg.duration}
+      </p>
+
+      <p>
+        <strong>Price:</strong> ₹{pkg.price}
+      </p>
 
       <hr style={{ margin: "20px 0" }} />
 
       <h3>Your Details</h3>
-      
+
       <input
         type="text"
         placeholder="Full Name"
         style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
       />
+
       <input
         type="text"
         placeholder="Phone Number"
         style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
       />
+
       <input
         type="date"
         style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
@@ -65,7 +78,7 @@ export default function BookingPage() {
           borderRadius: "5px",
           fontSize: "18px",
           cursor: "pointer",
-          marginTop: "10px"
+          marginTop: "10px",
         }}
       >
         Proceed to Payment

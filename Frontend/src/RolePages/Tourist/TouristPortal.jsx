@@ -14,10 +14,12 @@ import HotelsPage from "./components/Hotels/pages/HotelsPage.jsx";
 
 // ⭐ Packages List
 import AllPackages from "./components/package/AllPackage.jsx";
-import PaymentPage from "./components/package/PaymentPage.jsx";
 
-// ⭐ Booking Page
+// ⭐ Booking + Payment
 import BookingPage from "./components/package/BookingPage.jsx";
+import PaymentPage from "./components/package/PaymentPage.jsx";
+import PaymentSuccess from "./components/package/PaymentSuccess.jsx";
+import PaymentCancel from "./components/package/PaymentCancel.jsx";
 
 export default function Tourist() {
   const [authType, setAuthType] = useState(null);
@@ -43,8 +45,11 @@ export default function Tourist() {
 
           {/* ⭐ Booking Page */}
           <Route path="book-package/:id" element={<BookingPage />} />
-          <Route path="payment/:id" element={<PaymentPage />} />
 
+          {/* ✅ Stripe Payment Flow */}
+          <Route path="packages/payment" element={<PaymentPage />} />
+          <Route path="payment/success" element={<PaymentSuccess />} />
+          <Route path="payment/cancel" element={<PaymentCancel />} />
         </Routes>
       </div>
 

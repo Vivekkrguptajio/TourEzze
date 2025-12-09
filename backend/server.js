@@ -37,6 +37,9 @@ import hotelRoutes from "./src/Hotel/routes/hotel.routes.js";
 // Guide
 import guideAuthRoutes from "./src/Guide/routes/guide.auth.routes.js";
 
+// 💳 Payment Module ✅
+import paymentRoutes from "./src/Payments/routes/payment.routes.js";
+
 // -----------------------------------------
 // 📌 PATH FIX FOR ES MODULES (__dirname)
 // -----------------------------------------
@@ -96,7 +99,7 @@ app.get("/", (req, res) => {
 });
 
 // -----------------------------------------
-// ⭐ ATTACH ALL ROUTES
+// ⭐ ATTACH ALL ROUTES ✅
 // -----------------------------------------
 
 // Chatbot + Tourist
@@ -121,8 +124,11 @@ app.use("/api/hotel", hotelRoutes);
 // Guide Module
 app.use("/api/guide/auth", guideAuthRoutes);
 
+// 💳 Payment Module ✅ (CORRECT POSITION)
+app.use("/api/payments", paymentRoutes);
+
 // -----------------------------------------
-// ❌ 404 HANDLER
+// ❌ 404 HANDLER ✅ MUST BE LAST
 // -----------------------------------------
 app.use((req, res) => {
   return res.status(404).json({
