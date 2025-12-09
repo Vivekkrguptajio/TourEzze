@@ -12,6 +12,7 @@ import Plan from "./components/Plan/Plan.jsx";
 import EventsPage from "./components/events/pages/EventsPage.jsx";
 import MarketplacePage from "./components/Shop/pages/MarketplacePage.jsx";
 import HotelsPage from "./components/Hotels/pages/HotelsPage.jsx";
+import PaymentPage from "./components/packages/PaymentPage.jsx";
 
 export default function Tourist() {
   const [authType, setAuthType] = useState(null);
@@ -34,6 +35,8 @@ export default function Tourist() {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/shop" element={<MarketplacePage />} />
           <Route path="/hotels" element={<HotelsPage />} />
+          <Route path="/cart" element={<TourCart />} />
+           <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </div>
 
