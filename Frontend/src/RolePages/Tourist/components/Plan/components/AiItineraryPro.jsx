@@ -128,6 +128,7 @@ export default function AiItineraryPro() {
               foodPreference,
               comfortLevel,
               walkingPreference,
+              
               photography,
               interests,
             }}
