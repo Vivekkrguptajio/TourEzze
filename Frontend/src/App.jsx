@@ -1,9 +1,6 @@
 // App.jsx
 import React from "react";
-<<<<<<< HEAD
 
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 import { Routes, Route } from "react-router-dom";
 
 import Chatbot from "./components/chatbot/Chatbot";
