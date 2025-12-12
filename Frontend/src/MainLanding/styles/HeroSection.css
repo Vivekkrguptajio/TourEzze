@@ -1,0 +1,48 @@
+/* Background Crossfade */
+.fade-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+}
+
+.fade-image.active {
+  opacity: 1;
+}
+
+/* Text Slide-In Animation (Right → Center) */
+.text-slide {
+  animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px); /* enter from right */
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Exit Animation (Optional) */
+.text-slide-exit {
+  animation: slideOut 0.8s ease forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}

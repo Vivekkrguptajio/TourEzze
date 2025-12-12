@@ -1,0 +1,66 @@
+/* EventScroll.css - New file banao styles folder mein */
+
+.event-slider-wrapper {
+  position: relative;
+}
+
+.event-slider-wrapper:hover .event-arrow {
+  opacity: 1;
+}
+
+.event-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.event-arrow:hover {
+  background: #22c55e; /* Green color for events */
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.event-arrow-left {
+  left: 0;
+}
+
+.event-arrow-right {
+  right: 0;
+}
+
+.event-slider-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  cursor: grab;
+  
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.event-slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+.event-slider-container:active {
+  cursor: grabbing;
+}
+
+.event-slider-item {
+  flex-shrink: 0;
+  width: 288px; /* 72 * 4 = 288px (w-72) */
+}
