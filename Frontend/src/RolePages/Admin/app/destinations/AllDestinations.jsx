@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 import React, { useState, useEffect } from "react";
 import SearchFilterBar from "./Allcomponents/SearchFilterBar";
 import DestinationCard from "./Allcomponents/DestinationCard";
 import EditModal from "./Allcomponents/EditModal";
 import ARVRModal from "./Allcomponents/ARVRModal";
+<<<<<<< HEAD
 import { API_URL } from "../../../../../src/api.js";
+=======
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AllDestinations() {
   const [search, setSearch] = useState("");
@@ -19,7 +26,11 @@ export default function AllDestinations() {
   // FETCH ALL DESTINATIONS
   const fetchDestinations = async () => {
     try {
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/admin/destinations`);
+=======
+      const res = await fetch("http://localhost:5000/api/admin/destinations");
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       const data = await res.json();
 
       if (data.success) setDestinations(data.data);
@@ -36,7 +47,11 @@ export default function AllDestinations() {
   const updateDestination = async (form) => {
     try {
       const res = await fetch(
+<<<<<<< HEAD
         `${API_URL}/api/admin/destinations/${editingData._id}`,
+=======
+        `http://localhost:5000/api/admin/destinations/${editingData._id}`,
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         {
           method: "PUT",
           headers: {
@@ -68,7 +83,11 @@ export default function AllDestinations() {
 
     try {
       const res = await fetch(
+<<<<<<< HEAD
         `${API_URL}/api/admin/destinations/${id}`,
+=======
+        `http://localhost:5000/api/admin/destinations/${id}`,
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         { method: "DELETE" }
       );
 

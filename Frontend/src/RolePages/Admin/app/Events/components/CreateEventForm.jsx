@@ -10,7 +10,10 @@ import {
   Plus,
   Video,
 } from "lucide-react";
+<<<<<<< HEAD
 import { API_URL } from "../../../../../../src/api.js";
+=======
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function CreateEventForm() {
   const [form, setForm] = useState({
@@ -42,7 +45,11 @@ export default function CreateEventForm() {
             : [],
       };
 
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/admin/events`, {
+=======
+      const res = await fetch("http://localhost:5000/api/admin/events", {
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -82,8 +89,15 @@ export default function CreateEventForm() {
       <h1 className="text-3xl font-bold text-green-800">Create New Event</h1>
 
       <div className="bg-white border rounded-2xl shadow-sm p-6 space-y-8">
+<<<<<<< HEAD
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+=======
+
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           {/* Event Name */}
           <div>
             <label className="font-medium text-sm flex items-center gap-1">
@@ -178,6 +192,10 @@ export default function CreateEventForm() {
               className="w-full border mt-1 px-3 py-2 rounded-lg"
             />
           </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         </div>
 
         {/* Description */}
@@ -264,6 +282,10 @@ export default function CreateEventForm() {
             <Plus size={20} /> Create Event
           </button>
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
     </div>
   );

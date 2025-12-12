@@ -2,7 +2,10 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { API_URL } from "../../../api.js";
+=======
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function VendorSignup() {
   const [form, setForm] = useState({
@@ -139,7 +142,11 @@ export default function VendorSignup() {
       }
 
       // Send JSON to backend (route: POST /api/vendor/signup)
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/vendor/signup`, {
+=======
+      const res = await fetch("http://localhost:5000/api/vendor/signup", {
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

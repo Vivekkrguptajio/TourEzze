@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import EventCard from "./Eventss/EventCard";
 import ARVRModal from "./Eventss/ARVRModal";
 import DetailsModal from "./Eventss/DetailsModal"; // ⭐ ADD
+<<<<<<< HEAD
 import { API_URL } from "../../../../../api.js";
+=======
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function TouristEvents() {
   const [events, setEvents] = useState([]);
@@ -14,7 +17,11 @@ export default function TouristEvents() {
   const [isDetailsOpen, setDetailsOpen] = useState(false);
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch(`${API_URL}/api/admin/events`)
+=======
+    fetch("http://localhost:5000/api/admin/events")
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setEvents(data.data);

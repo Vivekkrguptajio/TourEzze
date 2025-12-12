@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Loader2 } from "lucide-react";
+=======
+import {
+  Loader2,
+} from "lucide-react";
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 import PlannerHeader from "./PlannerHeader";
 import PlannerLeftPanel from "./PlannerLeftPanel";
 import PlannerRightPanel from "./PlannerRightPanel";
+<<<<<<< HEAD
 import { API_URL } from "../../../../../../src/api.js";
+=======
+
+const API_BASE = "http://localhost:5000";
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AiItineraryPro() {
   // BASIC TRIP INFO (shared states)
@@ -61,7 +72,11 @@ export default function AiItineraryPro() {
         },
       };
 
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/ai/generate-itinerary`, {
+=======
+      const res = await fetch(`${API_BASE}/api/ai/generate-itinerary`, {
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -70,10 +85,16 @@ export default function AiItineraryPro() {
       const data = await res.json();
       if (!data.success) throw new Error(data.message);
 
+<<<<<<< HEAD
       let plan =
         typeof data.itinerary === "string"
           ? JSON.parse(cleanJSON(data.itinerary))
           : data.itinerary;
+=======
+      let plan = typeof data.itinerary === "string"
+        ? JSON.parse(cleanJSON(data.itinerary))
+        : data.itinerary;
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
       setPlanId(data.planId);
       setResult(plan);
@@ -88,7 +109,11 @@ export default function AiItineraryPro() {
     if (!planId) return;
 
     try {
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/ai/save-plan/${planId}`, {
+=======
+      const res = await fetch(`${API_BASE}/api/ai/save-plan/${planId}`, {
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
       });
       const data = await res.json();
@@ -99,6 +124,10 @@ export default function AiItineraryPro() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-gray-100 p-6">
       <div className="max-w-7xl mx-auto space-y-6">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         {/* HEADER */}
         <PlannerHeader
           saved={saved}
@@ -109,6 +138,10 @@ export default function AiItineraryPro() {
 
         {/* GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr,2fr] gap-6">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           {/* LEFT PANEL */}
           <PlannerLeftPanel
             {...{
@@ -124,7 +157,11 @@ export default function AiItineraryPro() {
               foodPreference,
               comfortLevel,
               walkingPreference,
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
               photography,
               interests,
             }}
@@ -143,6 +180,7 @@ export default function AiItineraryPro() {
             setPhotography={setPhotography}
             setInterests={setInterests}
             interestsList={[
+<<<<<<< HEAD
               "Nature",
               "Scenic Views",
               "Waterfalls",
@@ -154,6 +192,10 @@ export default function AiItineraryPro() {
               "Shopping",
               "Food & Cafes",
               "Nightlife",
+=======
+              "Nature","Scenic Views","Waterfalls","Wildlife","Culture",
+              "Heritage","Religious","Adventure","Shopping","Food & Cafes","Nightlife",
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
             ]}
             generate={generate}
             loading={loading}
@@ -161,7 +203,15 @@ export default function AiItineraryPro() {
           />
 
           {/* RIGHT PANEL */}
+<<<<<<< HEAD
           <PlannerRightPanel result={result} loading={loading} />
+=======
+          <PlannerRightPanel
+            result={result}
+            loading={loading}
+          />
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         </div>
       </div>
     </div>

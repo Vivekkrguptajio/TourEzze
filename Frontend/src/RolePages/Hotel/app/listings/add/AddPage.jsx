@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Upload, Eye } from "lucide-react";
+<<<<<<< HEAD
 import { API_URL } from "../../../../../api.js";
+=======
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AddRoomForm() {
   const [previewImage, setPreviewImage] = useState("");
@@ -16,6 +19,11 @@ export default function AddRoomForm() {
     coverPhoto: "",
   });
 
+<<<<<<< HEAD
+=======
+  const API_URL = "http://localhost:5000/api/hotel/room/add";
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
   // HANDLE INPUT CHANGE
   const handleChange = (e) => {
     setForm({
@@ -44,7 +52,11 @@ export default function AddRoomForm() {
           : [],
       };
 
+<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/hotel/room/add`, {
+=======
+      const res = await fetch(API_URL, {
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,6 +75,10 @@ export default function AddRoomForm() {
 
       alert("Room added successfully!");
       window.location.href = "/role/hotel-owner/listings/rooms";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
     } catch (err) {
       console.log(err);
       alert("Server Error!");
@@ -71,8 +87,15 @@ export default function AddRoomForm() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-6">
+<<<<<<< HEAD
       {/* LEFT FORM */}
       <div className="space-y-6">
+=======
+
+      {/* LEFT FORM */}
+      <div className="space-y-6">
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         {/* ROOM DETAILS */}
         <div className="border border-black rounded-lg p-5 bg-white">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">
@@ -123,7 +146,13 @@ export default function AddRoomForm() {
 
         {/* PRICING */}
         <div className="border border-black rounded-lg p-5 bg-white">
+<<<<<<< HEAD
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Pricing</h2>
+=======
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            Pricing
+          </h2>
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
           <label className="text-sm text-gray-700">Weekday Price (₹)</label>
           <input
@@ -134,9 +163,13 @@ export default function AddRoomForm() {
             className="w-full p-3 mt-1 border border-black rounded"
           />
 
+<<<<<<< HEAD
           <label className="text-sm text-gray-700 mt-4">
             Weekend Price (₹)
           </label>
+=======
+          <label className="text-sm text-gray-700 mt-4">Weekend Price (₹)</label>
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           <input
             name="weekendPrice"
             value={form.weekendPrice}
@@ -148,11 +181,19 @@ export default function AddRoomForm() {
 
         {/* IMAGES */}
         <div className="border border-black rounded-lg p-5 bg-white">
+<<<<<<< HEAD
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Images</h2>
 
           <label className="text-sm text-gray-700">
             Image Links (comma separated)
           </label>
+=======
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            Images
+          </h2>
+
+          <label className="text-sm text-gray-700">Image Links (comma separated)</label>
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           <textarea
             name="imageLinks"
             value={form.imageLinks}
@@ -163,16 +204,28 @@ export default function AddRoomForm() {
 
           <label className="w-full h-56 mt-4 border border-black border-dashed rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100">
             <Upload className="w-6 h-6 text-gray-700" />
+<<<<<<< HEAD
             <span className="text-gray-700 text-sm mt-2">
               Upload Cover Photo
             </span>
             <input type="file" onChange={handleFile} className="hidden" />
           </label>
         </div>
+=======
+            <span className="text-gray-700 text-sm mt-2">Upload Cover Photo</span>
+            <input type="file" onChange={handleFile} className="hidden" />
+          </label>
+        </div>
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
 
       {/* RIGHT PREVIEW */}
       <div className="border border-black rounded-lg p-5 bg-white">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         <div className="w-full h-72 border border-black rounded overflow-hidden flex items-center justify-center">
           {previewImage ? (
             <img src={previewImage} className="object-cover w-full h-full" />
@@ -187,6 +240,10 @@ export default function AddRoomForm() {
         >
           <Eye size={16} /> Publish Room
         </button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
     </div>
   );

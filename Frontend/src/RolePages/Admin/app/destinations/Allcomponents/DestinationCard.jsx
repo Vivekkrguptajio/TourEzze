@@ -1,23 +1,43 @@
 import React from "react";
 import { MapPin, Edit, Trash2, Video, PlayCircle } from "lucide-react";
+<<<<<<< HEAD
 import { API_URL } from "../../../../../../src/api.js";
 
 export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
+=======
+
+export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
   /* --------------------------------------------------------
       UNIVERSAL IMAGE HANDLER (External + Local + Fallback)
   --------------------------------------------------------- */
   const rawImage =
+<<<<<<< HEAD
     data.imageLinks && data.imageLinks.length > 0 ? data.imageLinks[0] : "";
+=======
+    data.imageLinks && data.imageLinks.length > 0
+      ? data.imageLinks[0]
+      : "";
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
   const imageUrl =
     rawImage && rawImage.trim() !== ""
       ? rawImage.startsWith("http")
         ? rawImage
+<<<<<<< HEAD
         : `${API_URL}/${rawImage}`
+=======
+        : `http://localhost:5000/${rawImage}`
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       : "https://placehold.co/600x400?text=No+Image+Found";
 
   return (
     <div className="group relative bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       {/* IMAGE */}
       <div className="relative h-80 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
         <img
@@ -35,6 +55,10 @@ export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
 
         {/* TOP BADGES */}
         <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           {/* Category Badge */}
           <div className="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
             {data.category}
@@ -51,6 +75,10 @@ export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
 
         {/* CONTENT */}
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           {/* Destination Name */}
           <h3 className="text-2xl font-bold mb-2 drop-shadow-lg">
             {data.name}
@@ -71,6 +99,10 @@ export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
 
           {/* BUTTONS */}
           <div className="flex gap-3">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
             {/* AR/VR Button */}
             {data.arvr === "yes" && (
               <button
@@ -99,6 +131,10 @@ export default function DestinationCard({ data, onEdit, onDelete, onARVR }) {
               <Trash2 className="w-4 h-4" />
               Delete
             </button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           </div>
         </div>
       </div>
