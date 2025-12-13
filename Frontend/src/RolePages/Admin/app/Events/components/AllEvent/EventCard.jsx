@@ -1,17 +1,10 @@
 import React from "react";
 import { Calendar, Edit, Trash2, MapPin, PlayCircle } from "lucide-react";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../../api.js";
 
 export default function EventCard({ data, onEdit, onDelete, onARVR }) {
   const image = data.bannerImage
     ? `${API_URL}/image-proxy?url=${encodeURIComponent(
-=======
-
-export default function EventCard({ data, onEdit, onDelete, onARVR }) {
-  const image = data.bannerImage
-    ? `http://localhost:5000/image-proxy?url=${encodeURIComponent(
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         data.bannerImage
       )}`
     : "https://via.placeholder.com/400";

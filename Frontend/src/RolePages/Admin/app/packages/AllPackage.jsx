@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../src/api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AllPackage() {
   const [packages, setPackages] = useState([]);
 
   const fetchPackages = async () => {
     try {
-<<<<<<< HEAD
       const res = await axios.get(`${API_URL}/api/admin/tour-packages/`);
-=======
-      const res = await axios.get("http://localhost:5000/api/admin/tour-packages/");
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       setPackages(res.data.data);
     } catch (err) {
       console.error(err);
@@ -25,11 +18,7 @@ export default function AllPackage() {
     if (!confirm("Are you sure you want to delete this package?")) return;
 
     try {
-<<<<<<< HEAD
       await axios.delete(`${API_URL}/api/admin/tour-packages/${id}`);
-=======
-      await axios.delete(`http://localhost:5000/api/admin/tour-packages/${id}`);
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       alert("Package deleted!");
       fetchPackages();
     } catch (err) {

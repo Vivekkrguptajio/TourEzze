@@ -1,9 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../src/api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function CreatePackage() {
   const [form, setForm] = useState({
@@ -48,11 +45,7 @@ export default function CreatePackage() {
 
     try {
       await axios.post(
-<<<<<<< HEAD
         `${API_URL}/api/admin/tour-packages/create`,
-=======
-        "http://localhost:5000/api/admin/tour-packages/create",
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         body
       );
       alert("Package Created Successfully!");

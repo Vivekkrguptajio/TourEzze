@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import EventCard from "./AllEvent/EventCard";
 import EditEventModal from "./AllEvent/EditEventModal";
 import ARVRModal from "./AllEvent/ARVRModal"; // ⭐ NEW
-<<<<<<< HEAD
 import { API_URL } from "../../../../../api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AllEvents() {
   const [events, setEvents] = useState([]);
@@ -18,11 +15,7 @@ export default function AllEvents() {
 
   // FETCH ALL EVENTS
   const fetchEvents = async () => {
-<<<<<<< HEAD
     const res = await fetch(`${API_URL}/api/admin/events`);
-=======
-    const res = await fetch("http://localhost:5000/api/admin/events");
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
     const data = await res.json();
     if (data.success) setEvents(data.data);
   };
@@ -35,11 +28,7 @@ export default function AllEvents() {
   const deleteEvent = async (id) => {
     if (!confirm("Delete this event?")) return;
 
-<<<<<<< HEAD
     const res = await fetch(`${API_URL}/api/admin/events/${id}`, {
-=======
-    const res = await fetch(`http://localhost:5000/api/admin/events/${id}`, {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       method: "DELETE",
     });
 
@@ -54,11 +43,7 @@ export default function AllEvents() {
   const updateEvent = async (updated) => {
     try {
       const res = await fetch(
-<<<<<<< HEAD
         `${API_URL}/api/admin/events/${editingData._id}`,
-=======
-        `http://localhost:5000/api/admin/events/${editingData._id}`,
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

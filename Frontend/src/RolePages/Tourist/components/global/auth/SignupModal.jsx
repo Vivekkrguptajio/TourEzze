@@ -1,10 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { X } from "lucide-react";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../../src/api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function SignupModal({ close }) {
   const [form, setForm] = useState({
@@ -23,14 +20,7 @@ export default function SignupModal({ close }) {
     try {
       setLoading(true);
 
-<<<<<<< HEAD
       const res = await axios.post(`${API_URL}/api/tourist/signup`, form);
-=======
-      const res = await axios.post(
-        "http://localhost:5000/api/tourist/signup",
-        form
-      );
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
       // SAVE USER & TOKEN FIRST
       localStorage.setItem("token", res.data.token);
@@ -44,10 +34,6 @@ export default function SignupModal({ close }) {
       setTimeout(() => {
         window.location.reload();
       }, 150);
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
     } catch (err) {
       alert(err.response?.data?.message || "Signup error");
     } finally {
@@ -58,10 +44,6 @@ export default function SignupModal({ close }) {
   return (
     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-center items-center z-[9999]">
       <div className="bg-white w-96 p-6 rounded-2xl shadow-2xl relative animate-fadeIn">
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         <button
           onClick={close}
           className="absolute right-4 top-4 text-gray-600 hover:text-black transition"
@@ -116,10 +98,7 @@ export default function SignupModal({ close }) {
         >
           {loading ? "Creating..." : "Create Account"}
         </button>
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
     </div>
   );

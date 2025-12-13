@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { API_URL } from "../../../api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function GuideAuth() {
   const navigate = useNavigate();
@@ -36,11 +33,7 @@ export default function GuideAuth() {
     e.preventDefault();
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/guide/auth/login`, {
-=======
-      const res = await fetch("http://localhost:5000/api/guide/auth/login", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginForm),
@@ -75,11 +68,7 @@ export default function GuideAuth() {
     }
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/guide/auth/signup`, {
-=======
-      const res = await fetch("http://localhost:5000/api/guide/auth/signup", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupForm),

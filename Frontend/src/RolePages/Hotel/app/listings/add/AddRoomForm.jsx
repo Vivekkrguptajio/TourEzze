@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Upload, Eye } from "lucide-react";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../src/api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AddHotelForm() {
   const [previewImage, setPreviewImage] = useState("");
@@ -28,11 +25,6 @@ export default function AddHotelForm() {
     coverPhoto: "",
   });
 
-<<<<<<< HEAD
-=======
-  const API_URL = "http://localhost:5000/api/hotel/add";
-
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
   // HANDLE TEXT CHANGE
   const handleChange = (e) => {
     setForm({
@@ -60,11 +52,7 @@ export default function AddHotelForm() {
         tags: form.tags.split(",").map((t) => t.trim()),
       };
 
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/hotel/add`, {
-=======
-      const res = await fetch(API_URL, {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,10 +71,7 @@ export default function AddHotelForm() {
 
       alert("Hotel added successfully!");
       window.location.href = "/role/hotel-owner"; // dashboard
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
     } catch (error) {
       console.log(error);
       alert("Server error, check console");
@@ -95,7 +80,6 @@ export default function AddHotelForm() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-6">
-<<<<<<< HEAD
       {/* LEFT SIDE FORM */}
       <div className="space-y-6">
         {/* HOTEL DETAILS */}
@@ -103,15 +87,6 @@ export default function AddHotelForm() {
           <h2 className="text-lg font-semibold mb-4 text-gray-800">
             Hotel Details
           </h2>
-=======
-
-      {/* LEFT SIDE FORM */}
-      <div className="space-y-6">
-
-        {/* HOTEL DETAILS */}
-        <div className="border border-black rounded-lg p-5 bg-white">
-          <h2 className="text-lg font-semibold mb-4 text-gray-800">Hotel Details</h2>
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
           <label className="text-sm text-gray-700">Hotel Name</label>
           <input
@@ -232,13 +207,9 @@ export default function AddHotelForm() {
 
         {/* CONTACT DETAILS */}
         <div className="border border-black rounded-lg p-5 bg-white">
-<<<<<<< HEAD
           <h2 className="text-lg font-semibold mb-4 text-gray-800">
             Contact & Booking Info
           </h2>
-=======
-          <h2 className="text-lg font-semibold mb-4 text-gray-800">Contact & Booking Info</h2>
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
           <label className="text-sm text-gray-700">Hotel Phone Number</label>
           <input
@@ -267,13 +238,9 @@ export default function AddHotelForm() {
             className="w-full mt-1 p-3 bg-white border border-black rounded"
           />
 
-<<<<<<< HEAD
           <label className="text-sm text-gray-700 mt-4">
             Booking Contact Person
           </label>
-=======
-          <label className="text-sm text-gray-700 mt-4">Booking Contact Person</label>
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           <input
             name="contactPerson"
             value={form.contactPerson}
@@ -285,13 +252,9 @@ export default function AddHotelForm() {
 
         {/* AR/VR */}
         <div className="border border-black rounded-lg p-5 bg-white">
-<<<<<<< HEAD
           <h2 className="text-lg font-semibold mb-4 text-gray-800">
             360° View / AR-VR Preview
           </h2>
-=======
-          <h2 className="text-lg font-semibold mb-4 text-gray-800">360° View / AR-VR Preview</h2>
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
           <label className="text-sm text-gray-700">360° / AR-VR Link</label>
           <input
@@ -309,7 +272,6 @@ export default function AddHotelForm() {
 
         {/* PHOTOS */}
         <div className="border border-black rounded-lg p-5 bg-white">
-<<<<<<< HEAD
           <h2 className="text-lg font-semibold mb-4 text-gray-800">
             Photos / Media
           </h2>
@@ -317,11 +279,6 @@ export default function AddHotelForm() {
           <label className="text-sm text-gray-700">
             Image URLs (comma separated)
           </label>
-=======
-          <h2 className="text-lg font-semibold mb-4 text-gray-800">Photos / Media</h2>
-
-          <label className="text-sm text-gray-700">Image URLs (comma separated)</label>
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
           <textarea
             name="imageLinks"
             value={form.imageLinks}
@@ -332,28 +289,17 @@ export default function AddHotelForm() {
 
           <label className="w-full h-60 mt-4 border border-black border-dashed rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100">
             <Upload className="w-6 h-6 text-gray-700" />
-<<<<<<< HEAD
             <span className="text-gray-700 text-sm mt-2">
               Upload Cover Photo
             </span>
             <input type="file" onChange={handleFile} className="hidden" />
           </label>
         </div>
-=======
-            <span className="text-gray-700 text-sm mt-2">Upload Cover Photo</span>
-            <input type="file" onChange={handleFile} className="hidden" />
-          </label>
-        </div>
-
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
 
       {/* RIGHT PREVIEW */}
       <div className="border border-black rounded-lg p-5 bg-white">
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         <div className="w-full h-72 border border-black rounded flex items-center justify-center mb-5 overflow-hidden">
           {previewImage ? (
             <img src={previewImage} className="w-full h-full object-cover" />
@@ -368,10 +314,6 @@ export default function AddHotelForm() {
         >
           <Eye size={16} /> Publish Hotel
         </button>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       </div>
     </div>
   );

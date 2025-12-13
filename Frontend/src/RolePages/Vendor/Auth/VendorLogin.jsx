@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { API_URL } from "../../../api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function VendorLogin() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,11 +17,7 @@ export default function VendorLogin() {
     setLoading(true);
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/vendor/login`, {
-=======
-      const res = await fetch("http://localhost:5000/api/vendor/login", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

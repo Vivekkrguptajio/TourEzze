@@ -9,10 +9,7 @@ import {
   Video,
   Image,
 } from "lucide-react";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../src/api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function AddDestination() {
   const [form, setForm] = useState({
@@ -37,11 +34,7 @@ export default function AddDestination() {
   // Submit Handler
   const handleSubmit = async () => {
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/admin/destinations`, {
-=======
-      const res = await fetch("http://localhost:5000/api/admin/destinations", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: {
           "Content-Type": "application/json",

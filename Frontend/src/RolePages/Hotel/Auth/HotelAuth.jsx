@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { API_URL } from "../../../api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function HotelAuth() {
   const navigate = useNavigate();
@@ -36,11 +33,7 @@ export default function HotelAuth() {
     e.preventDefault();
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/hotel/auth/login`, {
-=======
-      const res = await fetch("http://localhost:5000/api/hotel/auth/login", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginForm),
@@ -71,11 +64,7 @@ export default function HotelAuth() {
     }
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/hotel/auth/register`, {
-=======
-      const res = await fetch("http://localhost:5000/api/hotel/auth/register", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupForm),

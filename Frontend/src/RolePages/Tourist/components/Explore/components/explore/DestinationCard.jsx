@@ -1,37 +1,21 @@
 import React from "react";
 import { MapPin, Video, PlayCircle, Info } from "lucide-react";
-<<<<<<< HEAD
 import { API_URL } from "../../../../../../../src/api.js";
 
 export default function DestinationCard({ data, onARVR, onDetails }) {
   const rawImage =
     data.imageLinks && data.imageLinks.length > 0 ? data.imageLinks[0] : "";
-=======
-
-export default function DestinationCard({ data, onARVR, onDetails }) {
-  const rawImage =
-    data.imageLinks && data.imageLinks.length > 0
-      ? data.imageLinks[0]
-      : "";
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
   const imageUrl =
     rawImage && rawImage.trim() !== ""
       ? rawImage.startsWith("http")
         ? rawImage
-<<<<<<< HEAD
         : `${API_URL}/${rawImage}`
-=======
-        : `http://localhost:5000/${rawImage}`
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
       : "https://placehold.co/600x400?text=No+Image+Found";
 
   return (
     <div className="group relative bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
-<<<<<<< HEAD
-=======
-      
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
+
       {/* IMAGE */}
       <div className="relative h-80 overflow-hidden">
         <img

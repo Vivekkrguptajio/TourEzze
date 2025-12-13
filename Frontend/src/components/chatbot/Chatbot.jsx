@@ -1,10 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import FloatingButton from "./FloatingButton";
 import ChatWindow from "./ChatWindow";
-<<<<<<< HEAD
 import { API_URL } from "../../api.js";
-=======
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -62,11 +59,7 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/chat`, {
-=======
-      const res = await fetch("http://localhost:5000/api/chat", {
->>>>>>> 8fc040de90414307da0fa677067b8a8dd1cdea0e
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text, lang }),
