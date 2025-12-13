@@ -1,4 +1,5 @@
 import { User, Store, Navigation, Building, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const roles = [
   {
@@ -47,6 +48,7 @@ export default function RoleSelector() {
   return (
     <section className="py-20 bg-gradient-to-b from-orange-50 via-amber-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
+        
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-green-700 via-orange-600 to-green-600 bg-clip-text text-transparent">
@@ -64,11 +66,15 @@ export default function RoleSelector() {
               key={index}
               className="group relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ease-out"
             >
-              {/* Gradient Glow Effect */}
-              <div className={`absolute inset-0 rounded-2xl ${role.bgGlow} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}></div>
-              
-              {/* Icon with Gradient */}
-              <div className={`flex justify-center items-center w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${role.color} text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
+              {/* Gradient Glow */}
+              <div
+                className={`absolute inset-0 rounded-2xl ${role.bgGlow} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}
+              ></div>
+
+              {/* Icon */}
+              <div
+                className={`flex justify-center items-center w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${role.color} text-white shadow-md group-hover:scale-110 transition-transform duration-300`}
+              >
                 {role.icon}
               </div>
 
@@ -82,24 +88,25 @@ export default function RoleSelector() {
                 {role.desc}
               </p>
 
-              {/* Button */}
-              <a
-                href={role.link}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* Button using React Router Link */}
+              <Link
+                to={role.link}
                 className={`w-full block py-3 rounded-xl text-sm font-semibold text-center text-white bg-gradient-to-r ${role.color} hover:shadow-lg hover:scale-105 transition-all duration-300`}
               >
                 Enter Portal →
-              </a>
+              </Link>
             </div>
           ))}
         </div>
 
-        {/* Additional CTA */}
+        {/* CTA */}
         <div className="text-center mt-16">
           <p className="text-gray-600 text-sm">
             Not sure which role fits you?{" "}
-            <a href="#" className="text-orange-600 hover:text-orange-700 font-semibold underline decoration-2 underline-offset-4">
+            <a
+              href="#"
+              className="text-orange-600 hover:text-orange-700 font-semibold underline decoration-2 underline-offset-4"
+            >
               Learn more about each role
             </a>
           </p>
