@@ -146,21 +146,22 @@ export default function HeroSection() {
             and spiritual heritage — now enhanced with AI-powered planning.
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-4">
-            <a
-              href="http://localhost:5173/role/tourist/ai-itinerary"
-              className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
-            >
-              Plan My Trip →
-            </a>
+         <div className="mt-7 flex flex-wrap gap-4">
+  <Link
+    to="/role/tourist/ai-itinerary"
+    className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
+  >
+    Plan My Trip →
+  </Link>
 
-            <a
-              href="http://localhost:5173/role/tourist"
-              className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
-            >
-              Explore Destinations
-            </a>
-          </div>
+  <Link
+    to="/role/tourist"
+    className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
+  >
+    Explore Destinations
+  </Link>
+</div>
+
         </div>
 
         {/* RIGHT-SIDE SLIDING TEXT */}
