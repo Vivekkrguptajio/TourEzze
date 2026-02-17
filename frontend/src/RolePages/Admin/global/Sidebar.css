@@ -1,0 +1,17 @@
+/* ===== Custom Scrollbar ===== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;   /* gray line removed */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #0A4A1D;        /* dark green grip */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0F6A2D;        /* hover green */
+}
