@@ -76,7 +76,9 @@ export default function ExploreRegion() {
               className={`er-region-item ${activeRegion.id === region.id ? 'active' : ''}`}
               onClick={() => handleRegionClick(region)}
             >
-              <div className="er-region-number">{region.id}</div>
+              <div className="er-region-number">
+                <span>{region.id}</span>
+              </div>
               <span className="er-region-name">{region.name}</span>
             </div>
           ))}

@@ -139,32 +139,24 @@
 }
 
 .er-region-number {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
   background-color: #555;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   flex-shrink: 0;
-  position: relative;
+  transform: rotate(-45deg);
   transition: background-color 0.2s;
-  margin-bottom: 6px; /* Space for the pin point */
+  margin-right: 4px;
 }
 
-.er-region-number::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
-  background-color: inherit;
-  z-index: -1;
+.er-region-number span {
+  transform: rotate(45deg);
 }
 
 .er-region-name {
