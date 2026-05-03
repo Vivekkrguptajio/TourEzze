@@ -1,13 +1,16 @@
 import React, { useRef } from "react";
 import Navbar from "./components/MainNavbar";
 import HeroSection from "./components/HeroSection";
-import Explore from "./components/Explore";
-import WhyChooseUs from "./components/WhyChoose";
-import CultureSection from "./components/CultureSection";
-import RoleSelector from "./components/RoleSelector";
-import Events from "./components/Events";
-import  Product  from "./components/Product";
-import Footer from "./components/Footer";
+import HassleFree from "./components/HassleFree";
+import TopThings from "./components/TopThings";
+import WhatsHappening from "./components/WhatsHappening";
+import ExperienceJharkhand from "./components/ExperienceJharkhand";
+import FindThingsToDo from "./components/FindThingsToDo";
+import UpcomingEvents from "./components/UpcomingEvents";
+import ExploreRegion from "./components/ExploreRegion";
+import PlanAhead from "./components/PlanAhead";
+import GlobalFooter from "./components/GlobalFooter";
+
 
 export default function MainLanding() {
   const exploreRef = useRef(null);
@@ -25,30 +28,36 @@ export default function MainLanding() {
       />
 
       <HeroSection />
-      <CultureSection />
-     
+      
+      {/* Hassle-free Jharkhand Section */}
+      <HassleFree />
 
-      {/* EXPLORE SECTION */}
-      <div ref={exploreRef}>
-        <Explore />
-      </div>
+      {/* Top 4 Things to do this week */}
+      <TopThings />
 
-      {/* EVENTS SECTION */}
+      {/* What's Happening Now */}
+      <WhatsHappening />
+
+      {/* Experience Jharkhand */}
+      <ExperienceJharkhand />
+
+      {/* Find Things To Do */}
+      <FindThingsToDo />
+
+      {/* Upcoming Events */}
       <div ref={eventsRef}>
-        <Events />
+        <UpcomingEvents />
       </div>
 
-      {/* MARKETPLACE SECTION */}
-      <div ref={marketplaceRef}>
-        <Product />
+      {/* Explore by Region */}
+      <div ref={exploreRef}>
+        <ExploreRegion />
       </div>
 
-      {/* ROLE SECTION */}
-      <div ref={roleRef}>
-        <RoleSelector />
-      </div>
-       <WhyChooseUs />
-      <Footer/>
+      {/* Plan Ahead */}
+      <PlanAhead />
+
+      <GlobalFooter />
     </div>
   );
 }

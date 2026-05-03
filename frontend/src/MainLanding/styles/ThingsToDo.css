@@ -1,0 +1,237 @@
+.things-to-do-section {
+  padding: 80px 24px;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.upcoming-events-section {
+  padding-top: 40px; /* Less top padding since it follows Things To Do */
+}
+
+.ttd-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ttd-main-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ue-month-dropdown {
+  color: #085B7A;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* Filters */
+.ttd-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.ttd-filter-btn {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ttd-filter-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.ttd-filter-btn.active {
+  background-color: #555;
+  color: #ffffff;
+}
+
+/* Grid */
+.ttd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.ttd-card {
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.ttd-image-wrapper {
+  height: 240px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ttd-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ttd-card:hover .ttd-image {
+  transform: scale(1.05);
+}
+
+.ttd-content {
+  position: relative;
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Floating Heart (Reusing from WhatsHappening but scoped here) */
+.ttd-heart-btn {
+  position: absolute;
+  top: -24px;
+  right: 20px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #085B7A;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.ttd-heart-btn:hover {
+  background-color: #fcfcfc;
+  transform: translateY(-2px);
+}
+
+.ttd-category {
+  font-size: 10px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.ttd-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.ttd-card-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* Upcoming Events Specific */
+.ue-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.ue-divider {
+  height: 1px;
+  background-color: #eaeaea;
+  margin-bottom: 16px;
+  margin-top: auto;
+}
+
+.ue-remind-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #888;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ue-remind-btn:hover {
+  color: #085B7A;
+}
+
+.ue-remind-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ue-plus {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+/* Bottom Actions */
+.ttd-bottom-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ttd-see-more-btn {
+  background-color: transparent;
+  border: 1px solid #085B7A;
+  color: #085B7A;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ttd-see-more-btn:hover {
+  background-color: rgba(8, 91, 122, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ttd-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .ttd-grid {
+    grid-template-columns: 1fr;
+  }
+}

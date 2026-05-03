@@ -1,0 +1,186 @@
+.hassle-free-section {
+  padding: 60px 24px;
+  background-color: #ffffff;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.hassle-free-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.hassle-free-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #000;
+  letter-spacing: -0.5px;
+}
+
+.hassle-free-carousel-wrapper {
+  position: relative;
+}
+
+.hf-card {
+  background-color: #f7f7f9;
+  border-radius: 24px;
+  padding: 32px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.hf-card:hover {
+  transform: translateY(-4px);
+}
+
+.hf-icon-circle {
+  width: 48px;
+  height: 48px;
+  background-color: #085B7A;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.hf-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #000;
+  letter-spacing: -0.3px;
+}
+
+.hf-card-desc {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.hf-card-arrow {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottom Controls */
+.hf-bottom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  position: relative;
+  height: 48px;
+}
+
+.hf-left-controls {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+.hf-view-all-btn {
+  background-color: #085B7A;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hf-view-all-btn:hover {
+  background-color: #064359;
+}
+
+.hf-nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.hf-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #eaeaea;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #085B7A;
+  transition: all 0.2s ease;
+}
+
+.hf-nav-btn:hover {
+  border-color: #d0d0d0;
+  background-color: #fcfcfc;
+}
+
+/* Pagination Dots */
+.custom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background-color: #ccc;
+  opacity: 1;
+  transition: all 0.3s ease;
+  margin: 0 !important;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+}
+
+/* Hide Swiper default nav */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .hf-bottom-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    height: auto;
+  }
+  .hf-left-controls {
+    position: relative;
+    left: auto;
+  }
+  .custom-pagination {
+    margin-top: 10px;
+  }
+}

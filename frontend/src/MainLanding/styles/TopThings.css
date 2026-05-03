@@ -1,0 +1,124 @@
+.top-things-section {
+  padding: 60px 24px;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.top-things-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.top-things-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.top-things-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.top-thing-card {
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background-color: #085B7A; /* Dark teal background for the bottom content */
+  color: #ffffff;
+}
+
+.top-thing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+}
+
+.tt-image-wrapper {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tt-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.top-thing-card:hover .tt-image {
+  transform: scale(1.05);
+}
+
+.tt-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.tt-date {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tt-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.tt-card-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  flex-grow: 1;
+  margin-bottom: 24px;
+}
+
+.tt-link-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.tt-link-btn:hover {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .top-things-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .top-things-grid {
+    grid-template-columns: 1fr;
+  }
+  .top-thing-card {
+    height: auto;
+    min-height: 440px;
+  }
+}

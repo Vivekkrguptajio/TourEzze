@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Chatbot from "./components/chatbot/Chatbot";
 import EmergencyWidget from "./components/EmergencyWidget";
 import MainLanding from "./MainLanding/MainLanding";
+import AllServices from "./MainLanding/components/uiServices/AllServices";
 
 // Role Pages
 import TouristPortal from "./RolePages/Tourist/TouristPortal";
@@ -55,6 +56,7 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<MainLanding />} />
+        <Route path="/services" element={<AllServices />} />
 
         {/* Public events listing + detail routes */}
         {/* If you don't have EventList just remove the EventList route */}
