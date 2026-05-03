@@ -61,30 +61,32 @@ export default function InputBar({ input, setInput, onSend }) {
   };
 
   return (
-    <div className="p-3 bg-white border-t flex items-center gap-2">
+    <div className="p-4 bg-white border-t border-gray-100 flex items-center gap-3">
       <button
         onClick={handleVoiceInput}
-        className="p-2 rounded-full cursor-pointer hover:bg-teal-100 transition active:scale-95"
+        className="p-3 rounded-xl cursor-pointer hover:bg-slate-100 transition-all active:scale-90 group"
       >
         <IoMdMic
           size={22}
-          className="text-teal-600 hover:text-teal-700 transition"
+          className="text-slate-400 group-hover:text-[#005f83] transition-colors"
         />
       </button>
 
-      <input
-        className="flex-1 px-4 py-2 border rounded-full text-sm focus:ring-2 focus:ring-teal-500 outline-none"
-        placeholder="Ask Champa..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && onSend()}
-      />
+      <div className="flex-1 relative">
+        <input
+          className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-2xl text-[14px] placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-[#005f83]/10 focus:border-[#005f83] outline-none transition-all"
+          placeholder="Type your message..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && onSend()}
+        />
+      </div>
 
       <button
         onClick={onSend}
-        className="bg-teal-600 text-white p-2 rounded-full hover:bg-teal-700 transition active:scale-95 shadow"
+        className="bg-[#005f83] text-white p-3.5 rounded-2xl hover:bg-[#007ba1] transition-all active:scale-95 shadow-lg shadow-blue-900/20"
       >
-        <FiSend size={20} />
+        <FiSend size={18} />
       </button>
     </div>
   );

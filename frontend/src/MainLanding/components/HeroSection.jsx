@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../styles/HeroSection.css";
 
 const slides = [
   {
@@ -55,13 +56,13 @@ const slides = [
 ];
 
 const languages = [
-  { discover: "Johar Jharkhand", tagline: "Pristine, Indigenous, TimeLess" },
-  { discover: "जोहड़ झारखण्ड", tagline: "निर्मल, स्वदेशी, शाश्वत" },
-  { discover: "जोहाड़ झारखण्ड", tagline: "निरमल • देसी • अमर" },
-  { discover: "जोहार झारुखाड़", tagline: "पोरुस • आदिवासी • दखापर" },
-  { discover: "जोहार झारखंड", tagline: "सिरी • होरोको • इतोको" },
-  { discover: "जोहार झारखंड", tagline: "सिरि • आदिवासी • लेंदे" },
-  { discover: "ᱡᱚᱦᱟᱨ ᱡᱷᱟᱨᱠᱟᱱᱰ", tagline: "ᱥᱟᱡᱟᱞ • ᱰᱤᱥᱚᱢ • ᱪᱮᱸᱰᱚ" }
+  { discover: "Johar Jharkhand", tagline: "Pristine · Indigenous · Timeless" },
+  { discover: "जोहड़ झारखण्ड", tagline: "निर्मल · स्वदेशी · शाश्वत" },
+  { discover: "जोहाड़ झारखण्ड", tagline: "निरमल · देसी · अमर" },
+  { discover: "जोहार झारुखाड़", tagline: "पोरुस · आदिवासी · दखापर" },
+  { discover: "जोहार झारखंड", tagline: "सिरी · होरोको · इतोको" },
+  { discover: "जोहार झारखंड", tagline: "सिरि · आदिवासी · लेंदे" },
+  { discover: "ᱡᱚᱦᱟᱨ ᱡᱷᱟᱨᱠᱟᱱᱰ", tagline: "ᱥᱟᱡᱟᱞ · ᱰᱤᱥᱚᱢ · ᱪᱮᱸᱰᱚ" },
 ];
 
 export default function HeroSection() {
@@ -83,122 +84,65 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen pt-24 relative overflow-hidden flex flex-col justify-center">
-      <style>{`
-        .fade-image {
-          position: absolute;
-          inset: 0;
-          background-size: cover;
-          background-position: center;
-          opacity: 0;
-          transition: opacity 1s ease-in-out;
-        }
-        .fade-image.active {
-          opacity: 1;
-        }
-        .text-slide {
-          animation: slideIn 0.6s ease-out;
-        }
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+    <section className="hero-section" id="hero">
+      <div className="hero-container">
+        <div className="hero-card">
+          {/* Background Images Slider */}
+          {slides.map((slide, index) => (
+            <img
+              key={`bg-${index}`}
+              src={slide.image}
+              alt=""
+              className={`hero-bg-slide ${index === current ? "active" : ""}`}
+              aria-hidden="true"
+            />
+          ))}
 
-      {/* Background Image Crossfade */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`fade-image ${index === current ? "active" : ""}`}
-          style={{ backgroundImage: `url(${slide.image})` }}
-        />
-      ))}
+          {/* Dark Gradient Overlay for readability */}
+          <div className="hero-card-overlay" />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/55"></div>
+          {/* Content Overlay */}
+          <div className="hero-card-content">
+            <div className="hero-text-wrapper">
+              <h1 key={`discover-${langIndex}`} className="hero-card-title text-slide">
+                {languages[langIndex].discover}
+              </h1>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+              <p className="hero-card-description">
+                Experience the untouched beauty of nature, rich tribal culture, and
+                spiritual heritage — now enhanced with AI-powered planning.
+              </p>
 
-        {/* LEFT TEXT */}
-        <div>
-          <h1
-            key={`discover-${langIndex}`}
-            className="text-white text-4xl md:text-6xl font-extrabold leading-tight text-slide"
-          >
-            {languages[langIndex].discover}
-          </h1>
+              <div className="hero-card-buttons">
+                <Link to="/role/tourist/ai-itinerary" className="hero-card-btn-primary">
+                  Plan My Trip <span className="btn-arrow">›</span>
+                </Link>
+                <Link to="/role/tourist" className="hero-card-btn-secondary">
+                  Explore Destinations <span className="btn-arrow">›</span>
+                </Link>
+              </div>
+            </div>
+          </div>
 
-          <h2
-            key={`tagline-${langIndex}`}
-            className="text-yellow-400 text-3xl md:text-5xl font-bold mt-2 tracking-tight text-slide"
-          >
-            {languages[langIndex].tagline}
-          </h2>
-
-          <p className="text-gray-200 mt-5 text-lg md:text-xl max-w-lg leading-relaxed">
-            Experience the untouched beauty of nature, rich tribal culture,
-            and spiritual heritage — now enhanced with AI-powered planning.
-          </p>
-
-         <div className="mt-7 flex flex-wrap gap-4">
-  <Link
-    to="/role/tourist/ai-itinerary"
-    className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300 transition shadow-lg"
-  >
-    Plan My Trip →
-  </Link>
-
-  <Link
-    to="/role/tourist"
-    className="px-6 py-3 bg-white/20 border border-white/30 text-white font-medium rounded-lg hover:bg-white/30 transition backdrop-blur-sm"
-  >
-    Explore Destinations
-  </Link>
-</div>
-
-        </div>
-
-        {/* RIGHT-SIDE SLIDING TEXT */}
-        <div className="text-right">
-          <h2
-            key={`title-${current}`}
-            className="text-yellow-400 text-3xl md:text-4xl font-bold text-slide"
-          >
-            {slides[current].title}
-          </h2>
-
-          <p
-            key={`desc-${current}`}
-            className="text-gray-300 mt-3 text-base md:text-lg text-slide"
-          >
-            {slides[current].desc}
-          </p>
+          {/* Slide Indicator (optional, matching Dubai style) */}
+          <div className="hero-card-dots">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrent(index)}
+                className={`hero-card-dot ${index === current ? "active" : ""}`}
+                aria-label={`Slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Bottom Stats */}
-      <div className="relative z-10 mt-10 flex justify-center gap-16 text-white opacity-90">
-        <div className="text-center">
-          <h3 className="text-3xl font-bold">50+</h3>
-          <p className="text-sm opacity-80">Destinations</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-3xl font-bold">1000+</h3>
-          <p className="text-sm opacity-80">Local Artisans</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-3xl font-bold">24/7</h3>
-          <p className="text-sm opacity-80">AI Support</p>
-        </div>
+      {/* Scroll indicator */}
+      <div className="hero-scroll-indicator">
+        <div className="scroll-mouse" />
+        <span className="scroll-text">Scroll</span>
       </div>
-
     </section>
   );
 }
