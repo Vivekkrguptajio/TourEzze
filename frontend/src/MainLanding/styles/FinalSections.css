@@ -139,8 +139,8 @@
 }
 
 .er-region-number {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: #555;
   color: #fff;
@@ -150,12 +150,27 @@
   font-size: 14px;
   font-weight: 700;
   flex-shrink: 0;
+  position: relative;
   transition: background-color 0.2s;
+  margin-bottom: 6px; /* Space for the pin point */
+}
+
+.er-region-number::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background-color: inherit;
+  z-index: -1;
 }
 
 .er-region-name {
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
+  font-weight: 500;
 }
 
 /* --- Plan Ahead --- */

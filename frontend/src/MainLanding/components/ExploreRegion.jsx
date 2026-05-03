@@ -10,7 +10,17 @@ const regions = [
   { id: 5, name: "Deoghar", desc: "A major Hindu pilgrimage center, famous for the Baidyanath Jyotirlinga temple." },
   { id: 6, name: "Hazaribagh", desc: "A scenic health resort town with dense forests and rich wildlife." },
   { id: 7, name: "Dumka", desc: "The sub-capital of Jharkhand, offering a glimpse into Santhal culture." },
-  { id: 8, name: "Giridih", desc: "Known for the Parasnath Hills, a major pilgrimage site for Jains." }
+  { id: 8, name: "Giridih", desc: "Known for the Parasnath Hills, a major pilgrimage site for Jains." },
+  { id: 9, name: "Netarhat", desc: "The Queen of Chotanagpur, renowned for breathtaking sunrises and pine forests." },
+  { id: 10, name: "Betla National Park", desc: "One of the first national parks in India, rich in tigers, elephants, and biodiversity." },
+  { id: 11, name: "Patratu Valley", desc: "A stunning valley with winding serpentine roads and a vast, beautiful lake." },
+  { id: 12, name: "Hundru Falls", desc: "One of the highest waterfalls in India, cascading down magnificent rocky cliffs." },
+  { id: 13, name: "Dassam Falls", desc: "A spectacular waterfall known for its scenic beauty and ten cascading streams." },
+  { id: 14, name: "Parasnath Hill", desc: "The highest mountain peak in Jharkhand and a sacred Jain pilgrimage site." },
+  { id: 15, name: "Rajrappa", desc: "Famous for the Chhinnamasta Temple and beautiful waterfalls at the confluence of rivers." },
+  { id: 16, name: "Dalma Wildlife Sanctuary", desc: "A vast sanctuary near Jamshedpur known for its significant elephant population." },
+  { id: 17, name: "Maluti Temples", desc: "A historic village featuring dozens of ancient, intricately carved terracotta temples." },
+  { id: 18, name: "Ghatshila", desc: "A charming town on the Subarnarekha river, famous for its hills and tribal culture." }
 ];
 
 export default function ExploreRegion() {
